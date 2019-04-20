@@ -65,6 +65,3 @@ typings/
 
 # VS Code tasks config
 .vscode/
-
-# sensitive information
-src/get-info.js
