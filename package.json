@@ -2,10 +2,11 @@
   "name": "powerclass",
   "version": "1.0.0",
   "description": "Official repo for powerclass",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "build": "babel src -d build -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node build/index.js"
   },
   "repository": {
     "type": "git",
