@@ -11,10 +11,13 @@ var helmet = require("helmet");
 
 var fs = require("fs");
 
-require("babel-polyfill"); // local files
+var path = require("path");
 
+var util = require("util");
 
-var getInfo = require("./get-info"); // program start
+var execFile = util.promisify(require("child_process").execFile);
+
+require("babel-polyfill"); // program start
 
 
 var app = express();
@@ -37,25 +40,64 @@ function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(req, res) {
+    var _req$body, user, pass, _ref2, stdout, stderr;
+
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.t0 = res;
-            _context.next = 3;
-            return getInfo();
+            _req$body = req.body, user = _req$body.user, pass = _req$body.pass;
+            _context.prev = 1;
 
-          case 3:
-            _context.t1 = _context.sent;
+            if (!(user && pass)) {
+              _context.next = 13;
+              break;
+            }
 
-            _context.t0.send.call(_context.t0, _context.t1);
+            _context.next = 5;
+            return execFile("node", [path.resolve(__dirname, "get-info.js"), user, pass]);
 
           case 5:
+            _ref2 = _context.sent;
+            stdout = _ref2.stdout;
+            stderr = _ref2.stderr;
+
+            if (!stderr) {
+              _context.next = 10;
+              break;
+            }
+
+            throw Error(stderr.trim());
+
+          case 10:
+            // JSON.parse() because output is a stringified array
+            res.send(JSON.parse(stdout));
+            _context.next = 14;
+            break;
+
+          case 13:
+            throw Error("Username and/or password not provided.");
+
+          case 14:
+            _context.next = 19;
+            break;
+
+          case 16:
+            _context.prev = 16;
+            _context.t0 = _context["catch"](1);
+
+            if (_context.t0.message === "Incorrect username or password." || _context.t0.message === "Username and/or password not provided.") {
+              res.status(401).send(_context.t0.message);
+            } else {
+              res.sendStatus(500);
+            }
+
+          case 19:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee);
+    }, _callee, null, [[1, 16]]);
   }));
 
   return function (_x, _x2) {

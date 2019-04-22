@@ -2,10 +2,10 @@
 const express = require("express");
 const helmet = require("helmet");
 const fs = require("fs");
+const path = require("path");
+const util = require("util");
+const execFile = util.promisify(require("child_process").execFile);
 require("babel-polyfill");
-
-// local files
-const getInfo = require("./get-info");
 
 // program start
 const app = express();
@@ -26,7 +26,27 @@ app.get("/", (req, res) => {
 });
 
 app.post("/api/sls", async (req, res) => {
-  res.send(await getInfo());
+  const { user, pass } = req.body;
+  try {
+    if (user && pass) {
+      const { stdout, stderr } = await execFile("node", [
+        path.resolve(__dirname, "get-info.js"), user, pass]);
+
+      if (stderr) throw Error(stderr.trim());
+
+      // JSON.parse() because output is a stringified array
+      res.send(JSON.parse(stdout));
+    } else {
+      throw Error("Username and/or password not provided.");
+    }
+  } catch (err) {
+    if (err.message === "Incorrect username or password."
+      || err.message === "Username and/or password not provided.") {
+      res.status(401).send(err.message);
+    } else {
+      res.sendStatus(500);
+    }
+  }
 });
 
 const PORT = process.env.PORT || 3000;
