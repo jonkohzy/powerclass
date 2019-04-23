@@ -67,4 +67,6 @@ typings/
 .vscode/
 
 # Transpiled scripts (automatically transpiled on Heroku)
-build/
+build/*
+# BUT keep the selectors!
+!build/selectors.json
