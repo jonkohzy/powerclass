@@ -34,8 +34,10 @@ app.post("/api/sls", async (req, res) => {
 
       if (stderr) throw Error(stderr.trim());
 
-      // JSON.parse() because output is a stringified array
-      res.send(JSON.parse(stdout));
+      // ignores all but the first line (warnings, etc.)
+      const assignments = stdout.split("\n")[0];
+      // JSON.parse() because assignments is a stringified array
+      res.send(JSON.parse(assignments));
     } else {
       throw Error("Username and/or password not provided.");
     }
