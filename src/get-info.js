@@ -2,6 +2,13 @@ const phantom = require("phantom");
 require("babel-polyfill");
 
 (async () => {
+  // user and pass are 3rd & 4th command-line args respectively
+  const user = process.argv[2];
+  const pass = process.argv[3];
+  if (!user || !pass) {
+    throw Error("Username and/or password not provided.");
+  }
+
   const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36";
   const steps = [
     // 1. Login to SLS
@@ -10,11 +17,7 @@ require("babel-polyfill");
         document.getElementById("username").value = user;
         document.getElementById("password").value = pass;
         document.getElementById("loginform").submit();
-      }, {
-        // user and pass are 3rd & 4th command-line args respectively
-        user: process.argv[2],
-        pass: process.argv[3],
-      });
+      }, { user, pass });
     },
 
     // 2. Retrieve complete tasks
