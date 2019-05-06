@@ -30,7 +30,7 @@ app.post("/api/sls", async (req, res) => {
   try {
     if (user && pass) {
       const { stdout, stderr } = await execFile("node", [
-        path.resolve(__dirname, "get-info.js"), user, pass]);
+        path.resolve(__dirname, "get-sls-assignments.js"), user, pass]);
 
       if (stderr) throw Error(stderr.trim());
 
