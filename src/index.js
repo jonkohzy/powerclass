@@ -15,6 +15,9 @@ app.use(helmet());
 // parse JSON request bodies
 app.use(express.json());
 
+// serve static content
+app.use(express.static("public"));
+
 app.get("/", (req, res) => {
   fs.readFile("public/index.html", (err, data) => {
     if (err) {
