@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 app.post("/api/sls", async (req, res) => {
   const { user, pass } = req.body;
   try {
-    if (user && pass) {
+    if (user.trim() && pass.trim()) {
       const { stdout, stderr } = await execFile("node", [
         path.resolve(__dirname, "get-sls-assignments.js"), user, pass]);
 

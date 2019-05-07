@@ -5,7 +5,7 @@ require("babel-polyfill");
   // user and pass are 3rd & 4th command-line args respectively
   const user = process.argv[2];
   const pass = process.argv[3];
-  if (!user || !pass) {
+  if (!user.trim() || !pass.trim()) {
     throw Error("Username and/or password not provided.");
   }
 
