@@ -18,16 +18,6 @@ app.use(express.json());
 // serve static content
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  fs.readFile("public/index.html", (err, data) => {
-    if (err) {
-      res.status(500).send("There was an error reading the file.");
-      throw err;
-    }
-    res.header("Content-Type", "text/html").send(data);
-  });
-});
-
 app.post("/api/sls", async (req, res) => {
   const { user, pass } = req.body;
   try {
