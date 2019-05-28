@@ -15,20 +15,20 @@ ul, li {
 	color: black;
 	padding: 0px 60px 0px 100px;
 }
-.header-name {
+.header .name {
 	padding-top: 55px;
 	padding-bottom: 25px;
 	font-size: 50px;
 	display: inline-block;
 }
-.header-user {
+.header .user {
 	padding-top: 55px;
 	padding-bottom: 25px;
 	margin-top: 5px;
 	display: inline-block;
 	float: right;
 }
-.header-user-icon-notification {
+.header .user .icon-notification {
 	position:absolute;
 	top:55px;
 	right:90px;
@@ -43,32 +43,32 @@ ul, li {
 	box-shadow:0 0 1px #333;
 	z-index: 999;
 }
-.header-user-icon {
+.header .user .icon {
 	display: inline-block;
 	margin-right: 40px;
 	height: 53px;
 	border-radius: 50%;
 	cursor: pointer;
 }
-.header-user-icon:hover {
-	width: 50px;
-	height: 50px;
+.header .user .icon:hover {
+	width: 49px;
+	height: 47px;
 	border: 3px solid lightgrey;
 }
 
 /* main */
-.main {
+main {
 	margin-top: 50px;
 }
-.main-columns {
+main .columns {
 	display: inline-block;
 	width: 33% !important;
 	padding: 20px 0px 20px 0px;
 }
-.main-columns-container {
+main .columns .container {
 	position: relative;
 }
-.main-columns-container-divider::after {
+main .columns .container-divider::after {
 	content:""; 
 	background: black; 
 	position: absolute; 
@@ -77,26 +77,26 @@ ul, li {
 	height: 30%; 
 	width: 5px;
 }
-.main-columns-container-content {
+main .columns .container .content {
 	text-align: center;
 	margin-top: 50px;
 }
-.main-columns-container-content-header {
+.cheader {
 	font-size: 20px;
 	text-align: center;
 	text-decoration: italic;
 	color: #bbb;
 }
-.main-columns-container-content-ul {
+main .columns .container .content ul {
 	padding-left: 0px;
 }
-.main-columns-container-content-ul-li {
+.main .columns .container .content ul li {
 	font-size: 20px;
 	margin-top: 10px;
 	text-align: center;
 	color: black;
 }
-.main-columns-container-icon img {
+main .columns .container .icon img {
 	display: block;
 	margin: auto;
 }
