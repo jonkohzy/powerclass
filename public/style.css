@@ -16,16 +16,15 @@ ul, li {
 	padding: 0px 60px 0px 100px;
 }
 .header .name {
-	padding-top: 55px;
+	padding-top: 30px;
 	padding-bottom: 25px;
 	font-size: 50px;
 	display: inline-block;
 }
 .header .user {
-	padding-top: 55px;
+	padding-top: 30px;
 	padding-bottom: 25px;
 	margin-top: 5px;
-	display: inline-block;
 	float: right;
 }
 .header .user .icon-notification {
@@ -58,29 +57,30 @@ ul, li {
 
 /* main */
 main {
-	margin-top: 50px;
+	margin-top: 10px;
 	text-align: center;
 }
-main .columns {
+.columns {
+	background-color: white;
 	display: inline-block;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	margin: 12px;
 	padding: 24px;
 	border-radius: 12px;
 }
-main .columns:hover{
+.columns:hover{
 	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
 }
-main .columns:hover div img{
+.columns:hover div img{
 	transform: scale(1.2);
 }
-main .columns .container {
+.container {
 	margin: auto;
 	margin-bottom: 12px;
 	position: relative;
 	text-align: center;
 }
-main .columns .container .content {
+.content {
 	text-align: center;
 	margin-top: 50px;
 }
@@ -90,22 +90,29 @@ main .columns .container .content {
 	text-decoration: italic;
 	color: #bbb;
 }
-main .columns .container .content ul {
+ul {
 	padding-left: 0px;
 }
-.main .columns .container .content ul li {
-	font-size: 20px;
-	margin-top: 10px;
-	text-align: center;
-	color: black;
+ul li{
+	margin-top: 15px;
 }
-main .columns .container .icon .circle{
+ul li a{
+	text-decoration: none;
+	font-size: 20px;
+	text-align: center;
+	color: #848484;
+}
+ul li:hover a{
+	color: #161616;
+	font-size: 25px;
+}
+.circle{
 	padding-top: 50px;
 	height: 200px;
 	width: 250px;
 	margin-bottom: 15px;
 }
-main .columns .container .icon .circle img {
+.circle img {
 	display: block;
 	margin: auto;
 	transition: .1s transform ease-in-out;
