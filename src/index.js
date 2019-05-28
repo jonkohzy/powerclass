@@ -1,22 +1,18 @@
-// modules
 const express = require("express");
 const helmet = require("helmet");
-const fs = require("fs");
 const path = require("path");
 const util = require("util");
 const execFile = util.promisify(require("child_process").execFile);
 require("babel-polyfill");
 
-// program start
 const app = express();
-
 app.use(helmet());
-
-// parse JSON request bodies
 app.use(express.json());
-
-// serve static content
 app.use(express.static("public"));
+
+// TODO: put core functions here (e.g. ISP authentication)
+// put routes in files in separate folders for different functions
+// export core functions from here, require them in files
 
 app.post("/api/sls", async (req, res) => {
   const { user, pass } = req.body;
