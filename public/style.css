@@ -72,6 +72,9 @@ main {
 	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
 }
 .columns:hover div img{
+	transition: all .15s ease-in-out;
+}
+.columns:hover div img{
 	transform: scale(1.2);
 }
 .container {
