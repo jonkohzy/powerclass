@@ -29,7 +29,7 @@ ul, li {
 }
 .header .user .icon-notification {
 	position:absolute;
-	top:55px;
+	top:30px;
 	right:90px;
 	font-size:13px;
 	padding: 7px;
@@ -75,6 +75,7 @@ main {
 	transform: scale(1.2);
 }
 .container {
+	height: 445px;
 	margin: auto;
 	margin-bottom: 12px;
 	position: relative;
@@ -101,6 +102,7 @@ ul li a{
 	font-size: 20px;
 	text-align: center;
 	color: #848484;
+	transition: .15s all;
 }
 ul li:hover{
 	padding: 0px;
