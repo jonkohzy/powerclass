@@ -94,18 +94,12 @@ main {
 ul {
 	padding-left: 0px;
 }
-ul li{
-	padding: 3.5px;
-}
 ul li a{
 	text-decoration: none;
 	font-size: 20px;
 	text-align: center;
 	color: #848484;
-	transition: .15s all;
-}
-ul li:hover{
-	padding: 0px;
+	transition: all .15s ease-in-out;
 }
 ul li:hover a{
 	color: #161616;
