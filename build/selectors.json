@@ -1,8 +1,8 @@
 {
   "divToClick": "body > main > div > div > div > div > article > div > section > div > div.section-wrapper > div.section-content.main.section-content-loaded > div.component-wrapper.component-host-wrapper > div.component.component-host.component-task > div",
   "taskNameSelectors": {
-    "newTasksSelector": "body > main > div > div > div > div > article > div > section > div > div.section-wrapper > div.section-content.main.section-content-loaded.host-expand > div.component-wrapper.component-host-wrapper > div.component.component-host.component-task.active > div > div.component-content.assignment-group > div.component.component-assignment.in-progress > div > div.component-content > dl > dd > div > div.assignment-details > h3",
-    "inProgressTasksSelector": "body > main > div > div > div > div > article > div > section > div > div.section-wrapper > div.section-content.main.section-content-loaded.host-expand > div.component-wrapper.component-host-wrapper > div.component.component-host.component-task.active > div > div.component-content.assignment-group > div.component.component-assignment.new > div > div.component-content > dl > dd > div > div.assignment-details > h3",
-    "completedTasksSelector": "body > main > div > div > div > div > article > div > section > div > div.section-wrapper > div.section-content.main.section-content-loaded.host-expand > div.component-wrapper.component-host-wrapper > div.component.component-host.component-task.active > div > div.component-content.assignment-group > div.component.component-assignment.complete > div > div.component-content > dl > dd > div > div.assignment-details > h3"
+    "newTasksSelector": "div.component.component-assignment.new > div > div.component-content > dl > dd > div > div.assignment-details > h3",
+    "inProgressTasksSelector": "div.component.component-assignment.in-progress > div > div.component-content > dl > dd > div > div.assignment-details > h3",
+    "completedTasksSelector": "div.component.component-assignment.complete > div > div.component-content > dl > dd > div > div.assignment-details > h3"
   }
 }
