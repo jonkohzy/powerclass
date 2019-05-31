@@ -109,13 +109,13 @@ ul li:hover a{
 	color: #161616;
 	font-size: 25px;
 }
-.circle{
+.mid{
 	padding-top: 50px;
 	height: 200px;
 	width: 250px;
 	margin-bottom: 15px;
 }
-.circle img {
+.mid img {
 	display: block;
 	margin: auto;
 	transition: .1s transform ease-in-out;
