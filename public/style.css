@@ -97,6 +97,8 @@ main {
 	text-align: center;
 	text-decoration: italic;
 	color: #bbb;
+	position: relative;
+	top: -40px;
 }
 ul {
 	padding-left: 0px;
