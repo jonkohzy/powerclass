@@ -7,13 +7,15 @@ require("babel-polyfill");
 
 const app = express();
 app.use(helmet());
+app.enable("trust proxy");
 
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
-    if (!req.secure) {
-      res.redirect(`https://${req.headers.host + req.originalUrl}`);
-    } else {
+    console.log(req.secure);
+    if (req.secure) {
       next();
+    } else {
+      res.redirect(`https://${req.headers.host + req.originalUrl}`);
     }
   });
 }
@@ -57,7 +59,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT);
 console.log(`App listening on port ${PORT}.`);
 
-//redirect to 404
+// redirect to 404
 app.use((_, res) => {
   res.status(404).redirect("/404.html");
 });

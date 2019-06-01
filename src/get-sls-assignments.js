@@ -20,11 +20,7 @@ require("babel-polyfill");
       }, { user, pass });
     },
 
-    // 2. Retrieve complete tasks
-    // In production, this retrieves INCOMPLETE tasks.
-    // TODO: use someone else's account with incomplete tasks
-    // and find the CSS selector for that
-    // then change selectors.json
+    // 2. Retrieve incomplete tasks
     async () => page.evaluate(({ divToClick, taskNameSelectors }) => {
       const { newTasksSelector, inProgressTasksSelector } = taskNameSelectors;
 
