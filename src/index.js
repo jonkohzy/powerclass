@@ -44,6 +44,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT);
 console.log(`App listening on port ${PORT}.`);
 
+//redirect to 404
 app.use((_, res) => {
   res.status(404).redirect("/404.html");
 });
