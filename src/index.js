@@ -7,6 +7,17 @@ require("babel-polyfill");
 
 const app = express();
 app.use(helmet());
+
+if (process.env.NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    if (!req.secure) {
+      res.redirect(`https://${req.headers.host + req.originalUrl}`);
+    } else {
+      next();
+    }
+  });
+}
+
 app.use(express.json());
 app.use(express.static("public"));
 
@@ -16,8 +27,13 @@ app.use(express.static("public"));
 
 app.post("/api/sls", async (req, res) => {
   const { user, pass } = req.body;
-  try {
-    if (user.trim() && pass.trim()) {
+
+  if (typeof user !== "string" || typeof pass !== "string") {
+    res.sendStatus(400);
+  } else if (!user.trim() || !pass.trim()) {
+    res.status(401).send("Username and/or password not provided.");
+  } else {
+    try {
       const { stdout, stderr } = await execFile("node", [
         path.resolve(__dirname, "get-sls-assignments.js"), user, pass]);
 
@@ -27,15 +43,12 @@ app.post("/api/sls", async (req, res) => {
       const assignments = stdout.split("\n")[0];
       // JSON.parse() because assignments is a stringified array
       res.send(JSON.parse(assignments));
-    } else {
-      throw Error("Username and/or password not provided.");
-    }
-  } catch (err) {
-    if (err.message === "Incorrect username or password."
-      || err.message === "Username and/or password not provided.") {
-      res.status(401).send(err.message);
-    } else {
-      res.sendStatus(500);
+    } catch (err) {
+      if (err.message === "Incorrect username or password.") {
+        res.status(401).send(err.message);
+      } else {
+        res.sendStatus(500);
+      }
     }
   }
 });
