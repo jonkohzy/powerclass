@@ -43,3 +43,7 @@ app.post("/api/sls", async (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
 console.log(`App listening on port ${PORT}.`);
+
+app.use((_, res) => {
+  res.status(404).redirect("/404.html");
+});
