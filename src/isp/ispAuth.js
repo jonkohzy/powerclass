@@ -20,6 +20,9 @@ const auth = async (method, action, user, pass, req, res) => {
       });
 
   if (authRes.error) {
+    // note: invalid Base64 string causes ISP to respond with 500
+    // it should be fine if pass is a valid Base64 string
+    // (especially for get-file)
     res.sendStatus(500);
   } else if (authRes.body.includes("/error700.asp")) {
     // invalid credentials
