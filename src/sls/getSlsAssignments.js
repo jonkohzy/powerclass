@@ -55,22 +55,32 @@ require("babel-polyfill");
     if (stepNum === 1) {
       // 2nd step returns assignments, so check if we're there yet
 
-      const result = await steps[stepNum]();
+      try {
+        const result = await steps[stepNum]();
 
-      if (result === "Incorrect username or password.") {
-        // console.error() is treated as stderr
-        console.error(result);
-      } else if (result instanceof Array) {
-        const assignments = result;
-        // console.log() is treated as stdout
-        console.log(JSON.stringify(assignments));
-      } else {
+        if (result === "Incorrect username or password.") {
+          // console.error() is treated as stderr
+          console.error(result);
+        } else if (result instanceof Array) {
+          const assignments = result;
+          // console.log() is treated as stdout
+          console.log(JSON.stringify(assignments));
+        } else {
+          console.error("An unknown error occurred.");
+        }
+      } catch (err) {
         console.error("An unknown error occurred.");
       }
 
       instance.exit();
     } else {
-      steps[stepNum]();
+      try {
+        steps[stepNum]();
+      } catch (err) {
+        console.error("An unknown error occurred.");
+        instance.exit();
+        return;
+      }
     }
 
     stepNum++;
