@@ -20,6 +20,12 @@ const getFile = (res, cookies, req) => {
       Cookie: `${cookieKey}=${cookieVal};`,
     },
   }, (fileRes) => {
+    if (fileRes.statusCode === 400) {
+      // stops error because of Content-Disposition header being undefined
+      res.status(400).send("Invalid file URL.");
+      return;
+    }
+
     fileRes.on("error", () => {
       res.sendStatus(500);
     });
