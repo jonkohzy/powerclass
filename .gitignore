@@ -69,4 +69,4 @@ typings/
 # Transpiled scripts (automatically transpiled on Heroku)
 build/*
 # BUT keep the selectors!
-!build/selectors.json
+!build/sls/selectors.json
