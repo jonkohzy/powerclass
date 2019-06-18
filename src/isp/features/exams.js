@@ -20,7 +20,6 @@ const parseExamResults = (examPages) => {
     // include exam name
     return {
       exam: getSelectedOption(examsSelector),
-      // examId: (ID of the thing to download)
       results: examResults,
     };
   });
