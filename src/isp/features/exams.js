@@ -73,7 +73,8 @@ const getExamResultsAndReports = async (res, cookies) => {
       const examResults = parseExamResults(examPages);
 
       const reportsRows = document.querySelector(".form").childNodes.slice(2);
-      const reports = parseReports(reportsRows);
+      const reports = reportsRows.length > 0 ?
+          parseReports(reportsRows) : [];
 
       res.send({ examResults, reports });
     }
