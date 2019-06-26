@@ -1,5 +1,4 @@
 const https = require("https");
-const path = require("path");
 const mime = require("mime");
 
 const getFile = (res, cookies, req) => {
@@ -40,8 +39,7 @@ const getFile = (res, cookies, req) => {
 
       const filename = fileRes.headers["content-disposition"]
           .match(/(?<=filename=).+/)[0];
-      const extension = path.extname(filename);
-      const mimeType = mime.getType(extension);
+      const mimeType = mime.getType(filename) || "application/octet-stream";
 
       res.set({
         "Content-Type": mimeType, // I love standards compliance! The school doesn't...
