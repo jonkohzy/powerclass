@@ -1,0 +1,12 @@
+announcements       - dashboard (homepage) AND own page
+cip                 - dashboard (homepage) AND own page
+discipline          - dashboard (homepage) AND own page
+events              - dashboard (homepage) AND own page
+exams               - own page
+particulars         - own page
+project work        - own page
+
+What's on the dashboard?
+- Links
+- Outstanding work
+- CIP, discipline, events
