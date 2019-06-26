@@ -11,7 +11,8 @@ const parseEventsFromElements = (eventsElements) => {
 
         if (eventDatePairs[0][0] === "(No events found)") {
           // no events in this time period
-          return null;
+          // return empty array
+          return [];
         }
 
         return eventDatePairs.map(([eventName, date]) => ({ eventName, date }));
