@@ -27,21 +27,25 @@ const getCip = async (res, cookies) => {
   if (actionRes.error) {
     res.sendStatus(500);
   } else {
-    const document = parseHtml(actionRes.body);
+    try {
+      const document = parseHtml(actionRes.body);
 
-    // get total CIP hours
-    const rawTotalHours = document.querySelectorAll("th.form")[1]
-        .structuredText.split(" ")[3];
-    const totalCipHours = parseInt(rawTotalHours);
+      // get total CIP hours
+      const rawTotalHours = document.querySelectorAll("th.form")[1]
+          .structuredText.split(" ")[3];
+      const totalCipHours = parseInt(rawTotalHours);
 
-    // get CIP activities
-    const elements = [...document.querySelectorAll("td.form3")].slice(1);
-    // remove extra row (the "Add Activity" button)
-    elements.pop();
+      // get CIP activities
+      const elements = [...document.querySelectorAll("td.form3")].slice(1);
+      // remove extra row (the "Add Activity" button)
+      elements.pop();
 
-    const activities = parseCipActivities(elements);
+      const activities = parseCipActivities(elements);
 
-    res.send({ totalCipHours, activities });
+      res.send({ totalCipHours, activities });
+    } catch (err) {
+      res.sendStatus(500);
+    }
   }
 };
 

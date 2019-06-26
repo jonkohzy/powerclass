@@ -25,16 +25,20 @@ const getDisciplineRecords = async (res, cookies) => {
   if (actionRes.error) {
     res.sendStatus(500);
   } else {
-    const document = parseHtml(actionRes.body);
-    const elements = [...document.querySelectorAll("td.form3")];
+    try {
+      const document = parseHtml(actionRes.body);
+      const elements = [...document.querySelectorAll("td.form3")];
 
-    const disciplineRecords = parseDisciplineRecords(elements);
+      const disciplineRecords = parseDisciplineRecords(elements);
 
-    // add up total demerit points of all discipline records
-    const totalDemeritPoints = disciplineRecords
-        .reduce((totalPoints, { demeritPoints }) => totalPoints + demeritPoints, 0);
+      // add up total demerit points of all discipline records
+      const totalDemeritPoints = disciplineRecords
+          .reduce((totalPoints, { demeritPoints }) => totalPoints + demeritPoints, 0);
 
-    res.send({ totalDemeritPoints, disciplineRecords });
+      res.send({ totalDemeritPoints, disciplineRecords });
+    } catch (err) {
+      res.sendStatus(500);
+    }
   }
 };
 
