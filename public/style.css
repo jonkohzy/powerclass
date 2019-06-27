@@ -1,22 +1,40 @@
 /* tags */
+html, body {
+	height: 100%;
+}
 body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	padding: 0px;
 	margin: 0px;
 	background-color: white;
 }
+h1 {
+	margin-top: 0;
+	font-size: 4em;
+	font-weight: normal;
+}
 ul, li {
 	list-style: none;
 }
 a {
+	color: black;
 	text-decoration: none;
+	cursor: pointer;
+}
+a:hover {
+	color: #797979;
 }
 
 /* header */
 .header {
+	position: sticky;
+	top: 0;
+	height: 123px;
 	background-color: white;
 	color: black;
-	padding: 0px 60px 0px 100px;
+	padding: 0px 60px;
+	border-bottom: 1px solid grey;
+	z-index: 999;
 }
 .header .name {
 	padding-top: 30px;
@@ -25,11 +43,13 @@ a {
 	display: inline-block;
 }
 .header .user {
-	padding-top: 30px;
-	padding-bottom: 25px;
-	margin-top: 5px;
+	padding: 15px;
+	margin-top: 30px;
 	float: right;
+	border: 1px solid black;
+	border-radius: 10px;
 }
+/*
 .header .user .icon-notification {
 	position:absolute;
 	top:30px;
@@ -45,59 +65,82 @@ a {
 	box-shadow:0 0 1px #333;
 	z-index: 999;
 }
+*/
+.header .user .username {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+}
 .header .user .icon {
 	display: inline-block;
-	margin-right: 40px;
-	height: 53px;
+	vertical-align: middle;
+	height: 35px;
 	border-radius: 50%;
 	cursor: pointer;
+	box-sizing: border-box;
 }
 .header .user .icon:hover {
-	width: 49px;
-	height: 47px;
-	border: 3px solid lightgrey;
+	box-shadow: 0 0 0 3px lightgray;
+}
+.header .header-item {
+	position: absolute;
+	/* display: inline-block; */
+	top: calc(50% - 0.5em);
+	margin-left: 5%;
+	font-size: 25px;
+}
+.header .outstanding-work-navlink { margin-left: 5%; }
+.header .school-matters-navlink { margin-left: 23%; }
+.header .message-board-navlink { margin-left: 41%; }
+.disclosure-triangle {
+	font-size: 16px;
 }
 
 /* main */
 main {
-	margin-top: 10px;
-	text-align: center;
+	height: calc(100% - 124px);
+	position: relative;
 }
-.columns {
-	background-color: white;
+
+.homework-item, .view-more {
+	line-height: 2;
+	font-size: 40px;
+}
+
+.view-more {
 	display: inline-block;
-	vertical-align: top;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-	margin: 12px;
-	padding: 24px;
-	border-radius: 12px;
+	color: gray;
+	margin-top: 4px;
 }
-.columns:hover{
-	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+
+.link-to-page {
+	position: absolute;
+	display: inline-block;
+	top: 25%;
+	right: 5%;
+	width: 30%;
+	text-align: right;
+	color: white;
+	font-size: 70px;
 }
-.columns:hover div img{
-	transition: all .15s ease-in-out;
+
+.outstanding-work {
+	background: linear-gradient(70deg, white 60%, rgb(91, 57, 184) 60.1%);
 }
-.columns:hover div img{
-	transform: scale(1.2);
+
+.announcements {
+	background: linear-gradient(110deg, white 60%, green 60.1%);
 }
-.container {
-	margin: auto;
-	margin-bottom: 12px;
+
+.panel {
+	height: calc(100% - 120px);
 	position: relative;
-	text-align: center;
+	padding: 60px;
 }
-.content {
-	text-align: center;
+.panel .gradient-protector {
+	width: 54%;
 }
-.cheader {
-	font-size: 20px;
-	text-align: center;
-	text-decoration: italic;
-	color: #bbb;
-	position: relative;
-	top: -40px;
-}
+
 ul {
 	padding-left: 0px;
 }
@@ -123,4 +166,3 @@ ul li:hover a{
 	margin: auto;
 	transition: .1s transform ease-in-out;
 }
-

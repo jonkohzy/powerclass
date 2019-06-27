@@ -23,12 +23,16 @@ const getProjectWork = async (res, cookies) => {
   if (actionRes.error) {
     res.sendStatus(500);
   } else {
-    const document = parseHtml(actionRes.body);
+    try {
+      const document = parseHtml(actionRes.body);
 
-    const elements = document.querySelectorAll(".form3");
-    const projectDetails = parseProject(elements);
+      const elements = document.querySelectorAll(".form3");
+      const projectDetails = parseProject(elements);
 
-    res.send(projectDetails);
+      res.send(projectDetails);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   }
 };
 

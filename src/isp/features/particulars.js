@@ -23,12 +23,16 @@ const getParticulars = async (res, cookies) => {
   if (actionRes.error) {
     res.sendStatus(500);
   } else {
-    const document = parseHtml(actionRes.body);
-    const particularsElements = document.querySelectorAll(".form3");
+    try {
+      const document = parseHtml(actionRes.body);
+      const particularsElements = document.querySelectorAll(".form3");
 
-    const particulars = parseParticulars(particularsElements);
+      const particulars = parseParticulars(particularsElements);
 
-    res.send(particulars);
+      res.send(particulars);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   }
 };
 

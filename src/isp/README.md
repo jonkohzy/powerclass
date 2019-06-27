@@ -1,9 +1,8 @@
-### NOTE!
-some_value is used to represent a number
 ### announcements API
+```js
 fetch("https://powerclass.herokuapp.com/api/isp/announcement", {
     method: "POST",
-    headers: {"Content-Type": "application/json},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         user: "user",
         pass: "password"
@@ -11,70 +10,97 @@ fetch("https://powerclass.herokuapp.com/api/isp/announcement", {
 }).then((res) => res.json()).then((announcements) => {
     //some code
 });
-### returns
+```
+### example data returned
+```json
 [
     {
-        "text": "some value",
-        "additionalDetails": "some value",          //can be null
+        "text": "announcement text",
+        "additionalDetails": "details",          //can be null
         "createdBy": "some person",
-        "date": "some date as a string NOT UTC"
-        "attachedFileLink": "some value             //can be null
+        "date": "some date as a string NOT UTC",
+        "attachedFileLink": "link to attachment" //can be null
     }
 ]
+```
+
+
+
+
+
 ### cip API
+```js
 fetch("https://powerclass.herokuapp.com/api/isp/cip", {
     method: "POST",
-    headers: {"Content-Type": "application/json},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         user: "user",
         pass: "password"
     }),
-}).then((res) => res.json()).then(({totalCipHours, activities}) => {
+}).then((res) => res.json()).then(({ totalCipHours, activities }) => {
     //some code
 });
-### returns
+```
+### example data returned
+```json
 {
-    "totalCipHours": some_value,
+    "totalCipHours": 3,
     "activities": [
         {
             "activityName": "some name",
             "organisation": "some name",
-            "type": "some value"                //Teacher-Initiated or Student-Initiated
-            "
-            "period": "some date as string NOT UTC",
-            "hours": some_value,
+            "type": "some value",               //Teacher-Initiated or Student-Initiated
+
+            "period": "some date range as string NOT UTC",
+            "hours": 3,
             "status": "some value"              //WY's ones are all "Endorsed", could be to show status of acceptance
         }
     ]
 }
+```
+
+
+
+
+
 ### discipline API
+```js
 fetch("https://powerclass.herokuapp.com/api/isp/discipline", {
     method: "POST",
-    headers: {"Content-Type": "application/json},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         user: "user",
         pass: "password"
     }),
-}).then((res) => res.json()).then(({totalDemeritPoints, disciplineRecords}) => {
+}).then((res) => res.json()).then(({ totalDemeritPoints, disciplineRecords }) => {
     //some code
 });
-### returns
+```
+### example data returned
+```json
 {
-    "totalDemeritPoints": some_value,
-    "DisciplineRecords": [
+    "totalDemeritPoints": 1,
+    "disciplineRecords": [
         {
-            "category": "some value",        //WY's case: Attendance
-            "offence": "some value",         //WY's case: Late
+            "category": "Attendance",        //WY's case: Attendance
+            "offence": "Late",               //WY's case: Late
             "date": "some date as string e.g. 08/08/2001",
-            "demeritPoints": some_value,
-            "majorOffence": some_boolean
+            "demeritPoints": 1,
+            "majorOffence": false
         }
     ]
 }
+```
+
+
+
+
+
 ### events API
+```js
 fetch("https://powerclass.herokuapp.com/api/isp/events", {
     method: "POST",
-    headers: {"Content-Type": "application/json},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         user: "user",
         pass: "password"
@@ -82,39 +108,50 @@ fetch("https://powerclass.herokuapp.com/api/isp/events", {
 }).then((res) => res.json()).then((events) => {
     //some code
 });
-### returns
+```
+### example data returned
+```json
 {
     "today": [
         {
-            "eventName": "some value",
-            "date": "some date as string **not too sure in what format**"
+            "eventName": "Name",
+            "date": "Thursday 27 Jun 2019"
         }
-    ], **can be empty**
+    ], // can be empty array
     "tomorrow": [
         {
             "eventName": "some value",
-            "date": "some date as string **not too sure in what format**"
+            "date": "Friday 28 Jun 2019"
         }
-    ], **can be empty**
-    "nextWeek": [
+    ], // can be empty array
+    "next1Week": [
         {
-            "eventName": "some value",
-            "date": "some date as string **not too sure in what format**"
+            "eventName": "PW Mid-Term Evaluation",
+            "date": "Thursday 04 Jul 2019"
         }
-    ] **can be empty**
+    ] // can be empty array
 }
+```
+
+
+
+
+
 ### exams API
+```js
 fetch("https://powerclass.herokuapp.com/api/isp/exams", {
     method: "POST",
-    headers: {"Content-Type": "application/json},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         user: "user",
         pass: "password"
     }),
-}).then((res) => res.json()).then(({examResults, reports}) => {
+}).then((res) => res.json()).then(({ examResults, reports }) => {
     //some code
 });
-### returns
+```
+### example data returned
+```json
 {
     "examResults": [
         {
@@ -134,19 +171,35 @@ fetch("https://powerclass.herokuapp.com/api/isp/exams", {
         }
     ]
 }
+```
+
+
+
+
+
 ### getFile API
 **link can be from either /announcements or /exams**
+```js
+// opens new tab, downloads file at link
 window.open("https://powerclass.herokuapp.com/api/isp/get-file?user=**BASE64ENCODEDUSERNAME**&pass=**BASE64ENCODEDPASS**&fileLink=**link**");
+//                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^      ^^^^^^^^^^^^^^^^^^^^^          ^^^^^^^^
+```
 
 link: https://isphs.hci.edu.sg/getStudentDocument.asp?ID=**ID** //this is for exam reports
 or
 https://isphs.hci.edu.sg/getfile.asp?ID=**ID** //this is for announcements
-### returns
+### example data returned
 opens a new tab and downloads file
+
+
+
+
+
 ### particulars API
+```js
 fetch("https://powerclass.herokuapp.com/api/isp/particulars", {
     method: "POST",
-    headers: {"Content-Type": "application/json},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         user: "user",
         pass: "password"
@@ -154,7 +207,9 @@ fetch("https://powerclass.herokuapp.com/api/isp/particulars", {
 }).then((res) => res.json()).then((particulars) => {
     //some code
 });
-### returns
+```
+### example data returned
+```json
 {
     "name": "some name",
     "chineseName": "some name",
@@ -163,14 +218,21 @@ fetch("https://powerclass.herokuapp.com/api/isp/particulars", {
     "dateOfBirth": "some date with dashes",
     "race": "some value in caps",
     "citizenship": "some value in caps",
-    "religion": 'some value in caps",
+    "religion": "some value in caps",
     "primarySchool": "some value",
     "psleTScore": "some value, **yes its a string**"
 }
+```
+
+
+
+
+
 ### projectwork API
+```js
 fetch("https://powerclass.herokuapp.com/api/isp/project-work", {
     method: "POST",
-    headers: {"Content-Type": "application/json},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
         user: "user",
         pass: "password"
@@ -178,7 +240,9 @@ fetch("https://powerclass.herokuapp.com/api/isp/project-work", {
 }).then((res) => res.json()).then((projectWork) => {
     //some code
 });
-### returns
+```
+### example data returned
+```json
 {
     "name": "some value",
     "category": "some value",
@@ -187,3 +251,4 @@ fetch("https://powerclass.herokuapp.com/api/isp/project-work", {
     "catManagerApprovalStatus": "some value",
     "projectStatus": "some value"
 }
+```

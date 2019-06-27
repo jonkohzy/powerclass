@@ -55,10 +55,14 @@ const getAnnouncements = async (res, cookies) => {
     if (hasError(detailsResponses)) {
       res.sendStatus(500);
     } else {
-      const announcementsPages = detailsResponses.map((res) => parseHtml(res.body));
-      const announcements = parseAnnouncements(announcementsPages);
+      try {
+        const announcementsPages = detailsResponses.map((res) => parseHtml(res.body));
+        const announcements = parseAnnouncements(announcementsPages);
 
-      res.send(announcements);
+        res.send(announcements);
+      } catch (err) {
+        res.sendStatus(500);
+      }
     }
   }
 };

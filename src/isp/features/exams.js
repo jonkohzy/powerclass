@@ -69,14 +69,20 @@ const getExamResultsAndReports = async (res, cookies) => {
     if (hasError(resultsResponses)) {
       res.sendStatus(500);
     } else {
-      const examPages = resultsResponses.map((res) => parseHtml(res.body));
-      const examResults = parseExamResults(examPages);
+      try {
+        const examPages = resultsResponses.map((res) => parseHtml(res.body));
+        const examResults = parseExamResults(examPages);
 
-      const reportsRows = document.querySelector(".form").childNodes.slice(2);
-      const reports = reportsRows.length > 0 ?
-          parseReports(reportsRows) : [];
+        const reportsRows = document.querySelector(".form").childNodes.slice(2);
+        // IS THERE PLACEHOLDER TEXT IF NO REPORTS?
+        // if so, parseReports may run into an error trying to parse it
+        const reports = reportsRows.length > 0 ?
+            parseReports(reportsRows) : [];
 
-      res.send({ examResults, reports });
+        res.send({ examResults, reports });
+      } catch (err) {
+        res.sendStatus(500);
+      }
     }
   }
 };

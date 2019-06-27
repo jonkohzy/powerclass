@@ -34,12 +34,16 @@ const getEvents = async (res, cookies) => {
   if (actionRes.error) {
     res.sendStatus(500);
   } else {
-    const document = parseHtml(actionRes.body);
-    const eventsElements = document.querySelector("#PageContent").childNodes[5].childNodes[1].childNodes[0].childNodes[6].childNodes[4].childNodes[0].childNodes.slice(4);
+    try {
+      const document = parseHtml(actionRes.body);
+      const eventsElements = document.querySelector("#PageContent").childNodes[5].childNodes[1].childNodes[0].childNodes[6].childNodes[4].childNodes[0].childNodes.slice(4);
 
-    const events = parseEventsFromElements(eventsElements);
+      const events = parseEventsFromElements(eventsElements);
 
-    res.send(events);
+      res.send(events);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   }
 };
 
