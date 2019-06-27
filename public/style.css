@@ -13,6 +13,11 @@ h1 {
 	font-size: 4em;
 	font-weight: normal;
 }
+@media screen and (max-width: 1499px) {
+	h1 {
+		font-size: 3.3em;
+	}
+}
 ul, li {
 	list-style: none;
 }
@@ -66,10 +71,16 @@ a:hover {
 	z-index: 999;
 }
 */
+
 .header .user .username {
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 10px;
+	display: none;
+}
+@media screen and (min-width: 1500px) {
+	.header .user .username {
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 10px;
+	}
 }
 .header .user .icon {
 	display: inline-block;
@@ -90,8 +101,8 @@ a:hover {
 	font-size: 25px;
 }
 .header .outstanding-work-navlink { margin-left: 5%; }
-.header .school-matters-navlink { margin-left: 23%; }
-.header .message-board-navlink { margin-left: 41%; }
+.header .school-matters-navlink { margin-left: calc(5% + 275px); }
+.header .message-board-navlink { margin-left: calc(5% + 550px); }
 .disclosure-triangle {
 	font-size: 16px;
 }
@@ -122,6 +133,11 @@ main {
 	text-align: right;
 	color: white;
 	font-size: 70px;
+}
+@media screen and (max-width: 1499px) {
+	.link-to-page {
+		font-size: 60px;
+	}
 }
 
 .outstanding-work {
