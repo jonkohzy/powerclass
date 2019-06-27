@@ -80,7 +80,7 @@ fetch("https://powerclass.herokuapp.com/api/isp/discipline", {
 ```json
 {
     "totalDemeritPoints": 1,
-    "DisciplineRecords": [
+    "disciplineRecords": [
         {
             "category": "Attendance",        //WY's case: Attendance
             "offence": "Late",               //WY's case: Late
@@ -180,6 +180,7 @@ fetch("https://powerclass.herokuapp.com/api/isp/exams", {
 ### getFile API
 **link can be from either /announcements or /exams**
 ```js
+// opens new tab, downloads file at link
 window.open("https://powerclass.herokuapp.com/api/isp/get-file?user=**BASE64ENCODEDUSERNAME**&pass=**BASE64ENCODEDPASS**&fileLink=**link**");
 //                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^      ^^^^^^^^^^^^^^^^^^^^^          ^^^^^^^^
 ```
