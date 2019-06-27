@@ -34,3 +34,6 @@ console.log(`App listening on port ${PORT}.`);
 app.use((_, res) => {
   res.redirect("/404.html");
 });
+
+// MongoDB test!
+require("./mongodb-test.js")().catch(console.error);
