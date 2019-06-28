@@ -3,7 +3,7 @@
   <head>
     <title>Classroom API Quickstart</title>
     <meta charset="utf-8" />
-    <meta name="google-signin-client_id" content="nah bro idts">
+    <meta name="google-signin-client_id" content="167953657646-jdjmkp26lp14ut29gev2e7aqhv9ihsei.apps.googleusercontent.com">
 
   </head>
   <body>
@@ -18,15 +18,15 @@
 
     <script>
       // Client ID and API key from the Developer Console
-      var CLIENT_ID = 'dont even try >:)';
-      var API_KEY = 'nah bij';
+      var CLIENT_ID = '167953657646-jdjmkp26lp14ut29gev2e7aqhv9ihsei.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyCVayniJVOK5iagM3LwR9H68q_HfvoL-jM';
 
       // Array of API discovery doc URLs for APIs used by the quickstart
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/classroom/v1/rest"];
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/classroom.courses";
+      var SCOPES = "https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.coursework.me.readonly";
 
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
@@ -122,7 +122,7 @@
       function listCourses() {
         console.log("courses");
         gapi.client.classroom.courses.list({
-          pageSize: 10
+          pageSize: 0 // lists all courses
         }).then(function(response) {
           var courses = response.result.courses;
           appendPre('Courses:');
@@ -160,8 +160,8 @@
         //   }
         //  });
         gapi.client.classroom.courses.courseWork.list({
-          courseId: "40470468982",
-          pageSize: 10
+          courseId: "27370624136",
+          pageSize: 0 // list all work
         }).then(function(response) {
 
           var getResult = response.result.courseWork;
@@ -174,12 +174,12 @@
         });
       }
 
-      fetch("https://powerclass.herokuapp.com/src/isp/announcements", {
+      fetch("/api/isp/announcements", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          user: "171290r",
-          pass: "Jkjk1234"
+          user: "171255n",
+          pass: "@cptaHadk0"
         }),
       }).then((res) => res.json()).then((announcements) => {
         console.log(announcements);
