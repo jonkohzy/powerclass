@@ -1,6 +1,6 @@
 ### announcements API
 ```js
-fetch("https://powerclass.herokuapp.com/api/isp/announcement", {
+fetch("/api/isp/announcements", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -30,7 +30,7 @@ fetch("https://powerclass.herokuapp.com/api/isp/announcement", {
 
 ### cip API
 ```js
-fetch("https://powerclass.herokuapp.com/api/isp/cip", {
+fetch("/api/isp/cip", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -65,7 +65,7 @@ fetch("https://powerclass.herokuapp.com/api/isp/cip", {
 
 ### discipline API
 ```js
-fetch("https://powerclass.herokuapp.com/api/isp/discipline", {
+fetch("/api/isp/discipline", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -98,7 +98,7 @@ fetch("https://powerclass.herokuapp.com/api/isp/discipline", {
 
 ### events API
 ```js
-fetch("https://powerclass.herokuapp.com/api/isp/events", {
+fetch("/api/isp/events", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -139,7 +139,7 @@ fetch("https://powerclass.herokuapp.com/api/isp/events", {
 
 ### exams API
 ```js
-fetch("https://powerclass.herokuapp.com/api/isp/exams", {
+fetch("/api/isp/exams", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -181,7 +181,7 @@ fetch("https://powerclass.herokuapp.com/api/isp/exams", {
 **link can be from either /announcements or /exams**
 ```js
 // opens new tab, downloads file at link
-window.open("https://powerclass.herokuapp.com/api/isp/get-file?user=**BASE64ENCODEDUSERNAME**&pass=**BASE64ENCODEDPASS**&fileLink=**link**");
+window.open("/api/isp/get-file?user=**BASE64ENCODEDUSERNAME**&pass=**BASE64ENCODEDPASS**&fileLink=**link**");
 //                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^      ^^^^^^^^^^^^^^^^^^^^^          ^^^^^^^^
 ```
 
@@ -197,7 +197,7 @@ opens a new tab and downloads file
 
 ### particulars API
 ```js
-fetch("https://powerclass.herokuapp.com/api/isp/particulars", {
+fetch("/api/isp/particulars", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -230,7 +230,7 @@ fetch("https://powerclass.herokuapp.com/api/isp/particulars", {
 
 ### projectwork API
 ```js
-fetch("https://powerclass.herokuapp.com/api/isp/project-work", {
+fetch("/api/isp/project-work", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
