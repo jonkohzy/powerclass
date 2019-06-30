@@ -184,13 +184,13 @@ a {
 
 /* events */
 .events {
-	background: linear-gradient(70deg, white 59%, rgb(253, 129, 46) 59.1%);
+	background: linear-gradient(70deg, white 59%, #fd812e 59.1%);
 }
 /* other events styles are above, together with announcements */
 
 /* CIP hours and DP */
 .numbers {
-	background: linear-gradient(135deg, white 86%, rgb(253, 129, 46) 86.1%);
+	background: linear-gradient(135deg, white 86%, #fd412e 86.1%);
 }
 
 .cip-hours, .demerit-points {
