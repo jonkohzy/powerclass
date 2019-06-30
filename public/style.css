@@ -1,7 +1,7 @@
 /* tags */
-html, body {
+/* html, body {
 	height: 100%;
-}
+} */
 body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	padding: 0px;
@@ -26,15 +26,12 @@ a {
 	text-decoration: none;
 	cursor: pointer;
 }
-a:hover {
-	color: #797979;
-}
 
 /* header */
 .header {
 	position: sticky;
 	top: 0;
-	height: 123px;
+	height: 90px;
 	background-color: white;
 	color: black;
 	padding: 0px 60px;
@@ -42,26 +39,19 @@ a:hover {
 	z-index: 999;
 }
 .header .name {
-	padding-top: 30px;
-	font-size: 50px;
+	padding-top: 18px;
+	font-size: 40px;
 	display: inline-block;
 }
 .header .user {
-	padding: 15px;
-	margin-top: 25px;
+	padding: 0;
+	margin-top: 18px;
 	float: right;
-	border: 1px solid black;
-	border-radius: 10px;
-}
-.header .user .username {
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 10px;
 }
 .header .user .icon {
 	display: inline-block;
 	vertical-align: middle;
-	height: 35px;
+	height: 50px;
 	border-radius: 50%;
 	cursor: pointer;
 	box-sizing: border-box;
@@ -74,7 +64,7 @@ a:hover {
 	/* display: inline-block; */
 	top: calc(50% - 0.5em);
 	margin-left: 5%;
-	font-size: 25px;
+	font-size: 20px;
 }
 .header .outstanding-work-navlink { margin-left: 5%; }
 .header .school-matters-navlink { margin-left: calc(5% + 275px); }
@@ -82,47 +72,30 @@ a:hover {
 .disclosure-triangle {
 	font-size: 16px;
 }
-@media screen and (max-width: 1499px) {
-	.header {
-		height: 90px;
-	}
-	.header .name {
-		padding-top: 18px;
-		font-size: 40px;
-	}
-	.header .header-item {
-		font-size: 20px;
-	}
-	.header .user {
-		padding: 0;
-		margin-top: 18px;
-		border: none;
-	}
-	.header .user .username {
-		display: none;
-	}
-	.header .user .icon {
-		height: 50px;
-	}
-	.header .user .disclosure-triangle {
-		display: none;
-	}
-}
 
 /* main */
-main {
-	height: calc(100% - 124px);
-	position: relative;
+.panel {
+	display: flex;
+	height: calc(100vh - 211px);
+	padding: 60px;
+	box-shadow: 0 2px 10px #0000004d;
 }
-@media screen and (max-width: 1499) {
-	main {
-		height: calc(100% - 91px);
+@media screen and (max-width: 1499px) {
+	.panel {
+		height: calc(100vh - 169px);
+		padding: 39px 40px 39px 50px;
 	}
 }
 
-.homework-item, .view-more {
-	line-height: 2;
-	font-size: 40px;
+.panel .gradient-protector {
+	width: 54%;
+}
+
+.card {
+	box-shadow: 0 2px 5px #0000004d;
+}
+.card:hover {
+	box-shadow: 0 3px 12px #0000004d;
 }
 
 .view-more {
@@ -130,45 +103,131 @@ main {
 	color: gray;
 	margin-top: 4px;
 }
+.view-more:hover {
+	color: #3c3c3c;
+}
 
 .link-to-page {
-	position: absolute;
-	display: inline-block;
-	top: 25%;
-	right: 5%;
-	width: 30%;
+	width: 37%;
+	align-self: center;
+	margin-left: 160px;
 	text-align: right;
 	color: white;
 	font-size: 70px;
+	cursor: pointer;
+}
+.link-to-page:hover {
+	color: #d3d3d3;
 }
 @media screen and (max-width: 1499px) {
 	.link-to-page {
+		margin-left: 137px;
 		font-size: 60px;
 	}
 }
 
+/* outstanding work */
 .outstanding-work {
-	background: linear-gradient(70deg, white 60%, rgb(91, 57, 184) 60.1%);
+	background: linear-gradient(70deg, white 59%, #5b39b8 59.1%);
 }
 
+.homework-item, .outstanding-work .view-more {
+	line-height: 2;
+	font-size: 40px;
+}
+
+/* announcements and events styles */
 .announcements {
-	background: linear-gradient(110deg, white 60%, green 60.1%);
+	background: linear-gradient(110deg, white 59%, #12b59f 59.1%);
 }
 
-.panel {
-	height: calc(100% - 120px);
-	position: relative;
-	padding: 60px;
+.announcements .view-more, .events .view-more {
+	font-size: 20px;
+	margin-top: 10px;
 }
-@media screen and (max-width: 1499px) {
-	.panel {
-		height: calc(100% - 46px);
-		padding: 39px 60px;
+
+.announcement, .event {
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 10px 17px;
+	border-radius: 10px;
+	line-height: 40px;
+	cursor: pointer;
+}
+@media screen and (max-height: 768px) {
+	.announcement, .event {
+		padding: 9px 13px;
+		line-height: 27px;
 	}
 }
 
-.panel .gradient-protector {
-	width: 54%;
+.announcement-text, .event-name {
+	font-size: 25px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+@media screen and (max-height: 768px) {
+	.announcement-text, .event-name {
+		font-size: 19px;
+	}
+}
+
+.announcement-details, .event-date {
+	font-size: 18px;
+}
+@media screen and (max-height: 768px) {
+	.announcement-details, .event-date {
+		font-size: 15px;
+	}
+}
+
+/* events */
+.events {
+	background: linear-gradient(70deg, white 59%, rgb(253, 129, 46) 59.1%);
+}
+/* other events styles are above, together with announcements */
+
+/* CIP hours and DP */
+.numbers {
+	background: linear-gradient(135deg, white 86%, rgb(253, 129, 46) 86.1%);
+}
+
+.cip-hours, .demerit-points {
+	flex: 0 100%;
+}
+
+.cip-hours {
+	border-right: 1px solid black;
+	margin-right: 60px; /* emulate 60px padding on panel */
+}
+@media screen and (max-width: 1499px) {
+	.cip-hours {
+		/* also emulate 50px padding on panel when screen is smaller */
+		margin-right: 50px;
+	}
+}
+
+.large-number {
+	font-size: 150px;
+}
+@media screen and (max-width: 1499px) {
+	.large-number {
+		font-size: 120px;
+	}
+}
+
+.button-link {
+	display: inline-block;
+	margin-top: 7%;
+	padding: 20px;
+	border-radius: 10px;
+	font-size: 30px;
+}
+@media screen and (max-width: 1499px) {
+	.button-link {
+		font-size: 25px;
+	}
 }
 
 ul {
