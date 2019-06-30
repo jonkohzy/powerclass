@@ -26,7 +26,7 @@
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.coursework.me.readonly";
+      var SCOPES = "https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.coursework.me";
 
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
@@ -160,8 +160,8 @@
         //   }
         //  });
         gapi.client.classroom.courses.courseWork.list({
-          courseId: "27370624136",
-          pageSize: 0 // list all work
+          courseId: "27168873444",
+          pageSize: 10 // list all work
         }).then(function(response) {
 
           var getResult = response.result.courseWork;
