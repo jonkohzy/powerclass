@@ -126,6 +126,28 @@ a {
 	}
 }
 
+.link-to-page::after {
+	content: "";
+	display: inline-block;
+	height: 70px;
+	width: 70px;
+	background-image: url("img/right-arrow-white-70px.png");
+	background-repeat: no-repeat;
+}
+.link-to-page:hover::after {
+	background-image: url("img/right-arrow-grey-70px.png");
+}
+@media screen and (max-width: 1499px) {
+	.link-to-page::after {
+		height: 60px;
+		width: 60px;
+		background-image: url("img/right-arrow-white-60px.png");
+	}
+	.link-to-page:hover::after {
+		background-image: url("img/right-arrow-grey-60px.png");
+	}
+}
+
 /* outstanding work */
 .outstanding-work {
 	background: linear-gradient(70deg, white 59%, #5b39b8 59.1%);
@@ -227,6 +249,25 @@ a {
 @media screen and (max-width: 1499px) {
 	.button-link {
 		font-size: 25px;
+	}
+}
+
+.button-link::after {
+	content: "";
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	margin-left: 5px;
+	margin-bottom: -1px;
+	background-image: url("img/right-arrow-black-30px.png");
+	background-repeat: no-repeat;
+}
+@media screen and (max-width: 1499px) {
+	.button-link::after {
+		height: 25px;
+		width: 25px;
+		margin-left: 3px;
+		background-image: url("img/right-arrow-black-25px.png");
 	}
 }
 
