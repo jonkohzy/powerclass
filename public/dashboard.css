@@ -1,7 +1,4 @@
 /* tags */
-/* html, body {
-	height: 100%;
-} */
 h1 {
 	margin-top: 0;
 	font-size: 3.9em;
@@ -15,7 +12,6 @@ h1 {
 ul, li {
 	list-style: none;
 }
-
 
 /* main */
 .panel {
@@ -45,9 +41,9 @@ ul, li {
 }
 
 .link-to-page {
-	width: 37%;
+	width: 38%;
 	align-self: center;
-	margin-left: 160px;
+	margin-left: 150px;
 	text-align: right;
 	color: white;
 	font-size: 70px;
