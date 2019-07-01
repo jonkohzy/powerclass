@@ -1,0 +1,54 @@
+/* header */
+.header {
+	position: sticky;
+	top: 0;
+	height: 90px;
+	background-color: white;
+	color: black;
+	padding: 0px 60px;
+	border-bottom: 1px solid grey;
+	z-index: 999;
+}
+.header .name {
+	padding-top: 18px;
+	font-size: 40px;
+	display: inline-block;
+}
+.header .user {
+	padding: 0;
+	margin-top: 18px;
+	float: right;
+}
+.header .user .icon {
+	display: inline-block;
+	vertical-align: middle;
+	height: 50px;
+	border-radius: 50%;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+.header .user .icon:hover {
+	box-shadow: 0 0 0 3px lightgray;
+}
+.header .header-item {
+	position: absolute;
+	/* display: inline-block; */
+	top: calc(50% - 0.5em);
+	margin-left: 5%;
+	font-size: 20px;
+}
+.header .outstanding-work-navlink { margin-left: 5%; }
+.header .school-matters-navlink { margin-left: calc(5% + 275px); }
+.header .message-board-navlink { margin-left: calc(5% + 550px); }
+.disclosure-triangle {
+	font-size: 16px;
+	transition: all .15s;
+}
+
+/* card */
+.card {
+	box-shadow: 0 2px 5px #0000004d;
+}
+.card:hover {
+	box-shadow: 0 3px 12px #0000004d;
+}
