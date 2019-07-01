@@ -1,6 +1,8 @@
 html,body{height:100%;}
 .navi{
     height: calc(100% - 91px);
+    display: inline-block;
+    background-color: #fd432e7a;
 }
 ul{
     -webkit-appearance: none;
@@ -12,31 +14,34 @@ ul{
     padding: 12px 20px;
 }
 li{
+    margin-top: 30px;
+}
+li a{
     padding: 8px 16px;
     margin-top: 12px;
     border-radius: 4px;
     cursor: pointer;
-    border: 2px solid orange;
-    background: linear-gradient(45deg, #fff, 50%, orange 50%);
+    border: 2px solid #fd432e;
+    background: linear-gradient(45deg, #fff, 50%, #fd432e 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
 }
-li::after{
+li a::after{
     content: "";
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(45deg, orange 50%, #fff 50%);
+    background: linear-gradient(45deg, #fd432e 50%, #fff 50%);
     z-index: -1;
 }
-li, li::after{
+li a, li a::after{
     background-size: 300%;
     background-position:100%;
     transition: .15s;
 }
-li:hover, li:hover::after, .selected, .selected::after{
+li a:hover, li a:hover::after, .selected, .selected::after{
     background-position: 0;
 }
