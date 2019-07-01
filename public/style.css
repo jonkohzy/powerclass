@@ -71,6 +71,7 @@ a {
 .header .message-board-navlink { margin-left: calc(5% + 550px); }
 .disclosure-triangle {
 	font-size: 16px;
+	transition: all .15s;
 }
 
 /* main */
@@ -121,7 +122,7 @@ a {
 }
 @media screen and (max-width: 1499px) {
 	.link-to-page {
-		margin-left: 137px;
+		margin-left: 122px;
 		font-size: 60px;
 	}
 }
