@@ -37,6 +37,6 @@ html,body{height:100%;}
     background-position:100%;
     transition: .3s;
 }
-.navi a:hover, .navi a:hover::after, .selected, .selected::after{
+.navi a:hover, .navi a:hover::after, a.selected, a.selected::after{
     background-position: 0;
 }
