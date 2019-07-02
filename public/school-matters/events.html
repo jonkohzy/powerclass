@@ -9,11 +9,22 @@
 	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
 	<title>PowerClass | Events</title>
+	<style>
+		td, th{
+			padding: 12px 20px;
+		}
+		tr{
+			box-shadow: 0 2px 5px #0000004d;
+			border-radius: 10px;
+		}
+		tr:hover{
+			box-shadow: 0 3px 12px #0000004d;
+		}
+	</style>
 </head>
 <body>
     <div class="header">
-		<div class="name">PowerClass</div>
-
+		<a href = "../dashboard.html" class="name">PowerClass</a>
 		<a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
 		<a class="header-item school-matters-navlink">School Matters&nbsp;&nbsp;
 			<span class="disclosure-triangle">&#9660;</span>
@@ -35,8 +46,82 @@
 		<a href="particulars.html">Particulars</a>
 		<a href="project-work.html">Project Work</a>
 	</div>
-
+	<div class = "content">
+		<h1 class = "Tdp">Today</h1>
+		<table id = "tdy"></table>
+		<h1 class = "Tpd">Tomorrow</h1>
+		<table id = "tmr"></table>
+		<h1 class = "Tpd">Next Week</h1>
+		<table id = "nxt"></table>
+	</div>
 	<!-- weird fix for transitions firing on page load -->
-	<script> </script>
+	<script>
+		fetch("/api/isp/events", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				user: "171255n",
+				pass: "@cptaHadk0"
+			}),
+		}).then((res) => res.json()).then(({today, tomorrow, next1Week}) => {
+			console.log(today);
+			console.log(tomorrow);
+			console.log(next1Week);
+			const TODAY = document.getElementById("tdy");
+			today.forEach(({eventName, date}) =>{
+				const ROW =  document.createElement("tr");
+				const EVENT = document.createElement("td");
+				EVENT.textContent = eventName;
+				const DATE = document.createElement("td");
+				DATE.textContent = date;
+				ROW.appendChild(EVENT);
+				ROW.appendChild(DATE);
+				TODAY.appendChild(ROW);
+			});
+			const TOMORROW = document.getElementById("tmr");
+			tomorrow.forEach(({eventName, date}) =>{
+				const ROW =  document.createElement("tr");
+				const EVENT = document.createElement("td");
+				EVENT.textContent = eventName;
+				const DATE = document.createElement("td");
+				DATE.textContent = date;
+				ROW.appendChild(EVENT);
+				ROW.appendChild(DATE);
+				TOMORROW.appendChild(ROW);
+			});
+			const NEXTWEEK = document.getElementById("nxt");
+			next1Week.forEach(({eventName, date}) =>{
+				const ROW =  document.createElement("tr");
+				const EVENT = document.createElement("td");
+				EVENT.textContent = eventName;
+				const DATE = document.createElement("td");
+				DATE.textContent = date;
+				ROW.appendChild(EVENT);
+				ROW.appendChild(DATE);
+				NEXTWEEK.appendChild(ROW);
+			});
+			if(today.length === 0){
+				const ROW = document.createElement("tr");
+				const TEXT = document.createElement("td");
+				TEXT.textContent = "There's nothing here. ¯\\_(ツ)_/¯";
+				ROW.appendChild(TEXT);
+				TODAY.appendChild(ROW);
+			}
+			if(tomorrow.length === 0){
+				const ROW = document.createElement("tr");
+				const TEXT = document.createElement("td");
+				TEXT.textContent = "There's nothing here. ¯\\_(ツ)_/¯";
+				ROW.appendChild(TEXT);
+				TOMORROW.appendChild(ROW);
+			}
+			if(next1Week.length === 0){
+				const ROW = document.createElement("tr");
+				const TEXT = document.createElement("td");
+				TEXT.textContent = "There's nothing here. ¯\\_(ツ)_/¯";
+				ROW.appendChild(TEXT);
+				NEXTWEEK.appendChild(ROW);
+			}
+		});
+	</script>
 </body>
 </html>
