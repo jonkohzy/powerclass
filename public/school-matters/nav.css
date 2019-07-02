@@ -1,5 +1,7 @@
 html,body{height:100%;}
 .navi{
+    position: sticky;
+    top: 91px;
     height: calc(100% - 91px);
     display: inline-block;
     background-color: #fd432e7a;
