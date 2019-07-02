@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
 	<title>PowerClass | Discipline Records</title>
+	<style>
+	</style>
 </head>
 <body>
     <div class="header">
@@ -35,8 +37,31 @@
 		<a href="particulars.html">Particulars</a>
 		<a href="project-work.html">Project Work</a>
 	</div>
+	<div class = "content">
+		<h1 class = "Tdp">Demerit Points</h1>
+		<div class = "number">Loading...</div>
+		<table class = "list">
 
+		</table>
+	</div>
 	<!-- weird fix for transitions firing on page load -->
-	<script> </script>
+	<script>
+		fetch("/api/isp/discipline", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				user: "171255n",
+				pass: "@cptaHadk0"
+			}),
+		}).then((res) => res.json()).then(({ totalDemeritPoints, disciplineRecords }) => {
+			const DP = document.getElementsByClassName("number")[0];
+			DP.textContent = totalDemeritPoints;
+			const BODY = document.getElementsByClassName("list")[0];
+			disciplineRecords.forEach(({category, offence, date, demeritPoints, majorOffence}) => {
+				const ROW = document.createElement("tr");
+				
+			});
+		});
+	</script>
 </body>
 </html>
