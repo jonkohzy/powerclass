@@ -8,7 +8,30 @@
 	<link rel="stylesheet" href="../common.css" type="text/css">
 	<link rel="stylesheet" href="nav.css" type="text/css">
     <title>Project Work</title>
-    
+	<style>
+		.content{
+			position: relative;
+			left: 200px;
+			padding-left: 10%;
+			padding-top: 10px;
+		}
+		.content strong{
+			font-size: 36px;
+		}
+		.content .cat{
+			font-size: 16px;
+			color: grey;
+		}
+		.mentor{
+			font-size: 18px;
+			margin-top: 10px;
+			vertical-align: middle;
+		}
+		img{
+			padding-left: 10px;
+			height: 20px;
+		}
+	</style>
 </head>
 <body>
     <div class="header">
@@ -35,5 +58,60 @@
 		<a href = "particulars.html">Particulars</a>
 		<a class = "selected" href = "project-work.html">Project Work</a>
 	</div>
+	<!--navigation end-->
+	<div class = "content">
+		<strong>PowerClass</strong>
+		<div class = "cat">INFOCOMM</div>
+		<div class = "mentor">Mentor: YONG JONG SHAN<img height = "20" src = "../img/tick.svg"/></div>
+		<div>Category Manager Approval<img height = "20" src = "../img/tick.svg"/></div>
+	</div>
+	<script>
+		fetch("../api/isp/project-work", {
+    	method: "POST",
+    	headers: { "Content-Type": "application/json" },
+    	body: JSON.stringify({
+        	user: "user",
+        	pass: "password"
+    	}),
+		}).then((res) => res.json()).then((projectWork) => {
+			const BODY = document.getElementsByClassName("content");
+			//Title
+			const NAME = document.createElement("strong");
+			const TITLE = document.createTextNode(projectWork.name);
+			NAME.appendChild(TITLE);
+			//category
+			const CATEGORY = document.createElement("div");
+			CATEGORY.className = "cat";
+			const CAT = document.createTextNode(projectWork.category);
+			CATEGORY.appendChild(CAT);
+			//mentor
+			const MENTOR = document.createElement("div");
+			MENTOR.className = "mentor";
+			const MEN = document.createTextNode(`Mentor: ${projectWork.mentor}`);
+			const IMAGE = document.createElement("img");
+			if(projectWork.mentorApprovalStatus === "Approved"){
+				IMAGE.src = "../img/tick.svg";
+			}else{
+				IMAGE.src = "../img/cross/svg";
+			}
+			MENTOR.appendChild(MEN);
+			MENTOR.appendChild(IMAGE);
+			//Cat manager
+			const CATMAN = document.createElement("div");
+			const TEXT = document.createTextNode("Category Manager Approval");
+			if(projectWork.catManagerApprovalStatus === "Approved"){
+				IMAGE.src = "../img/tick.svg";
+			}else{
+				IMAGE.src = "../img/cross/svg";
+			}
+			CATMAN.appendChild(TEXT);
+			CATMAN.appendChild(IMG);
+			// append to body
+			BODY.appendChild(NAME);
+			BODY.appendChild(CATEGORY);
+			BODY.appendChild(MENTOR);
+			BODY.appendChild(CATMAN);
+		});
+	</script>
 </body>
 </html>
