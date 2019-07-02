@@ -5,32 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="../common.css" type="text/css">
-	<link rel="stylesheet" href="nav.css" type="text/css">
-    <title>Project Work</title>
-	<style>
-		.content{
-			position: relative;
-			left: 200px;
-			padding: 10px 25px;
-		}
-		.content strong{
-			font-size: 36px;
-		}
-		.content .cat{
-			font-size: 16px;
-			color: grey;
-		}
-		.mentor{
-			font-size: 18px;
-			margin-top: 10px;
-			vertical-align: middle;
-		}
-		img{
-			padding-left: 10px;
-			height: 20px;
-		}
-	</style>
+	<link rel="stylesheet" href="../stylesheets/common.css" type="text/css">
+	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
+	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
+	<title>Project Work</title>
 </head>
 <body>
     <div class="header">
@@ -47,65 +25,88 @@
 		</div>
 	</div>
 	<!--header end-->
+
 	<!--navigational bar-->
-	<div class = "navi">
-		<a href = "announcements.html">Announcements</a>
-		<a href = cip.html>CIP</a>
-		<a href = "discipline.html">Discipline</a>
-		<a href = "events.html">Events</a>
-		<a href = "exams.html">Exams</a>
-		<a href = "particulars.html">Particulars</a>
-		<a class = "selected" href = "project-work.html">Project Work</a>
+	<div class="navi">
+		<a href="announcements.html">Announcements</a>
+		<a href="cip.html">CIP</a>
+		<a href="discipline.html">Discipline</a>
+		<a href="events.html">Events</a>
+		<a href="exams.html">Exams</a>
+		<a href="particulars.html">Particulars</a>
+		<a class="selected" href="project-work.html">Project Work</a>
 	</div>
 	<!--navigation end-->
-	<div class = "content">
+
+	<div class="content">
+		<h1>Project Work</h1>
+		<h2 id="project-name">Loading project...</h2>
+		<div id="project-category">Category: </div>
+		<div id="project-mentor">Mentor: </div>
+		<div id="mentor-approval-wrapper">
+			<span id="mentor-approval">Mentor approval status: </span>
+			<img id="mentor-approval-icon" class="icon">
+		</div>
+		<div id="category-manager-approval-wrapper">
+			<span id="category-manager-approval">Category manager approval status: </span>
+			<img id="cat-manager-approval-icon" class="icon">
+		</div>
+		<div id="project-status-wrapper">
+			<span id="project-status">Project status: </span>
+			<img id="project-status-icon" class="icon">
+		</div>
 	</div>
+
 	<script>
-		fetch("../api/isp/project-work", {
+		fetch("/api/isp/project-work", {
     	method: "POST",
     	headers: { "Content-Type": "application/json" },
     	body: JSON.stringify({
-        	user: "171255n",      	pass: "@cptaHadk0"
+					user: "171255n",
+					pass: "@cptaHadk0"
     	}),
-		}).then((res) => res.json()).then((projectWork) => {
-			const BODY = document.getElementsByClassName("content")[0];
-			//Title
-			const NAME = document.createElement("strong");
-			const TITLE = document.createTextNode(projectWork.name);
-			NAME.appendChild(TITLE);
-			//category
-			const CATEGORY = document.createElement("div");
-			CATEGORY.className = "cat";
-			const CAT = document.createTextNode(projectWork.category);
-			CATEGORY.appendChild(CAT);
-			//mentor
-			const MENTOR = document.createElement("div");
-			MENTOR.className = "mentor";
-			const MEN = document.createTextNode(`Mentor: ${projectWork.mentor}`);
-			const IMAGE = document.createElement("img");
-			if(projectWork.mentorApprovalStatus === "Approved"){
-				IMAGE.src = "../img/tick.svg";
-			}else{
-				IMAGE.src = "../img/cross.svg";
+		})
+		.then((res) => /* implement error handling before json() */ res.json())
+		.then(({
+			name,
+			category,
+			mentor,
+			mentorApprovalStatus,
+			catManagerApprovalStatus,
+			projectStatus
+		}) => {
+			// add project details
+			document.getElementById("project-name").textContent = `Project name: ${name}`;
+			document.getElementById("project-category").textContent += category;
+			document.getElementById("project-mentor").textContent += mentor;
+			document.getElementById("mentor-approval").textContent
+					+= mentorApprovalStatus;
+			document.getElementById("category-manager-approval").textContent
+					+= catManagerApprovalStatus;
+			document.getElementById("project-status").textContent += projectStatus;
+
+			// show approval icons
+			const mentorApprovalIcon = document.getElementById("mentor-approval-icon");
+			if (mentorApprovalStatus === "Approved") {
+				mentorApprovalIcon.src = "../img/tick.svg";
+			} else {
+				mentorApprovalIcon.src = "../img/cross.svg";
 			}
-			MENTOR.appendChild(MEN);
-			MENTOR.appendChild(IMAGE);
-			//Cat manager
-			const CATMAN = document.createElement("div");
-			const TEXT = document.createTextNode(`Category Manager Approval: ${projectWork.catManagerApprovalStatus}`);
-			const IMG = document.createElement("img");
-			if(projectWork.catManagerApprovalStatus === "Approved" || projectWork.catManagerApprovalStatus === "Not required"){
-				IMG.src = "../img/tick.svg";
-			}else{
-				IMG.src = "../img/cross.svg";
+
+			const catManagerApprovalIcon = document.getElementById("cat-manager-approval-icon");
+			if (catManagerApprovalStatus === "Approved"
+				|| catManagerApprovalStatus === "Not required") {
+				catManagerApprovalIcon.src = "../img/tick.svg";
+			} else {
+				catManagerApprovalIcon.src = "../img/cross.svg";
 			}
-			CATMAN.appendChild(TEXT);
-			CATMAN.appendChild(IMG);
-			// append to body
-			BODY.appendChild(NAME);
-			BODY.appendChild(CATEGORY);
-			BODY.appendChild(MENTOR);
-			BODY.appendChild(CATMAN);
+
+			const projectStatusIcon = document.getElementById("project-status-icon");
+			if (projectStatus === "Approved") {
+				projectStatusIcon.src = "../img/tick.svg";
+			} else {
+				projectStatusIcon.src = "../img/cross.svg";
+			}
 		});
 	</script>
 </body>
