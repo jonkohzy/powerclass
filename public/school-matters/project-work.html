@@ -12,8 +12,7 @@
 		.content{
 			position: relative;
 			left: 200px;
-			padding-left: 10%;
-			padding-top: 10px;
+			padding: 10px 25px;
 		}
 		.content strong{
 			font-size: 36px;
@@ -60,21 +59,16 @@
 	</div>
 	<!--navigation end-->
 	<div class = "content">
-		<strong>PowerClass</strong>
-		<div class = "cat">INFOCOMM</div>
-		<div class = "mentor">Mentor: YONG JONG SHAN<img height = "20" src = "../img/tick.svg"/></div>
-		<div>Category Manager Approval<img height = "20" src = "../img/tick.svg"/></div>
 	</div>
 	<script>
 		fetch("../api/isp/project-work", {
     	method: "POST",
     	headers: { "Content-Type": "application/json" },
     	body: JSON.stringify({
-        	user: "user",
-        	pass: "password"
+        	user: "171255n",      	pass: "@cptaHadk0"
     	}),
 		}).then((res) => res.json()).then((projectWork) => {
-			const BODY = document.getElementsByClassName("content");
+			const BODY = document.getElementsByClassName("content")[0];
 			//Title
 			const NAME = document.createElement("strong");
 			const TITLE = document.createTextNode(projectWork.name);
@@ -92,17 +86,18 @@
 			if(projectWork.mentorApprovalStatus === "Approved"){
 				IMAGE.src = "../img/tick.svg";
 			}else{
-				IMAGE.src = "../img/cross/svg";
+				IMAGE.src = "../img/cross.svg";
 			}
 			MENTOR.appendChild(MEN);
 			MENTOR.appendChild(IMAGE);
 			//Cat manager
 			const CATMAN = document.createElement("div");
-			const TEXT = document.createTextNode("Category Manager Approval");
-			if(projectWork.catManagerApprovalStatus === "Approved"){
-				IMAGE.src = "../img/tick.svg";
+			const TEXT = document.createTextNode(`Category Manager Approval: ${projectWork.catManagerApprovalStatus}`);
+			const IMG = document.createElement("img");
+			if(projectWork.catManagerApprovalStatus === "Approved" || projectWork.catManagerApprovalStatus === "Not required"){
+				IMG.src = "../img/tick.svg";
 			}else{
-				IMAGE.src = "../img/cross/svg";
+				IMG.src = "../img/cross.svg";
 			}
 			CATMAN.appendChild(TEXT);
 			CATMAN.appendChild(IMG);
