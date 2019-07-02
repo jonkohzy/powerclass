@@ -1,49 +1,42 @@
 html,body{height:100%;}
 .navi{
-    position: sticky;
+    position: fixed;
     top: 91px;
     height: calc(100% - 91px);
-    display: inline-block;
-    background-color: #fd432e7a;
-}
-ul{
-    -webkit-appearance: none;
-    list-style: none;
-    width: 200px;
-    height: 100%;
-    margin: 0px;
+    display: inline-block;   
+    background-color: #fd432e40;
+    width: 16%;
     text-align: center;
-    padding: 12px 20px;
+    padding: 12px 30px;
 }
-li{
-    margin-top: 30px;
-}
-li a{
+.navi a{
+    display: block;
     padding: 8px 16px;
     margin-top: 12px;
     border-radius: 4px;
     cursor: pointer;
     border: 2px solid #fd432e;
-    background: linear-gradient(45deg, #fff, 50%, #fd432e 50%);
+    background: linear-gradient(60deg, #fff, 50%, #fd432e 50%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
 }
-li a::after{
+.navi a::after{
     content: "";
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(45deg, #fd432e 50%, #fff 50%);
+    background: linear-gradient(60deg, #fd432e 50%, #fff 50%);
     z-index: -1;
 }
-li a, li a::after{
+.navi a, .navi a::after{
     background-size: 300%;
     background-position:100%;
-    transition: .15s;
+    transition: .3s;
 }
-li a:hover, li a:hover::after, .selected, .selected::after{
+.navi a:hover, .navi a:hover::after, .selected, .selected::after{
     background-position: 0;
 }
