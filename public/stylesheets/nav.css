@@ -3,7 +3,7 @@ html,body{height:100%;}
     position: fixed;
     top: 91px;
     height: calc(100% - 91px);
-    display: inline-block;   
+    display: block;   
     background-color: #fd432e40;
     width: 16%;
     text-align: center;

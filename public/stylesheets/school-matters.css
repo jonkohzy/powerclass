@@ -1,0 +1,16 @@
+/* tags */
+h2 {
+  font-weight: normal;
+}
+
+/* content */
+.content {
+  margin-left: calc(16% + 60px); /* same as navbar */
+  padding: 10px 25px;
+}
+
+img.icon {
+  width: 1em;
+  vertical-align: middle;
+  margin-left: 5px;
+}
