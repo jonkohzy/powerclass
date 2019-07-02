@@ -6,7 +6,7 @@ h2 {
 /* content */
 .content {
   margin-left: calc(16% + 60px); /* same as navbar */
-  padding: 10px 25px;
+  padding: 30px 32px;
 }
 
 img.icon {
@@ -14,17 +14,38 @@ img.icon {
   vertical-align: middle;
   margin-left: 5px;
 }
+
 .heading{
   font-size: 3.9em;
   font-weight: normal;
+  margin-top: 0;
 }
+
 .number{
   font-size: 150px;
 }
-@media screen and (max-width: 1499px){
+
+.no-records {
+  display: none;
+}
+
+td, th{
+  padding: 12px 17px;
+  text-align: left;
+}
+tr{
+  box-shadow: 0 2px 5px #0000004d;
+  border-radius: 10px;
+}
+tr:hover{
+  box-shadow: 0 3px 12px #0000004d;
+}
+
+@media screen and (max-width: 1499px) {
   .heading{
     font-size: 3.3em;
   }
+
   .number{
     font-size: 120px;
   }
