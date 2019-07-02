@@ -1,42 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-	<link rel="stylesheet" href="../stylesheets/common.css" type="text/css">
-	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
-	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
-	<title>PowerClass | Announcements</title>
-</head>
-<body>
-    <div class="header">
-		<div class="name">PowerClass</div>
-
-		<a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
-		<a class="header-item school-matters-navlink">School Matters&nbsp;&nbsp;
-			<span class="disclosure-triangle">&#9660;</span>
-		</a>
-		<a href="../message-board.html" class="header-item message-board-navlink">Message Board</a>
-
-		<div class="user">
-			<img class="icon" src="../img/user.png" alt="profile picture" onclick="show_profile();">
+<html>
+	<head>
+		<title>PowerClass | Announcements</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" href="../stylesheets/common.css" type="text/css">
+		<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
+	</head>
+	<body>
+		<div class="header">
+			<div class="name">PowerClass</div>
+			<a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
+			<a class="header-item school-matters-navlink">School Matters&nbsp;&nbsp;
+				<span class="disclosure-triangle">&#9660;</span>
+			</a>
+			<a href="../message-board.html" class="header-item message-board-navlink">Message Board</a>
+	
+			<div class="user">
+				<img class="icon" src="../img/user.png" alt="profile picture" onclick="show_profile();">
+			</div>
 		</div>
-	</div>
-	<!--header end-->
-	<!--navigational bar-->
-	<div class="navi">
-		<a class="selected" href="announcements.html">Announcements</a>
-		<a href="cip.html">CIP</a>
-		<a href="discipline.html">Discipline</a>
-		<a href="events.html">Events</a>
-		<a href="exams.html">Exams</a>
-		<a href="particulars.html">Particulars</a>
-		<a href="project-work.html">Project Work</a>
-	</div>
+		<!--header end-->
+		<!--navigational bar-->
+		<div class="navi">
+			<a class = "selected" href="announcements.html">Announcements</a>
+			<a href="cip.html">CIP</a>
+			<a href="discipline.html">Discipline</a>
+			<a href="events.html">Events</a>
+			<a href="exams.html">Exams</a>
+			<a href="particulars.html">Particulars</a>
+			<a href="project-work.html">Project Work</a>
+		</div>
+		<!--navigation end-->
+	<p>PowerClass | Announcements</p>
+	<p id="announcements"><p>
+		<script>
+			function appendAnnouncement(text) {
+				var b = document.getElementById('announcements');
+				var c = document.createElement('p');
+				var d = document.createTextNode(text);
+				c.appendChild(d);
+				b.appendChild(c);
+			}
 
-	<!-- weird fix for transitions firing on page load -->
-	<script> </script>
+			fetch("/api/isp/announcements", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify({
+					user: "171255n",
+					pass: "@cptaHadk0"
+				}),
+			}).then((res) => res.json()).then((announcements) => {
+        // appendAnnouncements(announcements);
+        announcements.forEach(({ text, additionalDetails, createdBy, date, attachedFileLink }) => {
+        	var a = text + "||" + additionalDetails + "||" + createdBy + "||" + date + "||" + attachedFileLink;
+        	appendAnnouncement(a);
+        });
+    });
+</script>
+
 </body>
 </html>
