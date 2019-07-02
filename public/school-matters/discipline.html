@@ -10,6 +10,16 @@
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
 	<title>PowerClass | Discipline Records</title>
 	<style>
+		td, th{
+			padding: 12px 20px;
+		}
+		tr{
+			box-shadow: 0 2px 5px #0000004d;
+			border-radius: 10px;
+		}
+		tr:hover{
+			box-shadow: 0 3px 12px #0000004d;
+		}
 	</style>
 </head>
 <body>
@@ -40,8 +50,26 @@
 	<div class = "content">
 		<h1 class = "Tdp">Demerit Points</h1>
 		<div class = "number">Loading...</div>
-		<table class = "list">
-
+		<table class = "list" cellspacing = "10">
+			<thead>
+				<tr>
+					<th>
+						Category
+					</th>
+					<th>
+						Offense
+					</th>
+					<th>
+						Date
+					</th>
+					<th>
+						Demerit Points
+					</th>
+					<th>
+						Major Offence?
+					</th>
+				</tr>
+			</thead>
 		</table>
 	</div>
 	<!-- weird fix for transitions firing on page load -->
@@ -54,13 +82,41 @@
 				pass: "@cptaHadk0"
 			}),
 		}).then((res) => res.json()).then(({ totalDemeritPoints, disciplineRecords }) => {
-			const DP = document.getElementsByClassName("number")[0];
-			DP.textContent = totalDemeritPoints;
+			const Tdp = document.getElementsByClassName("number")[0];
+			Tdp.textContent = totalDemeritPoints;
 			const BODY = document.getElementsByClassName("list")[0];
 			disciplineRecords.forEach(({category, offence, date, demeritPoints, majorOffence}) => {
 				const ROW = document.createElement("tr");
-				
+				const CAT = document.createElement("td");
+				CAT.textContent = category;
+				const OFF = document.createElement("td");
+				OFF.textContent = offence;
+				const DAY = document.createElement("td");
+				DAY.textContent = date;
+				const DP = document.createElement("td");
+				DP.textContent = `${demeritPoints} DP`;
+				const MAJOR = document.createElement("td");
+				if(majorOffence){
+					MAJOR.textContent = "Major Offence";
+				}else{
+					MAJOR.textContent = "Minor Offence";
+				}
+				ROW.appendChild(CAT);
+				ROW.appendChild(OFF);
+				ROW.appendChild(DAY);
+				ROW.appendChild(DP);
+				ROW.appendChild(MAJOR);
+				BODY.appendChild(ROW);
 			});
+			if(disciplineRecords.length === 0){
+				const ROW = document.createElement("tr");
+				const TEXT = document.createElement("td");
+				TEXT.textContent = "Hooray! You have no discipline records";
+				TEXT.colSpan = "5";
+				TEXT.style.width = "100%";
+				ROW.appendChild(TEXT);
+				BODY.appendChild(ROW);
+			}
 		});
 	</script>
 </body>
