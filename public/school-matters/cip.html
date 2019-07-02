@@ -25,7 +25,8 @@
 		</div>
 	</div>
 	<!--header end-->
-	<!--navigational bar-->
+
+	<!--navbar-->
 	<div class="navi">
 		<a href="announcements.html">Announcements</a>
 		<a class="selected" href="cip.html">CIP</a>
@@ -35,8 +36,98 @@
 		<a href="particulars.html">Particulars</a>
 		<a href="project-work.html">Project Work</a>
 	</div>
+	<!--navbar end-->
 
-	<!-- weird fix for transitions firing on page load -->
-	<script> </script>
+	<div class="content">
+		<h1 class="heading">CIP Records</h1>
+		<h2 class="no-records">No CIP records found.</h2>
+
+		<h2 id="totalCipHoursHeading">Total CIP hours:</h2>
+		<div id="totalCipHours" class="number">Loading...</div>
+
+		<table class="list" cellspacing="10">
+			<thead>
+				<tr>
+					<th>Activity Name</th>
+					<th>Organisation</th>
+					<th>Type</th>
+					<th>Period</th>
+					<th>Role</th>
+					<th>Hours</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+
+	<script>
+		fetch("/api/isp/cip", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				user: "171255n",
+				pass: "@cptaHadk0",
+			}),
+		})
+		.then((res) => {
+			const requestStatusElem = document.getElementById("totalCipHoursHeading");
+			const largeNumber = document.getElementById("totalCipHours");
+			switch (res.status) {
+				case 500:
+					requestStatusElem.textContent = "An internal error occurred.";
+					largeNumber.style.display = "none";
+					break;
+				case 401:
+					requestStatusElem.textContent = "Invalid username or password.";
+					largeNumber.style.display = "none";
+					break;
+				case 200:
+					return res.json();
+
+				default:
+					requestStatusElem.textContent = "An unknown error occurred.";
+					largeNumber.style.display = "none";
+			}
+		})
+		.then((cipData) => {
+			if (!cipData) return; // error already handled above
+
+			const { totalCipHours, activities } = cipData;
+			document.getElementById("totalCipHours").textContent = totalCipHours;
+			if (activities.length) {
+				const table = document.getElementsByClassName("list")[0];
+				activities.forEach(({ activityName,	organisation, type,	period, role,	hours, status	}) => {
+					const row = document.createElement("tr");
+
+					const activityCell = document.createElement("td");
+					activityCell.textContent = activityName;
+					const organisationCell = document.createElement("td");
+					organisationCell.textContent = organisation;
+					const typeCell = document.createElement("td");
+					typeCell.textContent = type;
+					const periodCell = document.createElement("td");
+					periodCell.textContent = period;
+					const roleCell = document.createElement("td");
+					roleCell.textContent = role;
+					const hoursCell = document.createElement("td");
+					hoursCell.textContent = hours;
+					const statusCell = document.createElement("td");
+					statusCell.textContent = status;
+
+					row.appendChild(activityCell);
+					row.appendChild(organisationCell);
+					row.appendChild(typeCell);
+					row.appendChild(periodCell);
+					row.appendChild(roleCell);
+					row.appendChild(hoursCell);
+					row.appendChild(statusCell);
+
+					table.appendChild(row);
+				});
+			} else {
+				document.getElementsByClassName("no-records")[0].style.display = "block";
+			}
+		})
+	</script>
 </body>
 </html>
