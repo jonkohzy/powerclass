@@ -11,45 +11,39 @@
 	<link rel="stylesheet" href="dropdown.css" type="text/css">
 	<title>PowerClass | Exam Results</title>
 	<style>
-		.button{
-			margin-left: 300px;
+		.heading {
+			margin-bottom: 0;
 		}
 		button{
-			width: 200px;
-			font-family:inherit;
-			background: transparent;
+			width: calc(30% - 10px);
 			position: relative;
 			display: block;
-			color: white;
+			margin-left: calc(70% + 10px);
+			font-family: inherit;
+			background: transparent;
+			color: #fc5185;
 			font-size: 14px;
 			text-decoration: none;
 			border: 2px solid #fc5185;
-			padding: 21px 20px;
+			padding: 10px;
 			text-transform: uppercase;
 			overflow: hidden;
-			transition: 1s all ease;
+			transition: 0.3s all ease;
 			z-index: 2;
 		}
-		button::before{
-			background: #fc5185;
-			content: "";
-			height: 100%;
-			width: 0;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			z-index: -1;
-			transition: all 0.6s ease;
+		button:hover {
+			background-color: #fc5185;
+			color: white;
 		}
-		button:hover::before{
-			width: 100%;
-		}
-		.content div{
+		.exams, .reports {
 			float: left;
-			width: 50%;
+			width: calc(50% - 64px);
 			height: 100%;
-			background: #0b0962;
+			padding-right: 30px;
+		}
+		.exams {
+			border-right: 1px solid black;
+			margin-right: 32px;
 		}
 	</style>
 </head>
@@ -78,21 +72,19 @@
 		<a href="project-work.html">Project Work</a>
 	</div>
 	<div class = "content">
-		<div>
-		<h1 class = "heading">Exams</h1>
-		<div class = "select">
-			<input class="chosen-value" type="text" value="" placeholder="Loading...">
-			<ul style = "padding-left: 0px" class = "value-list">
-			</ul>
-			<div class = "button">
-				<button onClick=show()>Check your results</button>
+		<div class="exams">
+			<h1 class = "heading">Exams</h1>
+			<div class = "select">
+				<input class="chosen-value" type="text" value="" placeholder="Loading...">
+				<ul style = "padding-left: 0px" class = "value-list"></ul>
+				<button onclick="show()">Check your results</button>
 			</div>
-			
-		</div>
+
 		<table style = "margin-top: 50px" cellspacing = "10">
 
 		</table>
 		</div>
+
 		<div>
 			<h1 class = "heading">Reports</h1>
 		</div>

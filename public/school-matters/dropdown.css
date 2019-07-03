@@ -1,7 +1,6 @@
 .select {
     position: relative;
-    width: 18rem;
-    margin-top: 8vh;
+    margin-top: 5vh;
     box-sizing: border-box;
 }
   
@@ -9,7 +8,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 70%;
     box-sizing: border-box;
 }
   
