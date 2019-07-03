@@ -48,6 +48,7 @@
     overflow: hidden;
     max-height: 0;
     transition: .3s ease-in-out;
+    z-index: 3;
 }
   .value-list.open {
     max-height: 320px;

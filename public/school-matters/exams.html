@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style = "height: 100%">
 <head>
   <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,7 +47,7 @@
 		}
 	</style>
 </head>
-<body>
+<body style = "height: 100%">
     <div class="header">
 		<a href = "../dashboard.html" class="name">PowerClass</a>
 		<a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
@@ -87,6 +87,18 @@
 
 		<div>
 			<h1 class = "heading">Reports</h1>
+			<div class = "select">
+				<input class="chosen-value" type="text" value="" placeholder="Loading...">
+				<ul style = "padding-left: 0px" class = "value-list">
+				</ul>
+				<div class = "button">
+					<button onClick=download()>Download your reports</button>
+				</div>
+				
+			</div>
+			<table style = "margin-top: 50px" cellspacing = "10">
+	
+			</table>
 		</div>
 	</div>
 	<!-- weird fix for transitions firing on page load -->
@@ -101,16 +113,25 @@
 				pass: "@cptaHadk0"
 			}),
 		}).then((res) => res.json()).then(({examResults, reports }) => {
-			console.log(examResults);
+			console.log(reports);
 			Results = examResults
 			Reports = reports;
 			const SELECT = document.getElementsByClassName("value-list")[0];
 			examResults.forEach(results => {
 				const OPTION = document.createElement("li");
 				OPTION.textContent = results.exam;
+				OPTION.className = "one";
 				SELECT.appendChild(OPTION);
 			});
 			drop();
+			const SELECT2 = document.getElementsByClassName("value-list")[1];
+			reports.forEach(reports =>{
+				const OPTION = document.createElement("li");
+				OPTION.textContent = reports.reportName;
+				OPTION.className = "two";
+				SELECT2.appendChild(OPTION);
+			});
+			drop2();
 		});
 		const show = () => {
 			const inputField = document.getElementsByClassName("chosen-value")[0];
@@ -130,6 +151,14 @@
 						ROW.appendChild(MARK);
 						TABLE.appendChild(ROW);
 					});
+				}
+			});
+		}
+		const download = () => {
+			const inputField2 = document.getElementsByClassName("chosen-value")[1];
+			Reports.forEach((report) => {
+				if(inputField2.value === report.reportName){
+					window.open(`/api/isp/get-file?user=MTcxMjU1bg==&pass=QGNwdGFIYWRrMA==&fileLink=${report.reportUrl}`)
 				}
 			});
 		}
