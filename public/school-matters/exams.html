@@ -45,7 +45,12 @@
 		button:hover::before{
 			width: 100%;
 		}
-
+		.content div{
+			float: left;
+			width: 50%;
+			height: 100%;
+			background: #0b0962;
+		}
 	</style>
 </head>
 <body>
@@ -73,6 +78,7 @@
 		<a href="project-work.html">Project Work</a>
 	</div>
 	<div class = "content">
+		<div>
 		<h1 class = "heading">Exams</h1>
 		<div class = "select">
 			<input class="chosen-value" type="text" value="" placeholder="Loading...">
@@ -86,6 +92,10 @@
 		<table style = "margin-top: 50px" cellspacing = "10">
 
 		</table>
+		</div>
+		<div>
+			<h1 class = "heading">Reports</h1>
+		</div>
 	</div>
 	<!-- weird fix for transitions firing on page load -->
 	<script>
