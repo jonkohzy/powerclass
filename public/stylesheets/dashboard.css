@@ -64,20 +64,20 @@ ul, li {
 	display: inline-block;
 	height: 70px;
 	width: 70px;
-	background-image: url("img/right-arrow-white-70px.png");
+	background-image: url("../img/right-arrow-white-70px.png");
 	background-repeat: no-repeat;
 }
 .link-to-page:hover::after {
-	background-image: url("img/right-arrow-grey-70px.png");
+	background-image: url("../img/right-arrow-grey-70px.png");
 }
 @media screen and (max-width: 1499px) {
 	.link-to-page::after {
 		height: 60px;
 		width: 60px;
-		background-image: url("img/right-arrow-white-60px.png");
+		background-image: url("../img/right-arrow-white-60px.png");
 	}
 	.link-to-page:hover::after {
-		background-image: url("img/right-arrow-grey-60px.png");
+		background-image: url("../img/right-arrow-grey-60px.png");
 	}
 }
 
@@ -192,7 +192,7 @@ ul, li {
 	width: 30px;
 	margin-left: 5px;
 	margin-bottom: -1px;
-	background-image: url("img/right-arrow-black-30px.png");
+	background-image: url("../img/right-arrow-black-30px.png");
 	background-repeat: no-repeat;
 }
 @media screen and (max-width: 1499px) {
@@ -200,7 +200,7 @@ ul, li {
 		height: 25px;
 		width: 25px;
 		margin-left: 3px;
-		background-image: url("img/right-arrow-black-25px.png");
+		background-image: url("../img/right-arrow-black-25px.png");
 	}
 }
 
