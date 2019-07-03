@@ -19,6 +19,7 @@ img.icon {
   font-size: 3.9em;
   font-weight: normal;
   margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .number{
@@ -27,6 +28,10 @@ img.icon {
 
 .no-records {
   display: none;
+}
+
+table {
+  margin-bottom: 40px;
 }
 
 td, th{

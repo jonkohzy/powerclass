@@ -8,6 +8,34 @@
 	<link rel="stylesheet" href="../stylesheets/common.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
+
+	<style>
+		.particulars {
+			margin-top: 50px;
+		}
+
+		.particulars .name {
+			vertical-align: middle;
+		}
+
+		#large-name {
+			display: flex;
+			margin-bottom: 40px;
+		}
+
+		#name-icon {
+			display: inline-block;
+			width: 120px;
+		}
+
+		#name {
+			display: inline-block;
+			align-self: center;
+			margin-left: 30px;
+			font-size: 30px;
+		}
+	</style>
+
 	<title>PowerClass | Your Particulars</title>
 </head>
 <body>
@@ -34,8 +62,106 @@
 		<a class="selected" href = "particulars.html">Particulars</a>
 		<a href = "project-work.html">Project Work</a>
 	</div>
+
+	<div class="content">
+		<h1 class="heading">Your Particulars</h1>
+
+		<div class="particulars">
+			<div id="large-name">
+				<img id="name-icon" src="../img/user.png" alt="Profile">
+				<span id="name">Loading...</span>
+			</div>
+
+			<table class="list">
+				<tr>
+					<th>Name</th>
+				</tr>
+				<tr>
+					<th>Chinese Name</th>
+				</tr>
+				<tr>
+					<th>Gender</th>
+				</tr>
+				<tr>
+					<th>Date of Birth</th>
+				</tr>
+				<tr>
+					<th>Race</th>
+				</tr>
+				<tr>
+					<th>Citizenship</th>
+				</tr>
+				<tr>
+					<th>Religion</th>
+				</tr>
+				<tr>
+					<th>Primary School</th>
+				</tr>
+				<tr>
+					<th>PSLE T-Score</th>
+				</tr>
+			</table>
+		</div>
+	</div>
 	
-	<!-- weird fix for transitions firing on page load -->
-	<script> </script>
+	<script>
+		fetch("/api/isp/particulars", {
+			method: "POST",
+    	headers: { "Content-Type": "application/json" },
+    	body: JSON.stringify({
+				user: "171255n",
+				pass: "@cptaHadk0",
+    	}),
+		})
+		.then((res) => res.json())
+		.then(({
+			name,
+			chineseName,
+			gender,
+			photoUrl,
+			dateOfBirth,
+			race,
+			citizenship,
+			religion,
+			primarySchool,
+			psleTScore
+		}) => {
+			// update user icon
+			document.getElementById("name-icon").src = photoUrl;
+			document.getElementById("name").textContent = name;
+
+			// fill in table
+			const rows = document.getElementsByClassName("list")[0].childNodes[1].children;
+
+			const nameCell = document.createElement("td");
+			nameCell.textContent = name;
+			const chineseNameCell = document.createElement("td");
+			chineseNameCell.textContent = chineseName;
+			const genderCell = document.createElement("td");
+			genderCell.textContent = gender;
+			const dobCell = document.createElement("td");
+			dobCell.textContent = dateOfBirth;
+			const raceCell = document.createElement("td");
+			raceCell.textContent = race;
+			const citizenshipCell = document.createElement("td");
+			citizenshipCell.textContent = citizenship;
+			const religionCell = document.createElement("td");
+			religionCell.textContent = religion;
+			const pSchoolCell = document.createElement("td");
+			pSchoolCell.textContent = primarySchool;
+			const psleTScoreCell = document.createElement("td");
+			psleTScoreCell.textContent = psleTScore;
+
+			rows[0].appendChild(nameCell);
+			rows[1].appendChild(chineseNameCell);
+			rows[2].appendChild(genderCell);
+			rows[3].appendChild(dobCell);
+			rows[4].appendChild(raceCell);
+			rows[5].appendChild(citizenshipCell);
+			rows[6].appendChild(religionCell);
+			rows[7].appendChild(pSchoolCell);
+			rows[8].appendChild(psleTScoreCell)
+		});
+	</script>
 </body>
 </html>
