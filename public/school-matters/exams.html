@@ -10,6 +10,43 @@
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
 	<link rel="stylesheet" href="dropdown.css" type="text/css">
 	<title>PowerClass | Exam Results</title>
+	<style>
+		.button{
+			margin-left: 300px;
+		}
+		button{
+			width: 200px;
+			font-family:inherit;
+			background: transparent;
+			position: relative;
+			display: block;
+			color: white;
+			font-size: 14px;
+			text-decoration: none;
+			border: 2px solid #fc5185;
+			padding: 21px 20px;
+			text-transform: uppercase;
+			overflow: hidden;
+			transition: 1s all ease;
+			z-index: 2;
+		}
+		button::before{
+			background: #fc5185;
+			content: "";
+			height: 100%;
+			width: 0;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: -1;
+			transition: all 0.6s ease;
+		}
+		button:hover::before{
+			width: 100%;
+		}
+
+	</style>
 </head>
 <body>
     <div class="header">
@@ -37,15 +74,23 @@
 	</div>
 	<div class = "content">
 		<h1 class = "heading">Exams</h1>
-		<form>
+		<div class = "select">
 			<input class="chosen-value" type="text" value="" placeholder="Loading...">
 			<ul style = "padding-left: 0px" class = "value-list">
 			</ul>
-		</form>
+			<div class = "button">
+				<button onClick=show()>Check your results</button>
+			</div>
+			
+		</div>
+		<table style = "margin-top: 50px" cellspacing = "10">
 
+		</table>
 	</div>
 	<!-- weird fix for transitions firing on page load -->
 	<script>
+		let Results;
+		let Reports;
 		fetch("/api/isp/exams", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -53,8 +98,10 @@
 				user: "171255n",
 				pass: "@cptaHadk0"
 			}),
-		}).then((res) => res.json()).then(({ examResults, reports }) => {
+		}).then((res) => res.json()).then(({examResults, reports }) => {
 			console.log(examResults);
+			Results = examResults
+			Reports = reports;
 			const SELECT = document.getElementsByClassName("value-list")[0];
 			examResults.forEach(results => {
 				const OPTION = document.createElement("li");
@@ -63,6 +110,27 @@
 			});
 			drop();
 		});
+		const show = () => {
+			const inputField = document.getElementsByClassName("chosen-value")[0];
+			Results.forEach((element) =>{
+				if(inputField.value === element.exam){
+					const TABLE = document.getElementsByTagName("table")[0];
+					while(TABLE.firstChild){
+						TABLE.removeChild(TABLE.firstChild);
+					}
+					element.results.forEach((elem) => {
+						const ROW = document.createElement("tr");
+						const SUBJECT = document.createElement("td");
+						SUBJECT.textContent = elem.subject;
+						const MARK = document.createElement("td");
+						MARK.textContent = elem.mark;
+						ROW.appendChild(SUBJECT);
+						ROW.appendChild(MARK);
+						TABLE.appendChild(ROW);
+					});
+				}
+			});
+		}
 	</script>
 	<script src = "dropdown.js"></script>
 </body>

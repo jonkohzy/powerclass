@@ -1,4 +1,9 @@
 /* tags */
+.content{
+	background: #0b0962fe;
+	display: block;
+	color: #fce38a;
+}
 body {
 	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 	padding: 0px;
