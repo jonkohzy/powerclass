@@ -36,9 +36,9 @@
 		<a href="project-work.html">Project Work</a>
 	</div>
 	<div class = "content">
-		<h1 class = "Tdp, heading">Demerit Points</h1>
+		<h1 class = "heading">Discipline Records</h1>
 		<div class = "number">Loading...</div>
-		<table class = "list" cellspacing = "10">
+		<table class = "list">
 			<thead>
 				<tr>
 					<th>
@@ -85,9 +85,9 @@
 				DP.textContent = `${demeritPoints} DP`;
 				const MAJOR = document.createElement("td");
 				if(majorOffence){
-					MAJOR.textContent = "Major Offence";
+					MAJOR.textContent = "Yes";
 				}else{
-					MAJOR.textContent = "Minor Offence";
+					MAJOR.textContent = "No";
 				}
 				ROW.appendChild(CAT);
 				ROW.appendChild(OFF);
