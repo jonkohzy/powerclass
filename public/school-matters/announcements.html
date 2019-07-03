@@ -8,14 +8,45 @@
 		<link rel="stylesheet" href="../stylesheets/common.css" type="text/css">
 		<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
 		<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
+
+		<style>
+			h2 {
+				margin-top: 0;
+			}
+
+			.content {
+				padding-top: 0; /* override default */
+			}
+
+			#loading {
+				margin-top: 30px;
+			}
+
+			.announcements {
+				margin-top: 30px;
+			}
+
+			.announcement {
+				margin-top: 25px;
+				padding: 15px 20px;
+				border-radius: 10px;
+			}
+
+			.announcement-details {
+				margin-bottom: 10px;
+				line-height: 1.5;
+			}
+
+			.announcement-details a {
+				text-decoration: underline;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="header">
 			<a href = "../dashboard.html" class="name">PowerClass</a>
 			<a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
-			<a class="header-item school-matters-navlink">School Matters&nbsp;&nbsp;
-				<span class="disclosure-triangle">&#9660;</span>
-			</a>
+			<a class="header-item school-matters-navlink">School Matters</a>
 			<a href="../message-board.html" class="header-item message-board-navlink">Message Board</a>
 	
 			<div class="user">
@@ -36,33 +67,101 @@
 		<!--navigation end-->
 
 		<div class = "content">
-			<h1>PowerClass | Announcements</h1>
-			<p id="announcements"></p>
+			<!--announcements go here-->
+			<div id="loading">Loading...</div>
 		</div>
 
 <script>
-			function appendAnnouncement(text) {
-				var b = document.getElementById('announcements');
-				var c = document.createElement('p');
-				var d = document.createTextNode(text);
-				c.appendChild(d);
-				b.appendChild(c);
+	fetch("/api/isp/announcements", {
+		method: "POST",
+		headers: {"Content-Type": "application/json"},
+		body: JSON.stringify({
+			user: "171255n",
+			pass: "@cptaHadk0"
+		}),
+	})
+	.then((res) => res.json())
+	.then((announcements) => {
+		// hide "Loading..." div
+		document.getElementById("loading").style.display = "none";
+
+		// display announcements
+		announcements.forEach(({
+			text,
+			additionalDetails,
+			createdBy,
+			date,
+			attachedFileLink
+		}) => {
+			const announcementDiv = document.createElement("div");
+			announcementDiv.className = "announcement card";
+
+			// announcement name
+			const titleDiv = document.createElement("h2");
+			titleDiv.textContent = text;
+			announcementDiv.appendChild(titleDiv);
+
+			// additional details
+			const detailsLabel = document.createElement("b");
+			detailsLabel.textContent = "Additional details: "
+			const detailsDiv = document.createElement("div");
+			detailsDiv.className = "announcement-details";
+			const detailsText = document.createElement("span");
+			detailsText.textContent =	additionalDetails ? additionalDetails : "None";
+
+			detailsDiv.appendChild(detailsLabel);
+			detailsDiv.appendChild(detailsText);
+			announcementDiv.appendChild(detailsDiv);
+
+			// author
+			const authorLabel = document.createElement("b");
+			authorLabel.textContent = "Created by: ";
+			const authorDiv = document.createElement("div");
+			authorDiv.className = "announcement-details";
+			const authorText = document.createElement("span");
+			authorText.textContent = createdBy;
+
+			authorDiv.appendChild(authorLabel);
+			authorDiv.appendChild(authorText);
+			announcementDiv.appendChild(authorDiv);
+
+			// date
+			const dateLabel = document.createElement("b");
+			dateLabel.textContent = "Date: ";
+			const dateDiv = document.createElement("div");
+			dateDiv.className = "announcement-details";
+			const dateText = document.createElement("span");
+			dateText.textContent = date;
+			
+			dateDiv.appendChild(dateLabel);
+			dateDiv.appendChild(dateText);
+			announcementDiv.appendChild(dateDiv);
+
+			// file link
+			const fileLinkLabel = document.createElement("b");
+			fileLinkLabel.textContent = "Attached file: ";
+			const attachedFileDiv = document.createElement("div");
+			attachedFileDiv.className = "announcement-details";
+			const fileLinkElement = attachedFileLink ?
+					document.createElement("a") : document.createElement("span");
+			if (attachedFileLink) {
+				fileLinkElement.onclick = () => {
+					window.open(`/api/isp/get-file?user=${btoa("171255n")}&pass=${btoa("@cptaHadk0")}&fileLink=${attachedFileLink}`);
+				}
+				fileLinkElement.textContent = "Click here to download";
+			} else {
+				fileLinkElement.textContent = "None";
 			}
 
-			fetch("/api/isp/announcements", {
-				method: "POST",
-				headers: {"Content-Type": "application/json"},
-				body: JSON.stringify({
-					user: "171255n",
-					pass: "@cptaHadk0"
-				}),
-			}).then((res) => res.json()).then((announcements) => {
-        // appendAnnouncements(announcements);
-        announcements.forEach(({ text, additionalDetails, createdBy, date, attachedFileLink }) => {
-        	var a = text + "||" + additionalDetails + "||" + createdBy + "||" + date + "||" + attachedFileLink;
-        	appendAnnouncement(a);
-        });
-    });
+			attachedFileDiv.appendChild(fileLinkLabel);
+			attachedFileDiv.appendChild(fileLinkElement);
+			announcementDiv.appendChild(attachedFileDiv);
+
+			// append whole announcement
+			document.getElementsByClassName("content")[0]
+					.appendChild(announcementDiv);
+		})
+	});
 </script>
 
 </body>

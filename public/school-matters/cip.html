@@ -14,9 +14,7 @@
     <div class="header">
 		<a href = "../dashboard.html" class="name">PowerClass</a>
 		<a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
-		<a class="header-item school-matters-navlink">School Matters&nbsp;&nbsp;
-			<span class="disclosure-triangle">&#9660;</span>
-		</a>
+		<a class="header-item school-matters-navlink">School Matters</a>
 		<a href="../message-board.html" class="header-item message-board-navlink">Message Board</a>
 
 		<div class="user">
@@ -38,10 +36,7 @@
 	<!--navbar end-->
 
 	<div class="content">
-		<h1 class="heading">CIP Records</h1>
 		<h2 class="no-records">No CIP records found.</h2>
-
-		<h2 id="totalCipHoursHeading">Total CIP hours:</h2>
 		<div id="totalCipHours" class="number">Loading...</div>
 
 		<table class="list">
@@ -92,7 +87,7 @@
 			if (!cipData) return; // error already handled above
 
 			const { totalCipHours, activities } = cipData;
-			document.getElementById("totalCipHours").textContent = totalCipHours;
+			document.getElementById("totalCipHours").textContent = totalCipHours + "h";
 			if (activities.length) {
 				const table = document.getElementsByClassName("list")[0];
 				activities.forEach(({ activityName,	organisation, type,	period, role,	hours, status	}) => {
