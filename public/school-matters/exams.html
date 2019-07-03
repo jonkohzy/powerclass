@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="../stylesheets/common.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
+	<link rel="stylesheet" href="dropdown.css" type="text/css">
 	<title>PowerClass | Exam Results</title>
 </head>
 <body>
@@ -34,8 +35,35 @@
 		<a href="particulars.html">Particulars</a>
 		<a href="project-work.html">Project Work</a>
 	</div>
+	<div class = "content">
+		<h1 class = "heading">Exams</h1>
+		<form>
+			<input class="chosen-value" type="text" value="" placeholder="Loading...">
+			<ul style = "padding-left: 0px" class = "value-list">
+			</ul>
+		</form>
 
+	</div>
 	<!-- weird fix for transitions firing on page load -->
-	<script> </script>
+	<script>
+		fetch("/api/isp/exams", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				user: "171255n",
+				pass: "@cptaHadk0"
+			}),
+		}).then((res) => res.json()).then(({ examResults, reports }) => {
+			console.log(examResults);
+			const SELECT = document.getElementsByClassName("value-list")[0];
+			examResults.forEach(results => {
+				const OPTION = document.createElement("li");
+				OPTION.textContent = results.exam;
+				SELECT.appendChild(OPTION);
+			});
+			drop();
+		});
+	</script>
+	<script src = "dropdown.js"></script>
 </body>
 </html>
