@@ -11,15 +11,22 @@
 
 	<style>
 		.particulars {
-			margin-top: 50px;
+			display: flex;
+			align-items: flex-start;
+			margin-top: 30px;
 		}
 
 		.particulars .name {
 			vertical-align: middle;
 		}
 
+		.particulars-table {
+			display: inline-block;
+		}
+
 		#large-name {
-			display: flex;
+			display: inline-flex;
+			width: 50%;
 			margin-bottom: 40px;
 		}
 
@@ -72,33 +79,42 @@
 				<span id="name">Loading...</span>
 			</div>
 
-			<table class="list">
+			<table class="list particulars-table">
 				<tr>
 					<th>Name</th>
+					<td id="name-cell"></td>
 				</tr>
 				<tr>
 					<th>Chinese Name</th>
+					<td id="chinese-name-cell"></td>
 				</tr>
 				<tr>
 					<th>Gender</th>
+					<td id="gender-cell"></td>
 				</tr>
 				<tr>
 					<th>Date of Birth</th>
+					<td id="dob-cell"></td>
 				</tr>
 				<tr>
 					<th>Race</th>
+					<td id="race-cell"></td>
 				</tr>
 				<tr>
 					<th>Citizenship</th>
+					<td id="citizenship-cell"></td>
 				</tr>
 				<tr>
 					<th>Religion</th>
+					<td id="religion-cell"></td>
 				</tr>
 				<tr>
 					<th>Primary School</th>
+					<td id="primary-school-cell"></td>
 				</tr>
 				<tr>
 					<th>PSLE T-Score</th>
+					<td id="psle-tscore-cell"></td>
 				</tr>
 			</table>
 		</div>
@@ -131,36 +147,15 @@
 			document.getElementById("name").textContent = name;
 
 			// fill in table
-			const rows = document.getElementsByClassName("list")[0].childNodes[1].children;
-
-			const nameCell = document.createElement("td");
-			nameCell.textContent = name;
-			const chineseNameCell = document.createElement("td");
-			chineseNameCell.textContent = chineseName;
-			const genderCell = document.createElement("td");
-			genderCell.textContent = gender;
-			const dobCell = document.createElement("td");
-			dobCell.textContent = dateOfBirth;
-			const raceCell = document.createElement("td");
-			raceCell.textContent = race;
-			const citizenshipCell = document.createElement("td");
-			citizenshipCell.textContent = citizenship;
-			const religionCell = document.createElement("td");
-			religionCell.textContent = religion;
-			const pSchoolCell = document.createElement("td");
-			pSchoolCell.textContent = primarySchool;
-			const psleTScoreCell = document.createElement("td");
-			psleTScoreCell.textContent = psleTScore;
-
-			rows[0].appendChild(nameCell);
-			rows[1].appendChild(chineseNameCell);
-			rows[2].appendChild(genderCell);
-			rows[3].appendChild(dobCell);
-			rows[4].appendChild(raceCell);
-			rows[5].appendChild(citizenshipCell);
-			rows[6].appendChild(religionCell);
-			rows[7].appendChild(pSchoolCell);
-			rows[8].appendChild(psleTScoreCell)
+			document.getElementById("name-cell").textContent = name;
+			document.getElementById("chinese-name-cell").textContent = chineseName;
+			document.getElementById("gender-cell").textContent = gender;
+			document.getElementById("dob-cell").textContent = dateOfBirth;
+			document.getElementById("race-cell").textContent = race;
+			document.getElementById("citizenship-cell").textContent = citizenship;
+			document.getElementById("religion-cell").textContent = religion;
+			document.getElementById("primary-school-cell").textContent = primarySchool;
+			document.getElementById("psle-tscore-cell").textContent = psleTScore;
 		});
 	</script>
 </body>
