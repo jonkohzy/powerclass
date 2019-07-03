@@ -1,9 +1,10 @@
+html,body{height:100%;}
 .navi{
     position: fixed;
     top: 91px;
     height: calc(100% - 91px);
     display: block;   
-    background-color: #fc518540;
+    background-color: #fd432e40;
     width: 16%;
     text-align: center;
     padding: 12px 30px;
@@ -14,8 +15,8 @@
     margin-top: 12px;
     border-radius: 4px;
     cursor: pointer;
-    border: 2px solid #fc5185;
-    background: linear-gradient(60deg, #fce38a, 50%, #fc5185 50%);
+    border: 2px solid #fd432e;
+    background: linear-gradient(60deg, #fff, 50%, #fd432e 50%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -28,7 +29,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(60deg, #fc5185 50%, #fce38a 50%);
+    background: linear-gradient(60deg, #fd432e 50%, #fff 50%);
     z-index: -1;
 }
 .navi a, .navi a::after{

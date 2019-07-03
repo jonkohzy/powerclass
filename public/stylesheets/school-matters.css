@@ -7,7 +7,6 @@ h2 {
 .content {
   margin-left: calc(16% + 60px); /* same as navbar */
   padding: 30px 32px;
-  height: 100%;
 }
 
 img.icon {
@@ -17,11 +16,9 @@ img.icon {
 }
 
 .heading{
-	color: #fce38a;
   font-size: 3.9em;
   font-weight: normal;
   margin-top: 0;
-  margin-bottom: 10px;
 }
 
 .number{
@@ -31,21 +28,17 @@ img.icon {
 .no-records {
   display: none;
 }
-table{
-  color: #fce38a;
-  margin-bottom: 40px;
-}
 
 td, th{
   padding: 12px 17px;
   text-align: left;
 }
 tr{
-  box-shadow: 0 2px 5px #ffffff4d;
+  box-shadow: 0 2px 5px #0000004d;
   border-radius: 10px;
 }
 tr:hover{
-  box-shadow: 0 3px 12px #ffffff4d;
+  box-shadow: 0 3px 12px #0000004d;
 }
 
 @media screen and (max-width: 1499px) {
