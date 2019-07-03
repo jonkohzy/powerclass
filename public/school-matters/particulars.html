@@ -8,6 +8,41 @@
 	<link rel="stylesheet" href="../stylesheets/common.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
+
+	<style>
+		.particulars {
+			display: flex;
+			align-items: flex-start;
+			margin-top: 30px;
+		}
+
+		.particulars .name {
+			vertical-align: middle;
+		}
+
+		.particulars-table {
+			display: inline-block;
+		}
+
+		#large-name {
+			display: inline-flex;
+			width: 50%;
+			margin-bottom: 40px;
+		}
+
+		#name-icon {
+			display: inline-block;
+			width: 120px;
+		}
+
+		#name {
+			display: inline-block;
+			align-self: center;
+			margin-left: 30px;
+			font-size: 30px;
+		}
+	</style>
+
 	<title>PowerClass | Your Particulars</title>
 </head>
 <body>
@@ -34,8 +69,94 @@
 		<a class="selected" href = "particulars.html">Particulars</a>
 		<a href = "project-work.html">Project Work</a>
 	</div>
+
+	<div class="content">
+		<h1 class="heading">Your Particulars</h1>
+
+		<div class="particulars">
+			<div id="large-name">
+				<img id="name-icon" src="../img/user.png" alt="Profile">
+				<span id="name">Loading...</span>
+			</div>
+
+			<table class="list particulars-table">
+				<tr>
+					<th>Name</th>
+					<td id="name-cell"></td>
+				</tr>
+				<tr>
+					<th>Chinese Name</th>
+					<td id="chinese-name-cell"></td>
+				</tr>
+				<tr>
+					<th>Gender</th>
+					<td id="gender-cell"></td>
+				</tr>
+				<tr>
+					<th>Date of Birth</th>
+					<td id="dob-cell"></td>
+				</tr>
+				<tr>
+					<th>Race</th>
+					<td id="race-cell"></td>
+				</tr>
+				<tr>
+					<th>Citizenship</th>
+					<td id="citizenship-cell"></td>
+				</tr>
+				<tr>
+					<th>Religion</th>
+					<td id="religion-cell"></td>
+				</tr>
+				<tr>
+					<th>Primary School</th>
+					<td id="primary-school-cell"></td>
+				</tr>
+				<tr>
+					<th>PSLE T-Score</th>
+					<td id="psle-tscore-cell"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	
-	<!-- weird fix for transitions firing on page load -->
-	<script> </script>
+	<script>
+		fetch("/api/isp/particulars", {
+			method: "POST",
+    	headers: { "Content-Type": "application/json" },
+    	body: JSON.stringify({
+				user: "171255n",
+				pass: "@cptaHadk0",
+    	}),
+		})
+		.then((res) => res.json())
+		.then(({
+			name,
+			chineseName,
+			gender,
+			photoUrl,
+			dateOfBirth,
+			race,
+			citizenship,
+			religion,
+			primarySchool,
+			psleTScore
+		}) => {
+			// update user icon
+			document.getElementById("name-icon").src = photoUrl;
+			document.getElementById("name").textContent = name;
+
+			// fill in table
+			document.getElementById("name-cell").textContent = name;
+			document.getElementById("chinese-name-cell").textContent = chineseName;
+			document.getElementById("gender-cell").textContent = gender;
+			document.getElementById("dob-cell").textContent = dateOfBirth;
+			document.getElementById("race-cell").textContent = race;
+			document.getElementById("citizenship-cell").textContent = citizenship;
+			document.getElementById("religion-cell").textContent = religion;
+			document.getElementById("primary-school-cell").textContent = primarySchool;
+			document.getElementById("psle-tscore-cell").textContent = psleTScore;
+		});
+	</script>
 </body>
 </html>
