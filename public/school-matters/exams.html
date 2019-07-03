@@ -15,40 +15,42 @@
 			margin-top: 100px;
 		}
 		button{
-			width: 200px;
-			font-family:inherit;
-			background: transparent;
-			position: relative;
 			display: block;
-			color: white;
-			font-size: 14px;
-			text-decoration: none;
-			border: 2px solid #fc5185;
-			padding: 21px 20px;
-			text-transform: uppercase;
-			overflow: hidden;
-			transition: 1s all ease;
-			z-index: 2;
+		padding: 8px 16px;
+		margin-top: 12px;
+		border-radius: 4px;
+		cursor: pointer;
+		border: 2px solid #fc5185;
+		background: linear-gradient(60deg, #fff, 50%, #fc5185 50%);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		position: relative;
 		}
-		button::before{
-			background: #fc5185;
+		button::after{
 			content: "";
-			height: 100%;
-			width: 0;
 			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: linear-gradient(60deg, #fc5185 50%, #fff 50%);
 			z-index: -1;
-			transition: all 0.6s ease;
 		}
-		button:hover::before{
-			width: 100%;
+		button, button::after{
+			background-size: 300%;
+			background-position: 100%;
+			transition: background-size .3s, background-position .3s;
+		}
+		button:hover, button:hover::after{
+			background-position: 0;
 		}
 		.content div{
 			float: left;
 			width: 50%;
-			background: #0b0962;
+		}
+		.report tr td{
+			vertical-align: middle;
 		}
 	</style>
 </head>
@@ -94,7 +96,7 @@
 		</div>
 		<div>
 			<h1 class = "heading">Reports</h1>
-			<div class = "select">
+			<!--<div class = "select">
 				<input class="chosen-value" type="text" value="" placeholder="Loading...">
 				<ul style = "padding-left: 0px" class = "value-list">
 				</ul>
@@ -105,10 +107,12 @@
 			</div>
 			<table style = "margin-top: 50px" cellspacing = "10">
 	
+			</table>-->
+			<table class = "report" cellspacing = "10">
+				
 			</table>
 		</div>
 	</div>
-	<!-- weird fix for transitions firing on page load -->
 	<script>
 		let Results;
 		let Reports;
@@ -131,14 +135,25 @@
 				SELECT.appendChild(OPTION);
 			});
 			drop();
-			const SELECT2 = document.getElementsByClassName("value-list")[1];
-			reports.forEach(reports =>{
-				const OPTION = document.createElement("li");
-				OPTION.textContent = reports.reportName;
-				OPTION.className = "two";
-				SELECT2.appendChild(OPTION);
+			const TABLE = document.getElementsByClassName("report")[0];
+			let id = 0;
+			reports.forEach((element) => {
+				const ROW = document.createElement("tr");
+				const NAME = document.createElement("td");
+				const DOWNLOAD = document.createElement("td");
+				const BUTTON = document.createElement("button");
+				BUTTON.onclick = () =>{
+					window.open(`/api/isp/get-file?user=MTcxMjU1bg==&pass=QGNwdGFIYWRrMA==&fileLink=${element.reportUrl}`);
+				}
+				id++;
+				BUTTON.textContent = "Download File";
+				NAME.textContent = element.reportName;
+				DOWNLOAD.appendChild(BUTTON);
+				ROW.appendChild(NAME);
+				ROW.appendChild(DOWNLOAD);
+				TABLE.appendChild(ROW);
 			});
-			drop2();
+			
 		});
 		const show = () => {
 			const inputField = document.getElementsByClassName("chosen-value")[0];
@@ -161,13 +176,8 @@
 				}
 			});
 		}
-		const download = () => {
-			const inputField2 = document.getElementsByClassName("chosen-value")[1];
-			Reports.forEach((report) => {
-				if(inputField2.value === report.reportName){
-					window.open(`/api/isp/get-file?user=MTcxMjU1bg==&pass=QGNwdGFIYWRrMA==&fileLink=${report.reportUrl}`)
-				}
-			});
+		const download = (id) => {
+			window.open(`/api/isp/get-file?user=MTcxMjU1bg==&pass=QGNwdGFIYWRrMA==&fileLink=${Reports[id].reportUrl}`);
 		}
 	</script>
 	<script src = "dropdown.js"></script>
