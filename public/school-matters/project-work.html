@@ -9,6 +9,16 @@
 	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
 	<title>Project Work</title>
+	<style>
+		#project-name {
+			margin-bottom: 20px;
+		}
+
+		.pw-detail {
+			font-size: 20px;
+			margin-bottom: 5px;
+		}
+	</style>
 </head>
 <body>
     <div class="header">
@@ -36,18 +46,18 @@
 	<!--navbar end-->
 
 	<div class="content">
-		<h1 id="project-name">Loading project...</h1>
-		<div id="project-category">Category: </div>
-		<div id="project-mentor">Mentor: </div>
-		<div id="mentor-approval-wrapper">
+		<h1 id="project-name" class="heading">Loading project...</h1>
+		<div class="pw-detail" id="project-category">Category: </div>
+		<div class="pw-detail" id="project-mentor">Mentor: </div>
+		<div class="pw-detail" id="mentor-approval-wrapper">
 			<span id="mentor-approval">Mentor approval status: </span>
 			<img id="mentor-approval-icon" class="icon">
 		</div>
-		<div id="category-manager-approval-wrapper">
+		<div class="pw-detail" id="category-manager-approval-wrapper">
 			<span id="category-manager-approval">Category manager approval status: </span>
 			<img id="cat-manager-approval-icon" class="icon">
 		</div>
-		<div id="project-status-wrapper">
+		<div class="pw-detail" id="project-status-wrapper">
 			<span id="project-status">Project status: </span>
 			<img id="project-status-icon" class="icon">
 		</div>
@@ -72,7 +82,7 @@
 			projectStatus
 		}) => {
 			// add project details
-			document.getElementById("project-name").textContent = `Project name: ${name}`;
+			document.getElementById("project-name").textContent = name;
 			document.getElementById("project-category").textContent += category;
 			document.getElementById("project-mentor").textContent += mentor;
 			document.getElementById("mentor-approval").textContent
