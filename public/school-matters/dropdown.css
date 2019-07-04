@@ -1,7 +1,7 @@
 .select {
     position: relative;
-    width: 18rem;
-    margin-top: 8vh;
+    width: 80%;
+    margin-top: 10px;
     box-sizing: border-box;
 }
   
@@ -15,10 +15,10 @@
   
 .chosen-value {
     font-family: inherit;
-    height: 4rem;
+    height: 71px;
     font-size: 1.1rem;
     padding: 1rem;
-    background-color: rgb(231, 237, 240);
+    background-color: #e7edf0;
     border: 3px solid transparent;
     transition: .3s ease-in-out;
 }
@@ -58,7 +58,6 @@
 .value-list li {
     box-sizing: border-box;
     position: relative;
-    height: 6rem;
     background-color: #FAFCFD;
     color: black;
     padding: 1rem;
