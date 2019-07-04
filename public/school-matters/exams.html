@@ -15,9 +15,8 @@
 			margin-top: 100px;
 		}
 		button{
-			display: block;
+		display: block;
 		padding: 8px 16px;
-		margin-top: 12px;
 		border-radius: 4px;
 		cursor: pointer;
 		border: 2px solid #fc5185;
@@ -99,6 +98,7 @@
 
 		<div class="half">
 			<h1 class = "heading">Reports</h1>
+			<div id="loading">Loading...</div>
 			<table class = "report"></table>
 		</div>
 	</div>
@@ -114,6 +114,8 @@
 				pass: "@cptaHadk0"
 			}),
 		}).then((res) => res.json()).then(({examResults, reports }) => {
+			document.getElementById("loading").style.display = "none";
+
 			console.log(reports);
 			Results = examResults
 			Reports = reports;
