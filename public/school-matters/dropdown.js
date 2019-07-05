@@ -62,5 +62,6 @@ const drop = () => {
     if (!isDropdown && !isInput) {
       dropdown.classList.remove("open");
     }
+    show();
   });
 };

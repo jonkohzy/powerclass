@@ -16,16 +16,15 @@
 		}
 		button{
 			display: block;
-		padding: 8px 16px;
-		margin-top: 12px;
-		border-radius: 4px;
-		cursor: pointer;
-		border: 2px solid #fc5185;
-		background: linear-gradient(60deg, #fff, 50%, #fc5185 50%);
-		background-clip: text;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		position: relative;
+			padding: 8px 16px;
+			border-radius: 4px;
+			cursor: pointer;
+			border: 2px solid #fc5185;
+			background: linear-gradient(60deg, #fff, 50%, #fc5185 50%);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			position: relative;
 		}
 		button::after{
 			content: "";
@@ -45,11 +44,21 @@
 		button:hover, button:hover::after{
 			background-position: 0;
 		}
-		.content div{
+		.half {
 			float: left;
 			width: 50%;
 		}
-		.report tr td{
+		table {
+			border-spacing: 10px;
+		}
+		.exams {
+			width: 80%;
+			margin-top: calc(7.97em + 10px);
+		}
+		.report {
+			margin-top: -10px;
+		}
+		.report tr td {
 			vertical-align: middle;
 		}
 	</style>
@@ -77,40 +86,23 @@
 		<a href="project-work.html">Project Work</a>
 	</div>
 	<div class = "content">
-		<div>
-		<h1 class = "heading">Exams</h1>
-		<div class = "select">
-			<input class="chosen-value" type="text" value="" placeholder="Loading...">
-			<ul style = "padding-left: 0px" class = "value-list">
-			</ul>
-			<div class = "button">
-				<button onClick=show()>Check your results</button>
-			</div>
-			
-		</div>
-		<table wdith = "80%" style = "margin-top: 50px" cellspacing = "10">
-
-		</table>
-		</div>
-		<div>
-			<h1 class = "heading">Reports</h1>
-			<!--<div class = "select">
+		<div class="half">
+			<h1 class = "heading">Exams</h1>
+			<div class = "select">
 				<input class="chosen-value" type="text" value="" placeholder="Loading...">
 				<ul style = "padding-left: 0px" class = "value-list">
-				</ul>
-				<div class = "button">
-					<button onClick=download()>Download your reports</button>
-				</div>
-				
+				</ul>			
 			</div>
-			<table style = "margin-top: 50px" cellspacing = "10">
-	
-			</table>-->
-			<table class = "report" cellspacing = "10">
-				
-			</table>
+			<table class="exams"></table>
+		</div>
+			<table wdith = "80%" style = "margin-top: 50px" cellspacing = "10">
+		<div class="half">
+			<h1 class = "heading">Reports</h1>
+			<div id="loading">Loading...</div>
+			<table class = "report"></table>
 		</div>
 	</div>
+
 	<script>
 		let Results;
 		let Reports;
@@ -118,10 +110,12 @@
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				user: "171255n",
-				pass: "@cptaHadk0"
+				user: "171290r",
+				pass: "jkjk1234"
 			}),
 		}).then((res) => res.json()).then(({examResults, reports }) => {
+			document.getElementById("loading").style.display = "none";
+
 			console.log(reports);
 			Results = examResults
 			Reports = reports;
@@ -173,9 +167,6 @@
 					});
 				}
 			});
-		}
-		const download = (id) => {
-			window.open(`/api/isp/get-file?user=MTcxMjU1bg==&pass=QGNwdGFIYWRrMA==&fileLink=${Reports[id].reportUrl}`);
 		}
 	</script>
 	<script src = "dropdown.js"></script>
