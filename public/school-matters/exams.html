@@ -147,8 +147,8 @@
 				const NAME = document.createElement("td");
 				const DOWNLOAD = document.createElement("td");
 				const BUTTON = document.createElement("button");
-				BUTTON.onclick = () =>{
-					window.open(`/api/isp/get-file?user=MTcxMjU1bg==&pass=QGNwdGFIYWRrMA==&fileLink=${element.reportUrl}`);
+				BUTTON.onclick = () => {
+					window.open(`/api/isp/get-file?user=${btoa("171290r")}&pass=${btoa("jkjk1234")}&fileLink=${element.reportUrl}`);
 				}
 				id++;
 				BUTTON.textContent = "Download File";
