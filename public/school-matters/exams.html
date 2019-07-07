@@ -25,6 +25,7 @@
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
 			position: relative;
+			z-index: 2;
 		}
 		button::after{
 			content: "";
@@ -61,6 +62,16 @@
 		.report tr td {
 			vertical-align: middle;
 		}
+		.left{
+			border-top-left-radius: 10px;
+			border-bottom-left-radius: 10px;
+			background: white;
+		}
+		.right{
+			border-top-right-radius: 10px;
+			border-bottom-right-radius: 10px;
+			background: white;
+		}
 	</style>
 </head>
 <body style = "height: 100%">
@@ -85,17 +96,19 @@
 		<a href="particulars.html">Particulars</a>
 		<a href="project-work.html">Project Work</a>
 	</div>
-	<div class = "content">
+	<div class = "content", style = "
+		height: 550px;
+		background: linear-gradient(120deg, #5b39b8 25%, transparent 25%);
+	">
 		<div class="half">
-			<h1 class = "heading">Exams</h1>
+			<h1 class = "heading" style = "color: white">Results</h1>
 			<div class = "select">
 				<input class="chosen-value" type="text" value="" placeholder="Loading...">
 				<ul style = "padding-left: 0px" class = "value-list">
 				</ul>			
 			</div>
-			<table class="exams"></table>
+			<table class="exams" style = "border-spacing: 0px 10px"></table>
 		</div>
-			<table wdith = "80%" style = "margin-top: 50px" cellspacing = "10">
 		<div class="half">
 			<h1 class = "heading">Reports</h1>
 			<div id="loading">Loading...</div>
@@ -159,8 +172,10 @@
 						const ROW = document.createElement("tr");
 						const SUBJECT = document.createElement("td");
 						SUBJECT.textContent = elem.subject;
+						SUBJECT.className = "left";
 						const MARK = document.createElement("td");
 						MARK.textContent = elem.mark;
+						MARK.className = "right";
 						ROW.appendChild(SUBJECT);
 						ROW.appendChild(MARK);
 						TABLE.appendChild(ROW);

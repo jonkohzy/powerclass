@@ -35,7 +35,8 @@ html,body{height:100%;}
 .navi a, .navi a::after{
     background-size: 300%;
     background-position: 100%;
-    transition: background-size .3s, background-position .3s;
+    transition-timing-function: ease-out;
+    transition: .6s;
 }
 .navi a:hover, .navi a:hover::after, .navi a.selected, .navi a.selected::after{
     background-position: 0;
