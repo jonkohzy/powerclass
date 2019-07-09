@@ -7,6 +7,7 @@ h2 {
 .content {
   margin-left: calc(16% + 60px); /* same as navbar */
   padding: 30px 32px;
+  height: 600px;
 }
 
 img.icon {
@@ -46,7 +47,9 @@ tr:hover{
   .heading{
     font-size: 3.3em;
   }
-
+  .content{
+    height: 550px;
+  }
   .number{
     font-size: 120px;
   }
