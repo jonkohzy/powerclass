@@ -7,7 +7,7 @@ h2 {
 .content {
   margin-left: calc(16% + 60px); /* same as navbar */
   padding: 30px 32px;
-  height: 600px;
+  height: 100%;
 }
 
 img.icon {
