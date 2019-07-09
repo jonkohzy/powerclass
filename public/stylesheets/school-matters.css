@@ -32,6 +32,10 @@ img.icon {
   display: none;
 }
 
+table.list {
+  margin-bottom: 25px;
+}
+
 td, th{
   padding: 12px 17px;
   text-align: left;
