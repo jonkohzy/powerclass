@@ -6,6 +6,7 @@ h2 {
 /* content */
 .content {
   margin-left: calc(16% + 60px); /* same as navbar */
+  margin-top: 90px;
   padding: 30px 32px;
   height: 600px;
 }

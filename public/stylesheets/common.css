@@ -12,7 +12,8 @@ a {
 }
 /* header */
 .header {
-	position: sticky;
+	position: fixed;
+	width: calc(100% - 120px);
 	top: 0;
 	height: 90px;
 	background-color: white;
