@@ -9,6 +9,19 @@
 	<link rel="stylesheet" href="../stylesheets/nav.css" type="text/css">
 	<link rel="stylesheet" href="../stylesheets/school-matters.css" type="text/css">
 	<title>PowerClass | CIP Records</title>  
+	<style>
+		td, tr{
+			background: white;
+		}
+		.left{
+			border-top-left-radius: 10px;
+			border-bottom-left-radius: 10px;
+		}
+		.right{
+			border-top-right-radius: 10px;
+			border-bottom-right-radius: 10px;
+		}
+	</style>
 </head>
 <body>
     <div class="header">
@@ -35,20 +48,23 @@
 	</div>
 	<!--navbar end-->
 
-	<div class="content">
+	<div class = "content", style = "
+		height: 550px;
+		background: linear-gradient(120deg, #12b59f 25%, transparent 25%);
+	">
 		<h2 class="no-records">No CIP records found.</h2>
 		<div id="totalCipHours" class="number">Loading...</div>
 
-		<table class="list">
+		<table class="list" style = "border-spacing: 0px 10px">
 			<thead>
 				<tr>
-					<th>Activity Name</th>
+					<th class = 'left'>Activity Name</th>
 					<th>Organisation</th>
 					<th>Type</th>
 					<th>Period</th>
 					<th>Role</th>
 					<th>Hours</th>
-					<th>Status</th>
+					<th class = 'right'>Status</th>
 				</tr>
 			</thead>
 		</table>
@@ -95,6 +111,7 @@
 
 					const activityCell = document.createElement("td");
 					activityCell.textContent = activityName;
+					activityCell.className = "left";
 					const organisationCell = document.createElement("td");
 					organisationCell.textContent = organisation;
 					const typeCell = document.createElement("td");
@@ -107,6 +124,7 @@
 					hoursCell.textContent = hours;
 					const statusCell = document.createElement("td");
 					statusCell.textContent = status;
+					statusCell.className = "right";
 
 					row.appendChild(activityCell);
 					row.appendChild(organisationCell);
