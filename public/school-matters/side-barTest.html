@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .img{
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                transition: .15s;
+                position: relative;
+                top: 2px;
+            }
+            .nav{
+                width: 20%;
+                background:turquoise;
+                padding: 10px;
+            }
+            a{
+                display: inline-block;
+                text-decoration: none;
+                vertical-align: middle;
+                border-radius: 20px;
+                transition: .15s;
+                padding: 10px;
+                width: calc(100% - 10px);
+                background: transparent;
+            }
+            ul{
+                list-style: none;
+                padding-left: 10px;
+                width: calc(100% - 10px);
+            }
+            li{
+                width: calc(100% - 10px);
+                display: inline-block;
+                margin-top: 10px;
+            }
+            a:hover, a.selected{
+                background: rgb(255, 173, 143);
+            }
+            .label{
+                display: inline-block;
+                font-size: 20px;
+                -webkit-appearance: none;
+                color: black;
+                font-weight: bold;
+                padding-left: 5px;
+            }
+            #ann{
+                background-image: url("../img/announcement.svg");
+            }
+            a:hover #ann, .selected #ann{
+                background-image: url("../img/announcement2.svg");
+            }
+            #cip{
+                background-image: url("../img/cip.svg");
+            }
+            a:hover #cip, .selected #cip{
+                background-image: url("../img/cip2.svg");
+            }
+            #dis{
+                background-image: url("../img/discipline.svg");
+            }
+            a:hover #dis, .selected #dis{
+                background-image: url("../img/discipline2.svg");
+            }
+            #eve{
+                background-image: url("../img/events.svg");
+            }
+            a:hover #eve, .selected #eve{
+                background-image: url("../img/events2.svg");
+            }
+            #exa{
+                background-image: url("../img/exams.svg");
+            }
+            a:hover #exa, .selected #exa{
+                background-image: url("../img/exams2.svg");
+            }
+            #par{
+                background-image: url("../img/particulars.svg");
+            }
+            a:hover #par, .selected #par{
+                background-image: url("../img/particulars2.svg");
+            }
+            #pro{
+                background-image: url("../img/project-work.svg");
+            }
+            a:hover #pro, .selected #pro{
+                background-image: url("../img/project-work2.svg");
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class = "nav">
+            <div class = "profile">
+
+            </div>
+            <ul>
+                <li>
+                    <a href = "announcements.html">
+                        <div id = "ann" class = "img"></div>
+                        <div class = "label">Announcements</div>
+                    </a>
+                </li>
+                <li>
+                    <a href = "cip.html">
+                        <div id = "cip" class = "img"></div>
+                        <div class = "label">CIP</div>
+                    </a>
+                </li>
+                <li>
+                    <a href = "discipline.html">
+                        <div id = "dis" class = "img"></div>
+                        <div class = "label">Discipline</div>
+                    </a>
+                </li>
+                <li>
+                    <a href = "events.html">
+                        <div id = "eve" class = "img"></div>
+                        <div class = "label">Events</div>
+                    </a>
+                </li>
+                <li>
+                    <a href = "exams.html">
+                        <div id = "exa" class = "img"></div>
+                        <div class = "label">Exams</div>
+                    </a>
+                </li>
+                <li>
+                    <a href = "particulars.html">
+                        <div id = "par" class = "img"></div>
+                        <div class = "label">Particulars</div>
+                    </a>
+                </li>
+                <li>
+                    <a href = "project-work.html">
+                        <div id = "pro" class = "img"></div>
+                        <div class = "label">Project Work</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
