@@ -2,6 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 require("babel-polyfill");
 
+/* APP INIT */
 const app = express();
 
 app.use(helmet());
@@ -20,17 +21,17 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// ISP routes
+/* ROUTES */
 require("./isp/ispRoutes.js")(app);
-
-// SLS route
 require("./sls/slsRoutes.js")(app);
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT);
-console.log(`App listening on port ${PORT}.`);
+require("./users/usersRoutes.js")(app);
 
 // redirect to 404
 app.use((_, res) => {
   res.redirect("/404.html");
 });
+
+/* LISTEN */
+const PORT = process.env.PORT || 3000;
+app.listen(PORT);
+console.log(`App listening on port ${PORT}.`);

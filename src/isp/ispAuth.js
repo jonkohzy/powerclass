@@ -1,9 +1,8 @@
 const unirest = require("unirest");
 
-const atob = (str) => Buffer.from(str, "base64").toString("utf8");
-const btoa = (str) => Buffer.from(str).toString("base64");
+const { atob, btoa } = require("../atob-btoa.js");
 
-const auth = async (method, action, user, pass, req, res) => {
+const ispAuth = async (method, action, user, pass, req, res) => {
   const cookies = unirest.jar();
 
   const authRes = await unirest("POST", "https://isphs.hci.edu.sg/pwd_auth.asp")
@@ -33,7 +32,7 @@ const auth = async (method, action, user, pass, req, res) => {
   }
 };
 
-const authHandler = ({ method, action }, req, res) => {
+const ispAuthHandler = ({ method, action }, req, res) => {
   // if method is POST, use req.body
   // else if it's GET, use req.query
   const { user, pass } = method === "POST" ? req.body : req.query;
@@ -44,8 +43,8 @@ const authHandler = ({ method, action }, req, res) => {
     res.status(401).send("Username and/or password not provided.");
   } else {
     // authenticate if credentials provided
-    auth(method, action, user, pass, req, res);
+    ispAuth(method, action, user, pass, req, res);
   }
 };
 
-module.exports = authHandler;
+module.exports = ispAuthHandler;

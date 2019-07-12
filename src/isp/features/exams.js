@@ -59,8 +59,6 @@ const getExamResultsAndReports = async (res, cookies) => {
     const document = parseHtml(actionRes.body);
     const examsElements = document.querySelector("#exam").childNodes.slice(1);
 
-    // TODO: another endpoint for downloading progress reports
-
     // request results for each exam
     const resultsResponses =
         await Promise.all(examsElements
