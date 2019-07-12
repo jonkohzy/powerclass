@@ -10,12 +10,11 @@ const parseAnnouncements = (announcementsPages) => {
     const announcementPageDetails = announcementPageDetailsRows
         .map((elem) => elem.childNodes[1]);
 
-    const additionalDetailsText = announcementPageDetails[1].structuredText;
     const attachedFileLink = announcementPageDetails[6].childNodes[0];
 
     const announcement = {
       text: announcementPageDetails[0].structuredText,
-      additionalDetails: additionalDetailsText ? additionalDetailsText : null,
+      additionalDetails: announcementPageDetails[1].structuredText || null,
       createdBy: announcementPageDetails[4].structuredText,
       date: announcementPageDetails[5].structuredText,
       // if there is an attached file, get its link

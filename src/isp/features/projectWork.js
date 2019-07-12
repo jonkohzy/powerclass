@@ -5,12 +5,12 @@ const parseProject = (elements) => {
   const elementsText = elements.map((elem) => elem.structuredText);
 
   const project = {
-    name: elementsText[1] ? elementsText[1] : null,
-    category: elementsText[2] ? elementsText[2] : null,
-    mentor: elementsText[4] ? elementsText[4] : null,
-    mentorApprovalStatus: elementsText[5] ? elementsText[5] : null,
-    catManagerApprovalStatus: elementsText[6] ? elementsText[6] : null,
-    projectStatus: elementsText[7] ? elementsText[7] : null,
+    name: elementsText[1] || null,
+    category: elementsText[2] || null,
+    mentor: elementsText[4] || null,
+    mentorApprovalStatus: elementsText[5] || null,
+    catManagerApprovalStatus: elementsText[6] || null,
+    projectStatus: elementsText[7] || null,
   };
 
   return project;
