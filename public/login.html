@@ -127,8 +127,9 @@
       display: inline-block;
       color: black;
       width: 100%;
-      margin-top: 15%;
+      margin-top: 20%;
       font-size: 29px;
+      vertical-align: middle;
     }
 
     #note {
@@ -142,6 +143,7 @@
       position: relative;
       top: 15%;
       text-align: center;
+      vertical-align: middle;
     }
 
     #username {
@@ -150,7 +152,7 @@
       padding: 10px;
       font-size: 14px;
       border: 1.5px solid lightgrey;
-      border-radius: 10px;
+      border-radius: 20px;
       width: 60%;
     }
 
@@ -158,23 +160,35 @@
       padding: 10px;
       font-size: 14px;
       border: 1.5px solid lightgrey;
-      border-radius: 10px;
+      border-radius: 20px;
       width: 60%;
     }
 
     #username:focus, #password:focus {
       border: 1.5px solid #5b39b8;
+      transition: all 0.25s ease-in-out;
+    }
+
+    #username::placeholder, #password::placeholder {
+      font-family: Open Sans, Calibri, sans-serif !important;
+      font-size: 14px;
     }
 
     #login-button {
+      font-family: Open Sans, Calibri, sans-serif !important;
       color: white;
-      padding: 10px;
-      font-size: 14px;
+      padding: 8px;
+      font-size: 16px;
       border: none;
-      border-radius: 10px;
+      border-radius: 20px;
       width: 65%;
       background-color: #5b39b8;
-      box-shadow: 0px 6px 6px color #735b39b8;
+      transition: all 0.25s ease-in-out;
+    }
+
+    #login-button:hover {
+      box-shadow: 0px 3px 6px #5b39b873;
+      transition: all 0.15s ease-in-out;
     }
   </style>
 </head>
@@ -200,7 +214,7 @@
             Welcome to <br><span style="font-size: 45px;">PowerClass</span>
           </span>
           <br>
-          <span id="note">Login with your school Windows<br> username and password</span>
+          <div id="note">Login with your school Windows<br> username and password</div>
         </div>
         <form class="form">          
           <input id="username" type="text" name="username" placeholder="Username" style="margin-bottom: 10px;">

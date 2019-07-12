@@ -14,6 +14,10 @@ ul, li {
 }
 
 /* main */
+main {
+	margin-top: 91px;
+}
+
 .panel {
 	display: flex;
 	height: calc(100vh - 211px);
