@@ -155,6 +155,7 @@
 
     input:focus {
       border: 1.5px solid #5b39b8;
+      transition: border 0.2s ease-in-out;
     }
 
     #login-button {
@@ -168,7 +169,7 @@
       background-color: #5b39b8;
     }
 
-    #login-button:hover {
+    #login-button:hover, #login-button:focus {
       background-color: #5333a8;
       box-shadow: 0 3px 6px #5b39b873;
     }
