@@ -11,40 +11,45 @@
                 top: 2px;
             }
             .nav{
-                width: 20%;
-                background:turquoise;
+                width: 25%;
+                background:#5b39b8;
                 padding: 10px;
             }
             a{
                 display: inline-block;
                 text-decoration: none;
                 vertical-align: middle;
-                border-radius: 20px;
-                transition: .15s;
+                border-radius: 10px;
                 padding: 10px;
                 width: calc(100% - 10px);
                 background: transparent;
+                transition: .15s;
             }
             ul{
                 list-style: none;
                 padding-left: 10px;
-                width: calc(100% - 10px);
+                width: calc(100% - 30px);
             }
             li{
-                width: calc(100% - 10px);
+                width: calc(100% - 30px);
                 display: inline-block;
                 margin-top: 10px;
             }
             a:hover, a.selected{
-                background: rgb(255, 173, 143);
+                background: white;
+                box-shadow: 0 0 3px rgba(0, 0, 0, .75);
+            }
+            a:hover .label, a.selected .label{
+                color: #5b39b8;
             }
             .label{
                 display: inline-block;
                 font-size: 20px;
                 -webkit-appearance: none;
-                color: black;
+                color: white;
                 font-weight: bold;
                 padding-left: 5px;
+                transition: .15s;
             }
             #ann{
                 background-image: url("../img/announcement.svg");

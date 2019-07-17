@@ -1,43 +1,95 @@
 html,body{height:100%;}
-.navi{
-    position: fixed;
-    top: 91px;
-    height: calc(100% - 91px);
-    display: block;   
-    background-color: #fd432e40;
-    width: 16%;
-    text-align: center;
-    padding: 12px 30px;
-}
-.navi a{
-    display: block;
-    padding: 8px 16px;
-    margin-top: 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 2px solid #fd432e;
-    background: linear-gradient(60deg, #fff, 50%, #fd432e 50%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.img{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    transition: .15s;
     position: relative;
+    top: 2px;
 }
-.navi a::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(60deg, #fd432e 50%, #fff 50%);
-    z-index: -1;
+.nav{
+    width: 20%;
+    background:#5b39b8b4;
+    padding: 10px;
+    display: block;
+    position: fixed;
+    height: 100%;
 }
-.navi a, .navi a::after{
-    background-size: 300%;
-    background-position: 100%;
-    transition-timing-function: ease-out;
-    transition: .6s;
+.nav ul li a{
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: middle;
+    border-radius: 10px;
+    padding: 10px;
+    width: calc(100% - 10px);
+    background: transparent;
+    transition: .15s;
 }
-.navi a:hover, .navi a:hover::after, .navi a.selected, .navi a.selected::after{
-    background-position: 0;
+.nav ul {
+    list-style: none;
+    padding-left: 5px;
+    width: calc(100% - 10px);
+}
+.nav ul li{
+    width: calc(100% - 10px);
+    display: inline-block;
+    margin-top: 10px;
+}
+.nav ul li a:hover, .nav ul li a.selected{
+    background: white;
+    box-shadow: 0 0 3px rgba(0, 0, 0, .75);
+}
+.nav ul li a:hover .label, .nav ul li a.selected .label{
+    color: #5b39b8;
+}
+.label{
+    display: inline-block;
+    font-size: 20px;
+    -webkit-appearance: none;
+    color: white;
+    font-weight: bold;
+    padding-left: 5px;
+    transition: .15s;
+}
+#ann{
+    background-image: url("../img/announcement.svg");
+}
+a:hover #ann, .selected #ann{
+    background-image: url("../img/announcement2.svg");
+}
+#cip{
+    background-image: url("../img/cip.svg");
+}
+a:hover #cip, .selected #cip{
+    background-image: url("../img/cip2.svg");
+}
+#dis{
+    background-image: url("../img/discipline.svg");
+}
+a:hover #dis, .selected #dis{
+    background-image: url("../img/discipline2.svg");
+}
+#eve{
+    background-image: url("../img/events.svg");
+}
+a:hover #eve, .selected #eve{
+    background-image: url("../img/events2.svg");
+}
+#exa{
+    background-image: url("../img/exams.svg");
+}
+a:hover #exa, .selected #exa{
+    background-image: url("../img/exams2.svg");
+}
+#par{
+    background-image: url("../img/particulars.svg");
+}
+a:hover #par, .selected #par{
+    background-image: url("../img/particulars2.svg");
+}
+#pro{
+    background-image: url("../img/project-work.svg");
+}
+a:hover #pro, .selected #pro{
+    background-image: url("../img/project-work2.svg");
 }
