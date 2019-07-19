@@ -13,7 +13,6 @@ const app = express();
 app.use(helmet());
 app.enable("trust proxy");
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 const mongoUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/powerclass";
 
