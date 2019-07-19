@@ -1,8 +1,10 @@
 const unirest = require("unirest");
 
 const { btoa } = require("../atob-btoa.js");
+const authResponses = require("./authResponses.js");
+const User = require("../models/userModel.js");
 
-const login = async (user, pass, res) => {
+const login = async (user, pass, req, res) => {
   const authRes = await unirest("POST", "https://isphs.hci.edu.sg/pwd_auth.asp")
       .headers({
         "Content-Type": "application/x-www-form-urlencoded",
@@ -13,25 +15,35 @@ const login = async (user, pass, res) => {
       });
 
   if (authRes.error) {
-    res.sendStatus(500);
+    res.status(500).send(authResponses.INTERNAL_SERVER_ERROR);
   } else if (authRes.body.includes("/error700.asp")) {
-    res.status(401).send("Invalid username or password.");
+    res.status(401).send(authResponses.INVALID_CREDENTIALS);
   } else {
-    res.sendStatus(200);
+    try {
+      const foundUser = await User.findOne({ username: user }).exec();
+      if (foundUser) {
+        req.session.userId = foundUser._id;
+        res.send({ ...authResponses.OK, firstLogin: false });
+      } else {
+        const createdUser = await User.create({ username: user });
+        req.session.userId = createdUser._id;
+        res.send({ ...authResponses.OK, firstLogin: true });
+      }
+    } catch (err) {
+      res.status(500).send(authResponses.INTERNAL_SERVER_ERROR);
+    }
   }
 };
 
-const loginHandler = (req, res) => {
-  // TODO: express session handling
-  // store username in req.session here
+const loginHandler = async (req, res) => {
   const { user, pass } = req.body;
 
   if (typeof user !== "string" || typeof pass !== "string") {
-    res.sendStatus(400);
+    res.status(400).send(authResponses.BAD_REQUEST);
   } else if (!user.trim() || !pass.trim()) {
-    res.status(401).send("Username and/or password not provided.");
+    res.status(401).send(authResponses.MISSING_CREDENTIALS);
   } else {
-    login(user, pass, res);
+    login(user, pass, req, res);
   }
 };
 
