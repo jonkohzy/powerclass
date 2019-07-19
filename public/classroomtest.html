@@ -26,7 +26,7 @@
 
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.coursework.me";
+      var SCOPES = "https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.coursework.me https://www.googleapis.com/auth/classroom.rosters";
 
       var authorizeButton = document.getElementById('authorize_button');
       var signoutButton = document.getElementById('signout_button');
@@ -160,7 +160,7 @@
         //   }
         //  });
         gapi.client.classroom.courses.courseWork.list({
-          courseId: "27168873444",
+          courseId: "34869664428",
           pageSize: 10 // list all work
         }).then(function(response) {
 
@@ -173,17 +173,6 @@
 
         });
       }
-
-      fetch("/api/isp/announcements", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          user: "171290r",
-          pass: "jkjk1234"
-        }),
-      }).then((res) => res.json()).then((announcements) => {
-        console.log(announcements);
-      });
 
     </script>
 
