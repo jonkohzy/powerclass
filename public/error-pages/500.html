@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Internal Server Error</title>
+  <style>
+    #flame {
+      position: absolute;
+      margin: auto;
+      bottom: 0;
+      left: -11%;
+      width: 45%;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    }
+
+    h1 {
+      font-size: 3.9em;
+      font-weight: normal;
+      margin: 0;
+    }
+    @media screen and (max-width: 1499px) {
+      h1 {
+        font-size: 3.3em;
+      }
+    }
+
+    p {
+      margin-top: 0;
+    }
+    
+    a {
+      color: black;
+    }
+
+    #content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 34%; /* 45% - 11% */
+    }
+
+    #subtitle {
+      color: grey;
+      font-size: 2em;
+      margin-top: 0.5em;
+    }
+
+    #message {
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <img id="flame" src="../img/flame.svg" alt="500 error">
+
+  <div id="content">
+    <h1>Oh crap, a 500 error!</h1>
+    <p id="subtitle">Wing Yip's getting fired for this.</p>
+
+    <p id="message">
+      Just kidding, I'm Wing Yip. If you see this page, that means
+      something went wrong.
+      <br>
+      Please reach me at
+      <a href="mailto:171255n@student.hci.edu.sg">171255n@student.hci.edu.sg</a>
+      to report the problem.
+      <br>
+      Thanks!
+    </p>
+
+    <p class="icon-credits">
+      Icon by
+      <a href="https://www.flaticon.com/authors/vectors-market" target="_blank" rel="noopener noreferrer">Vectors Market</a>
+      from <a href="http://www.flaticon.com" target="_blank" rel="noopener noreferrer">www.flaticon.com</a>.
+    </p>
+  </div>
+</body>
+</html>
