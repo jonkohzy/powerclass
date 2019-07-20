@@ -47,21 +47,29 @@ app.use(require("./isp/ispRoutes.js"));
 app.use(require("./sls/slsRoutes.js"));
 app.use(require("./users/usersRoutes.js"));
 
+app.get("/error-pages/*", (_, res) => {
+  res.sendFile("404.html", { root: "public/error-pages" });
+});
+
 app.get("*", async (req, res, next) => {
-  const foundUser = await User.findById(req.session.userId).exec();
-  if (foundUser) {
-    next();
-  } else {
-    res.redirect("/");
+  try {
+    const foundUser = await User.findById(req.session.userId).exec();
+    if (foundUser) {
+      next();
+    } else {
+      res.redirect("/");
+    }
+  } catch (err) {
+    res.sendFile("500.html", { root: "public/error-pages" });
   }
 });
 
 // apply static routes after special cases
 app.use(express.static("public"));
 
-// redirect to 404
+// redirect to 404 (last route after nothing matches)
 app.use((_, res) => {
-  res.redirect("/404.html");
+  res.sendFile("404.html", { root: "public/error-pages" });
 });
 
 /* LISTEN */
