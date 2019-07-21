@@ -5,19 +5,104 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-        <link rel="stylesheet" href="../stylesheets/common.css" type="text/css">
+        <link rel="stylesheet" href="stylesheets/common.css" type="text/css">
+        <link rel = "stylesheet" href = "stylesheets/outstanding.css" type = "text/css">
         <title>Outstanding Work</title>
     </head>
     <body>
         <div class="header">
-                <a href = "../dashboard.html" class="name">PowerClass</a>
-                <a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
-                <a class="header-item school-matters-navlink">School Matters</a>
-                <a href="../message-board.html" class="header-item message-board-navlink">Message Board</a>
-        
-                <div class="user">
-                    <img class="icon" src="../img/user.png" alt="profile picture" onclick="show_profile();">
-                </div>
+            <a href = "dashboard.html" class="name">PowerClass</a>
+            <a href="outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
+            <a class="header-item school-matters-navlink">School Matters</a>
+            <a href="message-board.html" class="header-item message-board-navlink">Message Board</a>
+    
+            <div class="user">
+                <img class="icon" src="../img/user.png" alt="profile picture" onclick="show_profile();">
             </div>
+        </div>
+        <div class = "content">
+            <div class = "GC">
+                <div class = "heading">Google<br>Classroom</div>
+                <table class = "google" cellspacing = "10px">
+
+                </table>
+            </div>
+            <div class = "ISP">
+                <div class = "heading">ISP</div>
+                <table class = "school" cellspacing = "10px">
+
+                </table>
+            </div>
+        </div>
+        <script>
+            const courses = [{
+                name: "2019 3A3 Computing (TCK)",
+                id: "40713194839"
+            }, {
+                name: "2019 S3 Computing",
+                id: "27242247607"
+            }];
+            const assignments = {
+                "40713194839": [{
+                    alternateLink: "https://classroom.google.com/c/NDA3MTMxOTQ4Mzla/a/NDA4MTM5MDc3ODla/details",
+                    courseId: "40713194839",
+                    description: "Instructions<br>•	Submit one py file for each question, the question number will be the file name. eg. For Q1, it will be Q1_yourname.py . Do not code all of them in the same file.<br>•	Complete Q3 & 4 in a document and name it Q3&4.",
+                    dueDate: {
+                        year: 2019,
+                        month: 7,
+                        day: 8
+                    },
+                    dueTime: {
+                        hours: 15,
+                        minutes: 59
+                    },
+                    state: "PUBLISHED",
+                    title: "Practical 1",
+                    creatorUserId: "108319138264648651611"
+                }],
+                "27242247607": []
+            };
+            const BODY = document.getElementsByClassName("google")[0];
+            courses.forEach((element) => {
+                // declare elements
+                const ROW = document.createElement("tr");
+                const COURSE = document.createElement("th");
+                COURSE.textContent = element.name;
+                // put the header in the table
+                ROW.appendChild(COURSE);
+                BODY.appendChild(ROW);
+                // add assignments in an extra row
+                if(assignments[element.id].length > 0){
+                    const SUDOROW = document.createElement("tr");
+                    const CELL = document.createElement("td");
+                    const ASSIGNMENTS = document.createElement("table");
+                    ASSIGNMENTS.className = "data";
+                    // add assignments into the table
+                    assignments[element.id].forEach((elem) => {
+                        const C_ROW = document.createElement("tr");
+                        const CELL = document.createElement("td");
+                        CELL.className = "cell";
+                        //title and teacher
+                        const TOP = document.createElement("div");
+                        TOP.className = "top";
+                        const H1 = document.createElement("h1");
+                        H1.textContent = elem.title;
+                        const H2 = document.createElement("h2");
+                        H2.textContent = "Joseph Tan Choo Kee";
+                        
+                        // appending child nodes
+                        TOP.appendChild(H1);
+                        TOP.appendChild(H2);
+                        CELL.appendChild(TOP);
+                        
+                        C_ROW.appendChild(CELL);
+                        ASSIGNMENTS.appendChild(C_ROW);
+                    });
+                    CELL.appendChild(ASSIGNMENTS);
+                    SUDOROW.appendChild(CELL);
+                    BODY.appendChild(SUDOROW);
+                }
+            });
+        </script>
     </body>
 </html>

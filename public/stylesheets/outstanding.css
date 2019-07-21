@@ -1,0 +1,139 @@
+.data{
+    margin-left: 40px;
+    width: calc(100% - 40px);
+}
+.google{
+    width: 100%;
+    border-spacing: 0px 20px;
+}
+html, body{
+    height: 100%;
+}
+.ISP, .GC{
+    width: calc(50% - 30.5px);
+    padding: 15px;
+    height: 100%;
+    float: left;
+}
+.GC{
+    border-right: 1px solid black;
+    background: linear-gradient(120deg, #12b59f 45%, white 45%);
+}
+.ISP{
+    background: linear-gradient(120deg, #fd812e 45%, white 45%);
+}
+.content{
+    margin-top: 91px;
+    height: 100%;
+}
+th{
+    background: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px #0000004d;
+}
+th:hover{
+    box-shadow: 0 3px 12px #0000004d;
+}
+.smalltext{
+    background: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 5px #0000004d;
+}
+.smalltext:hover{
+    box-shadow: 0 3px 12px #0000004d;
+}
+
+/* 
+info on assignments
+so far i have only made this
+for google classroom
+ISP will be made later
+*/
+
+.top{
+    padding: 5px 0 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+.info{
+    padding-left: 10px;
+    letter-spacing: .025em;
+    font-size: .75em;
+    font-weight: 400;
+    line-height: 1rem;
+    color: #5f6368;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+.cell{
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 2px 5px #0000004d;
+    padding: 10px 20px 20px 20px;
+}
+.cell:hover{
+    box-shadow: 0 3px 12px #0000004d;
+}
+.top h1{
+    margin: 0;
+    display: inline-block;
+}
+.top h2{
+    margin: 0;
+    float: right;
+    position: relative;
+    top: 3.4px;
+    display: inline-block;
+}
+.material{
+    margin-top: 50px;
+    margin-right: .75rem;
+    border-radius: .5rem;
+    border: .0625rem solid #dadce0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: calc(50% - .75rem);
+}
+.img{
+    margin-right: 1rem;
+    height: 4.375rem;
+    width: 6.5625rem;
+    position:relative;
+    display: flex;
+    justify-content: center;
+}
+.text{
+    letter-spacing: .00625em;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    color: #000000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.smalltext{
+    letter-spacing: .01428571em;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    color: #5f6368;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.material a{
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    overflow: hidden;
+    text-decoration: none;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.type{
+    font-size: .8125rem;
+    line-height: 1.25rem;
+}
