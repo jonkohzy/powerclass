@@ -67,14 +67,7 @@ typings/
 .vscode/
 
 # Transpiled scripts (automatically transpiled on Heroku)
-build/*
-# dumb fix to gitignore single file
-# whitelist directory
-!build/sls/
-# then ignore all contents EXCEPT that file
-build/sls/*
-# keep selectors.json!
-!build/sls/selectors.json
+build/
 
 # local DB
-db/*
+db/

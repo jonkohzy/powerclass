@@ -87,6 +87,7 @@
       left: -5px;
       background-color: #ffffff;
       display: inline-flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100%;
@@ -133,18 +134,19 @@
       margin-top: 26px;
     }
 
-    .form {
+    form {
       position: relative;
       margin-top: 34px;
       text-align: center;
     }
 
-    .form * {
+    form * {
       font-family: inherit;
     }
 
     input {
       border-radius: 999999px;
+      margin-top: 5px;
       padding: 9px 13px;
       font-size: 15px;
       border: 1.5px solid lightgrey;
@@ -208,19 +210,52 @@
         <div id="heading">
           Welcome to <br><span style="font-size: 45px;">PowerClass</span>
         </div>
-        <div id="note">Login with your school Windows <br>username and password.</span>
+        <div id="note">Login with your school Windows <br>username and password.</div>
       </div>
-      <form class="form">          
-        <form class="form">          
-      <form class="form">          
-        <form class="form">          
-      <form class="form">          
-        <input id="username" type="text" name="username" placeholder="Username">
-        <input id="password" type="password" name="password" placeholder="Password">
-        <button type="submit" id="login-button">Login</button>
+      <form>
+        <input id="username" type="text" name="user" placeholder="Username">
+        <input id="password" type="password" name="pass" placeholder="Password">
+        <button id="login-button" type="submit">Login</button>
       </form>
     </div>
   </div>
-  
+  <script>
+    document.forms[0].addEventListener("submit", (event) => {
+      event.preventDefault();
+      login();
+    });
+
+    const displayError = (message) => {
+
+    };
+
+    const login = () => {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (!user.trim() || !pass.trim()) {
+        displayError("Username and/or password not provided.");
+        return;
+      }
+
+      fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user, pass }),
+      })
+      .then((res) => res.json())
+      .then(({ success, message, firstLogin }) => {
+        if (success) {
+          if (firstLogin) {
+            window.location = "/dashboard.html?firstLogin=true";
+          } else {
+            window.location = "/dashboard.html";
+          }
+        } else {
+          displayError(message);
+        }
+      });
+    };
+  </script>
 </body>
 </html>
