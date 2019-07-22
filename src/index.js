@@ -5,7 +5,7 @@ const MongoStore = require("connect-mongo")(session);
 require("babel-polyfill");
 const mongoose = require("mongoose");
 
-const User = require("./models/userModel");
+const User = require("./models/userModel.js");
 
 /* APP INIT */
 const app = express();
