@@ -43,23 +43,89 @@
                 id: "27242247607"
             }];
             const assignments = {
-                "40713194839": [{
-                    alternateLink: "https://classroom.google.com/c/NDA3MTMxOTQ4Mzla/a/NDA4MTM5MDc3ODla/details",
-                    courseId: "40713194839",
-                    description: "Instructions<br>•	Submit one py file for each question, the question number will be the file name. eg. For Q1, it will be Q1_yourname.py . Do not code all of them in the same file.<br>•	Complete Q3 & 4 in a document and name it Q3&4.",
-                    dueDate: {
-                        year: 2019,
-                        month: 7,
-                        day: 8
-                    },
-                    dueTime: {
-                        hours: 15,
-                        minutes: 59
-                    },
-                    state: "PUBLISHED",
-                    title: "Practical 1",
-                    creatorUserId: "108319138264648651611"
-                }],
+                "40713194839": [
+                    {
+                        alternateLink: "https://classroom.google.com/c/NDA3MTMxOTQ4Mzla/a/NDA4OTUyMTQ5NTla/details",
+                        courseId: "40713194839",
+                        dueDate: {
+                            year: 2019,
+                            month: 7,
+                            day: 22
+                        },
+                        dueTime: {
+                            hours: 15,
+                            minutes: 59
+                        },
+                        title: "For Loop",
+                        description: `Instructions
+●	Answer all questions
+●	Submit your py files online via google classroom
+●	Each question should be attempted in separate files.
+
+Question 1 (Q1_name.py)
+Get a number from the user and check if it is prime.
+
+Question 2 (Q2_name.py)
+Take 10 integers from keyboard using loop and print their average value on the screen.
+
+Question 3(Q3_name.py)
+Take integer inputs from user until he/she presses q ( Ask to press q to quit after every integer input ). Print average and product of all numbers.
+
+Question 4 (Q4_name.py)
+Print the following pattern using loop:
+
+*
+**
+***
+****
+
+Question 5 (Q5_name.py)
+Write a program to calculate factorial of a number.`
+
+                    },{
+                        alternateLink: "https://classroom.google.com/c/NDA3MTMxOTQ4Mzla/a/NDA4NTM3MDIwMzZa/details",
+                        courseId: "40713194839",
+                        dueDate: {
+                            day: 12,
+                            month: 7,
+                            year: 2019
+                        },
+                        dueTime: {
+                            hours: 15,
+                            minutes: 59
+                        },
+                        materials: [
+                            {
+                                driveFile: {
+                                    driveFile: {
+                                        alternateLink: "https://drive.google.com/open?id=1uEjyXiDOyyBZs4kP798cXXktfSEMJ6J4BJAgnEHida8",
+                                        id: "1uEjyXiDOyyBZs4kP798cXXktfSEMJ6J4BJAgnEHida8",
+                                        thumbnailUrl: "https://drive.google.com/thumbnail?id=1uEjyXiDOyyBZs4kP798cXXktfSEMJ6J4BJAgnEHida8&sz=s200",
+                                        title: "Selection Practice Questions"
+                                    },
+                                    shareMode: "VIEW"
+                                }
+                            }
+                        ],
+                        title: "Practical 2"
+                    },{
+                        alternateLink: "https://classroom.google.com/c/NDA3MTMxOTQ4Mzla/a/NDA4MTM5MDc3ODla/details",
+                        courseId: "40713194839",
+                        description: "Instructions\r\n•	Submit one py file for each question, the question number will be the file name. eg. For Q1, it will be Q1_yourname.py . Do not code all of them in the same file.\r\n•	Complete Q3 & 4 in a document and name it Q3&4.",
+                        dueDate: {
+                            year: 2019,
+                            month: 7,
+                            day: 8
+                        },
+                        dueTime: {
+                            hours: 15,
+                            minutes: 59
+                        },
+                        state: "PUBLISHED",
+                        title: "Practical 1",
+                        creatorUserId: "108319138264648651611"
+                    }
+                ],
                 "27242247607": []
             };
             const BODY = document.getElementsByClassName("google")[0];
@@ -77,11 +143,12 @@
                     const CELL = document.createElement("td");
                     const ASSIGNMENTS = document.createElement("table");
                     ASSIGNMENTS.className = "data";
+                    ASSIGNMENTS.cellSpacing = "5px";
                     // add assignments into the table
                     assignments[element.id].forEach((elem) => {
                         const C_ROW = document.createElement("tr");
-                        const CELL = document.createElement("td");
-                        CELL.className = "cell";
+                        const C = document.createElement("td");
+                        C.className = "cell";
                         //title and teacher
                         const TOP = document.createElement("div");
                         TOP.className = "top";
@@ -89,13 +156,70 @@
                         H1.textContent = elem.title;
                         const H2 = document.createElement("h2");
                         H2.textContent = "Joseph Tan Choo Kee";
-                        
-                        // appending child nodes
+                        const DUE = document.createElement("div");
+                        DUE.textContent = `Due ${elem.dueDate.month}/${elem.dueDate.day}/${elem.dueDate.year} ${elem.dueTime.hours}${elem.dueTime.minutes}`;
+                        //description
+                        INFO = document.createElement("div");
+                        INFO.className = "info";
+                        INFO.textContent = elem.description;
+                        //append all current ones first
                         TOP.appendChild(H1);
                         TOP.appendChild(H2);
-                        CELL.appendChild(TOP);
+                        TOP.appendChild(DUE);
+                        C.appendChild(TOP);
+                        C.appendChild(INFO);
+                        //adding on any existing materials
+                        if(elem.materials){
+                            elem.materials.forEach((link) => {
+                                const MATERIAL = document.createElement("div");
+                                MATERIAL.className = "material";
+                                const A = document.createElement("a");
+                                A.href = link.driveFile.driveFile.alternateLink;
+                                // le image
+
+                                const IMAGE = document.createElement("div");
+                                IMAGE.className = "img";
+                                const IMG = document.createElement("img");
+                                IMG.src = `https://drive.google.com/thumbnail?id=${link.driveFile.driveFile.id}&authuser=0&sz=w105-h70-c`;
+                                const SVGDIV = document.createElement("div");
+                                SVGDIV.style = "position: absolute; left: 0; top: 0";
+                                const SVG = document.createElement("img");
+                                SVG.src = "img/corner.svg";
+                                const TYPE = document.createElement("div");
+                                TYPE.className = "type";
+                                const TEXT = document.createElement("div");
+                                TEXT.className = "text";
+                                TEXT.textContent = link.driveFile.driveFile.title;
+                                const SMALLTEXT = document.createElement("div");
+                                SMALLTEXT.className = "smoltext";
+                                SMALLTEXT.textContent = "Google Docs";
+
+                                //appending child nodes
+                                SVGDIV.appendChild(SVG);
+                                IMAGE.appendChild(IMG);
+                                IMAGE.appendChild(SVGDIV);
+                                A.appendChild(IMAGE);
+                                TYPE.appendChild(TEXT);
+                                TYPE.appendChild(SMALLTEXT);
+                                A.appendChild(TYPE);
+                                MATERIAL.appendChild(A);
+                                C.appendChild(MATERIAL);
+                                
+                            });
+                        }
+                        //end data
+                        const LINK = document.createElement("div");
+                        LINK.style = "font-size: 10px; margin-top: 20px;";
+                        const A = document.createElement("a");
+                        A.textContent = "More details";
+                        A.href = elem.alternateLink;
+                        // appending child nodes
                         
-                        C_ROW.appendChild(CELL);
+                        LINK.appendChild(A);
+                        C.appendChild(LINK);
+                        
+                        
+                        C_ROW.appendChild(C);
                         ASSIGNMENTS.appendChild(C_ROW);
                     });
                     CELL.appendChild(ASSIGNMENTS);

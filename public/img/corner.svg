@@ -1,0 +1,9 @@
+<svg height="70px" width = "105px" y="0px" x="0px" viewBox="0 0 105 70" enable-background="new 0 0 105 70" xmlns = "http://www.w3.org/2000/svg">
+    <g opacity=".5">
+        <path d="m104.98 54.297c-0.017 0-0.017-54.297-0.017-54.297h-104.96v70h89.441s16.139-15.703 15.539-15.703z" fill="#E5E5E5"></path>
+    </g>
+    <polygon points="89.042 54.018 89.042 70 105 54.018" fill="#4285f4"></polygon>
+    <g opacity=".702">
+        <polygon points="73.084 70 89.042 70 89.042 54.018" fill="#bbb"></polygon>
+    </g>
+</svg>

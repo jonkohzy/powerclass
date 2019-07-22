@@ -145,10 +145,10 @@
        */
        function listAssignments() {
         gapi.client.classroom.courses.courseWork.list({
-          courseId: "34869664428",
+          courseId: "40713194839",
           pageSize: 0 // list all work
         }).then(function(response) {
-
+          console.log(response.result.courseWork);
           for (i = 0; i < response.result.courseWork.length; i++) {
             var getResult = response.result.courseWork[i];
             var cherId = getResult.creatorUserId;
