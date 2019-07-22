@@ -162,7 +162,13 @@
       transition: border 0.2s ease-in-out;
     }
 
+    .login-button-loading {
+      background-color: grey !important;
+      color: grey !important; /* effectively hides text */
+    }
+
     #login-button {
+      position: relative;
       color: white;
       margin-top: 21px;
       padding: 10px;
@@ -171,6 +177,8 @@
       border-radius: 999999px;
       width: 65%;
       background-color: #5b39b8;
+      transition: background-color 0.2s, box-shadow 0.2s;
+      user-select: none;
     }
 
     #login-button:hover, #login-button:focus {
@@ -185,6 +193,69 @@
       .intro{
         width: calc(60% - 1px);
       }
+    }
+
+    .loading-circle-wrapper {
+      width: 80px;
+      opacity: 0;
+      transition: opacity 0.5s;
+
+      /* center items */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      /* center self */
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .loading-circle {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #fff;
+      z-index: 999;
+
+      /* animation */
+      animation-name: grow;
+      animation-duration: 0.5s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+    @keyframes grow {
+      from {
+        width: 10px;
+        height: 10px;
+      }
+      to {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    #loading-circle-1 {
+      animation-delay: 0s;
+    }
+
+    #loading-circle-2 {
+      animation-delay: 0.2s;
+
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    #loading-circle-3 {
+      animation-delay: 0.4s;
     }
   </style>
 </head>
@@ -215,18 +286,35 @@
       <form>
         <input id="username" type="text" name="user" placeholder="Username">
         <input id="password" type="password" name="pass" placeholder="Password">
-        <button id="login-button" type="submit">Login</button>
+        <button id="login-button" type="submit">
+          Login
+          <div class="loading-circle-wrapper">
+            <div id="loading-circle-1" class="loading-circle"></div>
+            <div id="loading-circle-2" class="loading-circle"></div>
+            <div id="loading-circle-3" class="loading-circle"></div>
+          </div>
+        </button>
       </form>
     </div>
   </div>
   <script>
     document.forms[0].addEventListener("submit", (event) => {
       event.preventDefault();
+
+      document.getElementById("login-button").classList.add("login-button-loading");
+      document.getElementsByClassName("loading-circle-wrapper")[0]
+          .style.opacity = "1";
+      
       login();
     });
 
     const displayError = (message) => {
+      // revert element styles to previous unsubmitted state
+      document.getElementsByClassName("loading-circle-wrapper")[0]
+          .style.opacity = "0";
+      document.getElementById("login-button").classList.remove("login-button-loading");
 
+      // TODO: actually display error message
     };
 
     const login = () => {
