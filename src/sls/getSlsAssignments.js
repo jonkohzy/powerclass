@@ -57,7 +57,6 @@ require("babel-polyfill");
 
       try {
         const result = await steps[stepNum]();
-        console.log(result);
 
         if (result === "Incorrect username or password.") {
           // console.error() is treated as stderr
