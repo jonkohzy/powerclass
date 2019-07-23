@@ -17,6 +17,7 @@ const runSlsScrape = async ( user, pass, res) => {
     if (err.message === "Incorrect username or password.") {
       res.status(401).send(err.message);
     } else {
+      console.log(err);
       res.sendStatus(500);
     }
   }

@@ -4,7 +4,7 @@
   "description": "Official repo for powerclass",
   "main": "build/index.js",
   "scripts": {
-    "build": "babel src -d build",
+    "build": "babel src -d build --copy-files",
     "build-local": "babel src -d build -w --copy-files --delete-dir-on-start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build/index.js"
