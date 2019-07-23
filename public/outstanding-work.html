@@ -13,8 +13,8 @@
     <body>
         <div class="header">
             <a href = "dashboard.html" class="name">PowerClass</a>
-            <a href="outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
-            <a class="header-item school-matters-navlink">School Matters</a>
+            <a class="header-item outstanding-work-navlink">Outstanding Work</a>
+            <a href="/school-matters/announcements.html" class="header-item school-matters-navlink">School Matters</a>
             <a href="message-board.html" class="header-item message-board-navlink">Message Board</a>
     
             <div class="user">
@@ -52,10 +52,10 @@
             }
             const initClient = () => {
                 gapi.client.init({
-                apiKey: API_KEY,
-                clientId: CLIENT_ID,
-                discoveryDocs: DISCOVERY_DOCS,
-                scope: SCOPES
+                    apiKey: API_KEY,
+                    clientId: CLIENT_ID,
+                    discoveryDocs: DISCOVERY_DOCS,
+                    scope: SCOPES
                 }).then(function () {
                     // Listen for sign-in state changes.
                     gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
@@ -71,7 +71,28 @@
                     listCourses();
                 }
             }
-            const listCourses = () => {
+            const listCourses = async () => {
+                const { result: { courses } } = await gapi.client.classroom.courses.list({
+                    pageSize: 0
+                });
+                console.log(courses);
+                const allCoursesCourseWork = await Promise.all(courses
+                    .map(async ({ id, name }) => {
+                        const { result: { courseWork } } = await gapi.client.classroom.courses.courseWork.list({
+                            courseId: id,
+                            pageSize: 0
+                        });
+                        return { name, courseWork };
+                    }));
+                console.log("Work:", allCoursesCourseWork);
+                
+                // courses.forEach((course) => {
+                //    const { result: courseWork } = await gapi.client.classroom.courses.courseWork.list({
+                //        courseId: course.id,
+                //        pageSize: 0
+                //    });
+                // });
+
                 gapi.client.classroom.courses.list({
                     pageSize: 0
                 }).then((response) => {
@@ -133,7 +154,7 @@
 
                                     //end data
                                     const LINK = document.createElement("div");
-                                    LINK.style = "font-size: 10px; margin-topL 20px;";
+                                    LINK.style = "font-size: 10px; margin-top: 20px;";
                                     const A = document.createElement("a");
                                     A.textContent = "More details";
                                     A.href = elem.alternateLink;
