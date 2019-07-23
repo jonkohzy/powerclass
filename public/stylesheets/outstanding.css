@@ -65,7 +65,7 @@ ISP will be made later
     line-height: 1rem;
     color: #5f6368;
     overflow: hidden;
-    word-wrap: break-word;
+    white-space: pre-wrap;
 }
 .cell{
     border-radius: 20px;
@@ -85,7 +85,6 @@ ISP will be made later
     float: right;
     position: relative;
     top: 3.4px;
-    display: inline-block;
 }
 .material{
     margin-top: 50px;
