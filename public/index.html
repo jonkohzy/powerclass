@@ -127,11 +127,19 @@
       font-size: 29px;
     }
 
-    #note {
+    .subtitle {
       font-size: 18px;
-      color: rgba(0,0,0,0.502);
       position: relative;
       margin-top: 26px;
+    }
+
+    #note {
+      color: rgba(0, 0, 0, 0.502);
+    }
+
+    #error {
+      display: none; /* hidden by default */
+      color: red;
     }
 
     form {
@@ -281,7 +289,8 @@
         <div id="heading">
           Welcome to <br><span style="font-size: 45px;">PowerClass</span>
         </div>
-        <div id="note">Login with your school Windows <br>username and password.</div>
+        <div id="note" class="subtitle">Login with your school Windows <br>username and password.</div>
+        <div id="error" class="subtitle"></div>
       </div>
       <form>
         <input id="username" type="text" name="user" placeholder="Username">
@@ -314,10 +323,18 @@
           .style.opacity = "0";
       document.getElementById("login-button").classList.remove("login-button-loading");
 
-      // TODO: actually display error message
+      // display error
+      const errorDiv = document.getElementById("error");
+      errorDiv.style.display = "block";
+      errorDiv.textContent = message;
     };
 
     const login = () => {
+      // hide error
+      const errorDiv = document.getElementById("error");
+      errorDiv.style.display = "none";
+      errorDiv.textContent = "";
+
       const user = document.getElementById("username").value;
       const pass = document.getElementById("password").value;
 
