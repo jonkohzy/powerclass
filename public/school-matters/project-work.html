@@ -108,8 +108,8 @@
     	method: "POST",
     	headers: { "Content-Type": "application/json" },
     	body: JSON.stringify({
-				user: "171290r",
-				pass: "jkjk1234",
+				user: localStorage.getItem("user"),
+        pass: localStorage.getItem("pass"),
     	}),
 		})
 		.then((res) => /* implement error handling before json() */ res.json())

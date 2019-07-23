@@ -128,8 +128,8 @@
 		method: "POST",
 		headers: {"Content-Type": "application/json"},
 		body: JSON.stringify({
-			user: "171290r",
-			pass: "jkjk1234"
+			user: localStorage.getItem("user"),
+      pass: localStorage.getItem("pass"),
 		}),
 	})
 	.then((res) => res.json())
@@ -197,8 +197,10 @@
 			const fileLinkElement = attachedFileLink ?
 					document.createElement("a") : document.createElement("span");
 			if (attachedFileLink) {
+				const user = localStorage.getItem("user");
+				const pass = localStorage.getItem("pass");
 				fileLinkElement.onclick = () => {
-					window.open(`/api/isp/get-file?user=${btoa("171290r")}&pass=${btoa("jkjk1234")}&fileLink=${attachedFileLink}`);
+					window.open(`/api/isp/get-file?user=${btoa(user)}&pass=${btoa(pass)}&fileLink=${attachedFileLink}`);
 				}
 				fileLinkElement.textContent = "Click here to download";
 			} else {

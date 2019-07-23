@@ -351,6 +351,11 @@
       .then((res) => res.json())
       .then(({ success, message, firstLogin }) => {
         if (success) {
+          // store credentials locally
+          localStorage.setItem("user", user);
+          localStorage.setItem("pass", pass);
+
+          // redirect to dashboard
           if (firstLogin) {
             window.location = "/dashboard.html?firstLogin=true";
           } else {

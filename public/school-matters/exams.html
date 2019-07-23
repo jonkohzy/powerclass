@@ -163,8 +163,8 @@
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				user: "171290r",
-				pass: "jkjk1234"
+				user: localStorage.getItem("user"),
+        pass: localStorage.getItem("pass"),
 			}),
 		}).then((res) => res.json()).then(({examResults, reports }) => {
 			document.getElementById("loading").style.display = "none";
@@ -187,9 +187,13 @@
 				const NAME = document.createElement("td");
 				const DOWNLOAD = document.createElement("td");
 				const BUTTON = document.createElement("button");
+
+				const user = localStorage.getItem("user");
+				const pass = localStorage.getItem("pass");
 				BUTTON.onclick = () => {
-					window.open(`/api/isp/get-file?user=${btoa("171290r")}&pass=${btoa("jkjk1234")}&fileLink=${element.reportUrl}`);
+					window.open(`/api/isp/get-file?user=${btoa(user)}&pass=${btoa(pass)}&fileLink=${element.reportUrl}`);
 				}
+
 				id++;
 				BUTTON.textContent = "Download File";
 				NAME.textContent = element.reportName;
