@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="google-signin-client_id" content="167953657646-jdjmkp26lp14ut29gev2e7aqhv9ihsei.apps.googleusercontent.com">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link rel="stylesheet" href="stylesheets/common.css" type="text/css">
         <link rel = "stylesheet" href = "stylesheets/outstanding.css" type = "text/css">
@@ -35,6 +36,143 @@
             </div>
         </div>
         <script>
+            // Client ID and API key from the Developer Console
+            var CLIENT_ID = '167953657646-jdjmkp26lp14ut29gev2e7aqhv9ihsei.apps.googleusercontent.com';
+            var API_KEY = 'AIzaSyCVayniJVOK5iagM3LwR9H68q_HfvoL-jM';
+
+            // Array of API discovery doc URLs for APIs used by the quickstart
+            var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/classroom/v1/rest"];
+
+            // Authorization scopes required by the API; multiple scopes can be
+            // included, separated by spaces.
+            var SCOPES = "https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.coursework.me https://www.googleapis.com/auth/classroom.rosters";
+
+            const handleClientLoad = () => {
+                gapi.load('client:auth2', initClient);
+            }
+            const initClient = () => {
+                gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+                }).then(function () {
+                    // Listen for sign-in state changes.
+                    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                    // Handle the initial sign-in state.
+                    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                }, function(error) {
+                    console.log(JSON.stringify(error, null, 2));
+                });
+            }
+            const updateSigninStatus = (isSignedIn) => {
+                if(isSignedIn){
+                    listCourses();
+                }
+            }
+            const listCourses = () => {
+                gapi.client.classroom.courses.list({
+                    pageSize: 0
+                }).then((response) => {
+                    const courses = response.result.courses;
+                    console.log(courses);
+                    const BODY = document.getElementsByClassName("google")[0];
+                    courses.forEach((element) => {
+                        //declare elements
+                        const ROW = document.createElement("tr");
+                        const COURSE = document.createElement("th");
+                        COURSE.textContent = element.name;
+                        ROW.appendChild(COURSE);
+                        BODY.appendChild(ROW);
+                        //add assignments in an extra row
+                        gapi.client.classroom.courses.courseWork.list({
+                            courseId: element.id,
+                            pageSize: 0
+                        }).then((res) => {
+                            console.log(res.result.courseWork);
+                            if(res.result.courseWork && res.result.courseWork.length > 0){
+                                const SUDOROW = document.createElement("tr");
+                                const CELL = document.createElement("td");
+                                const ASSIGNMENTS = document.createElement("table");
+                                ASSIGNMENTS.className = "data";
+                                ASSIGNMENTS.cellSpacing = "5px";
+                                //add assignments to the table
+                                res.result.courseWork.forEach((elem) => {
+                                    const C_ROW = document.createElement("tr");
+                                    const C = document.createElement("td");
+                                    C.className = "cell";
+                                    //title and Teacher
+                                    const TOP = document.createElement("div");
+                                    TOP.className = "top";
+                                    const H1 = document.createElement("h1");
+                                    H1.textContent = elem.title;
+                                    const H2 = document.createElement("h2");
+                                    /*gapi.client.classroom.userProfiles.get({
+                                        userId: elem.creatorUserId
+                                    }).then((cher) => {
+                                        H2.textContent = cher.result.name.fullName;
+                                    });*/
+                                    const DUE = document.createElement("div");
+                                    if(elem.dueDate){
+                                        DUE.textContent = `Due ${elem.dueDate.month}/${elem.dueDate.day}/${elem.dueDate.year} ${elem.dueTime.hours}${elem.dueTime.minutes}`;
+                                    }else{
+                                        DUE.textContent = " ";
+                                    }
+                                    //description
+                                    const INFO = document.createElement("div");
+                                    INFO.className = "info";
+                                    INFO.textContent = elem.description;
+                                    //append all current ones first
+                                    TOP.appendChild(H1);
+                                    TOP.appendChild(H2);
+                                    TOP.appendChild(DUE);
+                                    C.appendChild(TOP);
+                                    C.appendChild(INFO);
+                                    //adding on any existing materials
+
+                                    //end data
+                                    const LINK = document.createElement("div");
+                                    LINK.style = "font-size: 10px; margin-topL 20px;";
+                                    const A = document.createElement("a");
+                                    A.textContent = "More details";
+                                    A.href = elem.alternateLink;
+                                    //appending child nodes
+
+                                    LINK.appendChild(A);
+                                    C.appendChild(LINK);
+                                    C_ROW.appendChild(C);
+                                    ASSIGNMENTS.appendChild(C_ROW);
+                                });
+                                CELL.appendChild(ASSIGNMENTS);
+                                SUDOROW.appendChild(CELL);
+                                BODY.appendChild(SUDOROW);
+                            }
+                        });
+                    });
+                });
+            }
+        </script>
+        <script async defer src = "https://apis.google.com/js/api.js" onload = "this.onload = handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+        <script src = "https://apis.google.com/js/platform.js" async defer></script>
+        <script>
+            /*
+            
+
+            //showing courses and assignments
+            const BODY = document.getElementsByClassName("google")[0];
+            gapi.client.classroom.courses.list({
+                pageSize: 0 // lists all courses
+            }).then(function(response) {
+                var courses = response.result.courses;
+                courses.forEach((element) =>{
+                    const ROW = document.createElement("tr");
+                    const COURSE = document.createElement("th");
+                    COURSE.textContent = element.name;
+                    ROW.appendChild(COURSE);
+                    BODY.appendChild(ROW);
+                });
+            });
             const courses = [{
                 name: "2019 3A3 Computing (TCK)",
                 id: "40713194839"
@@ -226,7 +364,7 @@ Write a program to calculate factorial of a number.`
                     SUDOROW.appendChild(CELL);
                     BODY.appendChild(SUDOROW);
                 }
-            });
+            });*/
         </script>
     </body>
 </html>
