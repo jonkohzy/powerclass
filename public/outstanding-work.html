@@ -85,307 +85,130 @@
                         return { name, courseWork };
                     }));
                 console.log("Work:", allCoursesCourseWork);
-                
-                // courses.forEach((course) => {
-                //    const { result: courseWork } = await gapi.client.classroom.courses.courseWork.list({
-                //        courseId: course.id,
-                //        pageSize: 0
-                //    });
-                // });
-
-                gapi.client.classroom.courses.list({
-                    pageSize: 0
-                }).then((response) => {
-                    const courses = response.result.courses;
-                    console.log(courses);
-                    const BODY = document.getElementsByClassName("google")[0];
-                    courses.forEach((element) => {
-                        //declare elements
+                const BODY = document.getElementsByClassName("google")[0];
+                let end_this = false;
+                allCoursesCourseWork.forEach((element) => {
+                    if(element.name === "2019 Senior Maths Olympiad Training - Mr Chen Zenghui"){
+                        end_this = true;
+                    }
+                    if(!end_this){
                         const ROW = document.createElement("tr");
                         const COURSE = document.createElement("th");
                         COURSE.textContent = element.name;
                         ROW.appendChild(COURSE);
                         BODY.appendChild(ROW);
-                        //add assignments in an extra row
-                        gapi.client.classroom.courses.courseWork.list({
-                            courseId: element.id,
-                            pageSize: 0
-                        }).then((res) => {
-                            console.log(res.result.courseWork);
-                            if(res.result.courseWork && res.result.courseWork.length > 0){
-                                const SUDOROW = document.createElement("tr");
-                                const CELL = document.createElement("td");
-                                const ASSIGNMENTS = document.createElement("table");
-                                ASSIGNMENTS.className = "data";
-                                ASSIGNMENTS.cellSpacing = "5px";
-                                //add assignments to the table
-                                res.result.courseWork.forEach((elem) => {
-                                    const C_ROW = document.createElement("tr");
-                                    const C = document.createElement("td");
-                                    C.className = "cell";
-                                    //title and Teacher
-                                    const TOP = document.createElement("div");
-                                    TOP.className = "top";
-                                    const H1 = document.createElement("h1");
-                                    H1.textContent = elem.title;
-                                    const H2 = document.createElement("h2");
-                                    /*gapi.client.classroom.userProfiles.get({
-                                        userId: elem.creatorUserId
-                                    }).then((cher) => {
-                                        H2.textContent = cher.result.name.fullName;
-                                    });*/
-                                    const DUE = document.createElement("div");
-                                    if(elem.dueDate){
-                                        DUE.textContent = `Due ${elem.dueDate.month}/${elem.dueDate.day}/${elem.dueDate.year} ${elem.dueTime.hours}${elem.dueTime.minutes}`;
-                                    }else{
-                                        DUE.textContent = " ";
-                                    }
-                                    //description
-                                    const INFO = document.createElement("div");
-                                    INFO.className = "info";
-                                    INFO.textContent = elem.description;
-                                    //append all current ones first
-                                    TOP.appendChild(H1);
-                                    TOP.appendChild(H2);
-                                    TOP.appendChild(DUE);
-                                    C.appendChild(TOP);
-                                    C.appendChild(INFO);
-                                    //adding on any existing materials
+                        
+                        if(element.courseWork && element.courseWork.length > 0){
+                            
+                            const SUDOROW = document.createElement("tr");
+                            const CELL = document.createElement("td");
+                            const ASSIGNMENTS = document.createElement("table");
+                            ASSIGNMENTS.className = "data";
+                            ASSIGNMENTS.cellSpacing = "5px";
+                            //add assignments to the table
+                            
+                            element.courseWork.forEach((elem) => {
+                                const C_ROW = document.createElement("tr");
+                                const C = document.createElement("td");C.className = "cell";
+                                //title and teacher
+                                const TOP = document.createElement("div");
+                                TOP.className = "top";
+                                const H1 = document.createElement("h1");
+                                H1.textContent = elem.title;
+                                const H2 = document.createElement("h2");
+                                //waiting to set as teacher's name
+                                const DUE = document.createElement("div");
+                                if(elem.dueDate){
+                                    DUE.textContent = `Due ${elem.dueDate.month}/${elem.dueDate.day}/${elem.dueDate.year} ${elem.dueTime.hours}${elem.dueTime.minutes}`;
+                                }else{
+                                    DUE.textContent = " ";
+                                }
+                                //description
+                                const INFO = document.createElement("div");
+                                INFO.className = "info";
+                                INFO.textContent = elem.description;
+                                //append all current nodes first
+                                TOP.appendChild(H1);
+                                TOP.appendChild(H2);
+                                TOP.appendChild(DUE);
+                                C.appendChild(TOP);
+                                C.appendChild(INFO);
+                                //add any materials
+                                if(elem.materials){
+                                    
+                                    const CONTAINER = document.createElement("div");
+                                    CONTAINER.className = "container"
+                                    elem.materials.forEach((link) => {
+                                        const MATERIAL = document.createElement("div");
+                                        MATERIAL.className = "material";
+                                        const A = document.createElement("a");
+                                        //the image
+                                        const IMAGE = document.createElement("div");
+                                        IMAGE.className = "img";
+                                        const IMG = document.createElement("img");
+                                        const SVGDIV = document.createElement("div");
+                                        SVGDIV.style = "position: absolute; left: 0; top: 0";
+                                        const SVG = document.createElement("img");
+                                        const TYPE = document.createElement("div");
+                                        TYPE.className = "type";
+                                        const TEXT = document.createElement("div");
+                                        TEXT.className = "text";
+                                        const SMALLTEXT = document.createElement("div");
+                                        SMALLTEXT.className = "smoltext";
+                                        SMALLTEXT.textContent = "Google Docs";
+                                        //special cases
+                                        if(link.driveFile){
+                                            A.href = link.driveFile.driveFile.alternateLink;
+                                            IMG.src = `https://drive.google.com/thumbnail?id=${link.driveFile.driveFile.id}&authuser=0&sz=w105-h70-c`;
+                                            SVG.src = "img/corner/drive.svg";
+                                            TEXT.textContent = link.driveFile.driveFile.title;
+                                            SMALLTEXT.textContent = "Google Drive";
+                                            
+                                        }else if(link.youtubeVideo){
+                                            A.href = link.youtubeVideo.alternateLink;
+                                            IMG.src = link.youtubeVideo.thumbnailUrl;
+                                            IMG.width = "105";
+                                            IMG.height = "70";
+                                            SVG.src = "img/corner/youtube.svg";
+                                            TEXT.textContent = link.youtubeVideo.title;
+                                            SMALLTEXT.textContent = "Youtube Video";
+                                        }
 
-                                    //end data
-                                    const LINK = document.createElement("div");
-                                    LINK.style = "font-size: 10px; margin-top: 20px;";
-                                    const A = document.createElement("a");
-                                    A.textContent = "More details";
-                                    A.href = elem.alternateLink;
-                                    //appending child nodes
+                                        //appending child nodes
+                                        SVGDIV.appendChild(SVG);
+                                        IMAGE.appendChild(IMG);
+                                        IMAGE.appendChild(SVGDIV);
+                                        A.appendChild(IMAGE);
+                                        TYPE.appendChild(TEXT);
+                                        TYPE.appendChild(SMALLTEXT);
+                                        A.appendChild(TYPE);
+                                        MATERIAL.appendChild(A);
+                                        CONTAINER.appendChild(MATERIAL);
+                                    });
+                                    C.appendChild(CONTAINER);
+                                }
+                                //end data
+                                const LINK = document.createElement("div");
+                                LINK.style = "font-size: 10px; margin-top: 20px;";
+                                const A = document.createElement("a");
+                                A.textContent = "More details";
+                                A.href = elem.alternateLink;
+                                //appending child nodes
 
-                                    LINK.appendChild(A);
-                                    C.appendChild(LINK);
-                                    C_ROW.appendChild(C);
-                                    ASSIGNMENTS.appendChild(C_ROW);
-                                });
-                                CELL.appendChild(ASSIGNMENTS);
-                                SUDOROW.appendChild(CELL);
-                                BODY.appendChild(SUDOROW);
-                            }
-                        });
-                    });
+                                LINK.appendChild(A);
+                                C.appendChild(LINK);
+                                C_ROW.appendChild(C);
+                                ASSIGNMENTS.appendChild(C_ROW);
+                            });
+                            CELL.appendChild(ASSIGNMENTS);
+                            SUDOROW.appendChild(CELL);
+                            BODY.appendChild(SUDOROW);
+                        }
+                    }
                 });
             }
         </script>
         <script async defer src = "https://apis.google.com/js/api.js" onload = "this.onload = handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
         <script src = "https://apis.google.com/js/platform.js" async defer></script>
-        <script>
-            /*
-            
-
-            //showing courses and assignments
-            const BODY = document.getElementsByClassName("google")[0];
-            gapi.client.classroom.courses.list({
-                pageSize: 0 // lists all courses
-            }).then(function(response) {
-                var courses = response.result.courses;
-                courses.forEach((element) =>{
-                    const ROW = document.createElement("tr");
-                    const COURSE = document.createElement("th");
-                    COURSE.textContent = element.name;
-                    ROW.appendChild(COURSE);
-                    BODY.appendChild(ROW);
-                });
-            });
-            const courses = [{
-                name: "2019 3A3 Computing (TCK)",
-                id: "40713194839"
-            }, {
-                name: "2019 S3 Computing",
-                id: "27242247607"
-            }];
-            const assignments = {
-                "40713194839": [
-                    {
-                        alternateLink: "https://classroom.google.com/c/NDA3MTMxOTQ4Mzla/a/NDA4OTUyMTQ5NTla/details",
-                        courseId: "40713194839",
-                        dueDate: {
-                            year: 2019,
-                            month: 7,
-                            day: 22
-                        },
-                        dueTime: {
-                            hours: 15,
-                            minutes: 59
-                        },
-                        title: "For Loop",
-                        description: `Instructions
-●	Answer all questions
-●	Submit your py files online via google classroom
-●	Each question should be attempted in separate files.
-
-Question 1 (Q1_name.py)
-Get a number from the user and check if it is prime.
-
-Question 2 (Q2_name.py)
-Take 10 integers from keyboard using loop and print their average value on the screen.
-
-Question 3(Q3_name.py)
-Take integer inputs from user until he/she presses q ( Ask to press q to quit after every integer input ). Print average and product of all numbers.
-
-Question 4 (Q4_name.py)
-Print the following pattern using loop:
-
-*
-**
-***
-****
-
-Question 5 (Q5_name.py)
-Write a program to calculate factorial of a number.`
-
-                    },{
-                        alternateLink: "https://classroom.google.com/c/NDA3MTMxOTQ4Mzla/a/NDA4NTM3MDIwMzZa/details",
-                        courseId: "40713194839",
-                        dueDate: {
-                            day: 12,
-                            month: 7,
-                            year: 2019
-                        },
-                        dueTime: {
-                            hours: 15,
-                            minutes: 59
-                        },
-                        materials: [
-                            {
-                                driveFile: {
-                                    driveFile: {
-                                        alternateLink: "https://drive.google.com/open?id=1uEjyXiDOyyBZs4kP798cXXktfSEMJ6J4BJAgnEHida8",
-                                        id: "1uEjyXiDOyyBZs4kP798cXXktfSEMJ6J4BJAgnEHida8",
-                                        thumbnailUrl: "https://drive.google.com/thumbnail?id=1uEjyXiDOyyBZs4kP798cXXktfSEMJ6J4BJAgnEHida8&sz=s200",
-                                        title: "Selection Practice Questions"
-                                    },
-                                    shareMode: "VIEW"
-                                }
-                            }
-                        ],
-                        title: "Practical 2"
-                    },{
-                        alternateLink: "https://classroom.google.com/c/NDA3MTMxOTQ4Mzla/a/NDA4MTM5MDc3ODla/details",
-                        courseId: "40713194839",
-                        description: "Instructions\r\n•	Submit one py file for each question, the question number will be the file name. eg. For Q1, it will be Q1_yourname.py . Do not code all of them in the same file.\r\n•	Complete Q3 & 4 in a document and name it Q3&4.",
-                        dueDate: {
-                            year: 2019,
-                            month: 7,
-                            day: 8
-                        },
-                        dueTime: {
-                            hours: 15,
-                            minutes: 59
-                        },
-                        state: "PUBLISHED",
-                        title: "Practical 1",
-                        creatorUserId: "108319138264648651611"
-                    }
-                ],
-                "27242247607": []
-            };
-            const BODY = document.getElementsByClassName("google")[0];
-            courses.forEach((element) => {
-                // declare elements
-                const ROW = document.createElement("tr");
-                const COURSE = document.createElement("th");
-                COURSE.textContent = element.name;
-                // put the header in the table
-                ROW.appendChild(COURSE);
-                BODY.appendChild(ROW);
-                // add assignments in an extra row
-                if(assignments[element.id].length > 0){
-                    const SUDOROW = document.createElement("tr");
-                    const CELL = document.createElement("td");
-                    const ASSIGNMENTS = document.createElement("table");
-                    ASSIGNMENTS.className = "data";
-                    ASSIGNMENTS.cellSpacing = "5px";
-                    // add assignments into the table
-                    assignments[element.id].forEach((elem) => {
-                        const C_ROW = document.createElement("tr");
-                        const C = document.createElement("td");
-                        C.className = "cell";
-                        //title and teacher
-                        const TOP = document.createElement("div");
-                        TOP.className = "top";
-                        const H1 = document.createElement("h1");
-                        H1.textContent = elem.title;
-                        const H2 = document.createElement("h2");
-                        H2.textContent = "Joseph Tan Choo Kee";
-                        const DUE = document.createElement("div");
-                        DUE.textContent = `Due ${elem.dueDate.month}/${elem.dueDate.day}/${elem.dueDate.year} ${elem.dueTime.hours}${elem.dueTime.minutes}`;
-                        //description
-                        INFO = document.createElement("div");
-                        INFO.className = "info";
-                        INFO.textContent = elem.description;
-                        //append all current ones first
-                        TOP.appendChild(H1);
-                        TOP.appendChild(H2);
-                        TOP.appendChild(DUE);
-                        C.appendChild(TOP);
-                        C.appendChild(INFO);
-                        //adding on any existing materials
-                        if(elem.materials){
-                            elem.materials.forEach((link) => {
-                                const MATERIAL = document.createElement("div");
-                                MATERIAL.className = "material";
-                                const A = document.createElement("a");
-                                A.href = link.driveFile.driveFile.alternateLink;
-                                // le image
-
-                                const IMAGE = document.createElement("div");
-                                IMAGE.className = "img";
-                                const IMG = document.createElement("img");
-                                IMG.src = `https://drive.google.com/thumbnail?id=${link.driveFile.driveFile.id}&authuser=0&sz=w105-h70-c`;
-                                const SVGDIV = document.createElement("div");
-                                SVGDIV.style = "position: absolute; left: 0; top: 0";
-                                const SVG = document.createElement("img");
-                                SVG.src = "img/corner.svg";
-                                const TYPE = document.createElement("div");
-                                TYPE.className = "type";
-                                const TEXT = document.createElement("div");
-                                TEXT.className = "text";
-                                TEXT.textContent = link.driveFile.driveFile.title;
-                                const SMALLTEXT = document.createElement("div");
-                                SMALLTEXT.className = "smoltext";
-                                SMALLTEXT.textContent = "Google Docs";
-
-                                //appending child nodes
-                                SVGDIV.appendChild(SVG);
-                                IMAGE.appendChild(IMG);
-                                IMAGE.appendChild(SVGDIV);
-                                A.appendChild(IMAGE);
-                                TYPE.appendChild(TEXT);
-                                TYPE.appendChild(SMALLTEXT);
-                                A.appendChild(TYPE);
-                                MATERIAL.appendChild(A);
-                                C.appendChild(MATERIAL);
-                                
-                            });
-                        }
-                        //end data
-                        const LINK = document.createElement("div");
-                        LINK.style = "font-size: 10px; margin-top: 20px;";
-                        const A = document.createElement("a");
-                        A.textContent = "More details";
-                        A.href = elem.alternateLink;
-                        // appending child nodes
-                        
-                        LINK.appendChild(A);
-                        C.appendChild(LINK);
-                        
-                        
-                        C_ROW.appendChild(C);
-                        ASSIGNMENTS.appendChild(C_ROW);
-                    });
-                    CELL.appendChild(ASSIGNMENTS);
-                    SUDOROW.appendChild(CELL);
-                    BODY.appendChild(SUDOROW);
-                }
-            });*/
-        </script>
     </body>
 </html>

@@ -86,8 +86,11 @@ ISP will be made later
     position: relative;
     top: 3.4px;
 }
-.material{
+.container{
+    width: 100%;
     margin-top: 50px;
+}
+.material{
     margin-right: .75rem;
     border-radius: .5rem;
     border: .0625rem solid #dadce0;
