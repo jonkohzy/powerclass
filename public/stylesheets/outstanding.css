@@ -116,6 +116,8 @@ ISP will be made later
     color: #000000;
     white-space: nowrap;
     text-overflow: ellipsis;
+    overflow: hidden;
+    box-sizing: inherit;
 }
 .smoltext{
     letter-spacing: .01428571em;
@@ -124,6 +126,8 @@ ISP will be made later
     color: #5f6368;
     white-space: nowrap;
     text-overflow: ellipsis;
+    box-sizing: inherit;
+    overflow: hidden;
 }
 .material a{
     -webkit-box-flex: 1;
@@ -139,4 +143,8 @@ ISP will be made later
 .type{
     font-size: .8125rem;
     line-height: 1.25rem;
+    box-sizing: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
