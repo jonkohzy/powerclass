@@ -51,7 +51,9 @@ so far i have only made this
 for google classroom
 ISP will be made later
 */
-
+*{
+    box-sizing: inherit;
+}
 .top{
     padding: 5px 0 10px 0;
     margin-bottom: 20px;
@@ -89,10 +91,19 @@ ISP will be made later
 .container{
     width: 100%;
     margin-top: 50px;
+    margin-right: -0.75rem;
+    margin-bottom: -0.75rem;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .material{
     margin-right: .75rem;
     border-radius: .5rem;
+    margin-bottom: .75rem;
+    padding-right: .5rem;
     border: .0625rem solid #dadce0;
     overflow: hidden;
     display: flex;
@@ -117,7 +128,6 @@ ISP will be made later
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    box-sizing: inherit;
 }
 .smoltext{
     letter-spacing: .01428571em;
@@ -126,24 +136,22 @@ ISP will be made later
     color: #5f6368;
     white-space: nowrap;
     text-overflow: ellipsis;
-    box-sizing: inherit;
     overflow: hidden;
 }
 .material a{
     -webkit-box-flex: 1;
     box-flex: 1;
+    flex-grow: 1;
     overflow: hidden;
     text-decoration: none;
     outline: none;
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-right: 20px;
 }
 .type{
     font-size: .8125rem;
     line-height: 1.25rem;
-    box-sizing: inherit;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

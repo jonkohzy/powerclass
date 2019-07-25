@@ -88,9 +88,9 @@
                 const BODY = document.getElementsByClassName("google")[0];
                 let end_this = false;   // for debugging purposes
                 allCoursesCourseWork.forEach((element) => {
-                    //if(element.name === "2019 Senior Maths Olympiad Training - Mr Chen Zenghui"){
-                    //    end_this = true;
-                    //}
+                    if(element.name === "2019 Senior Maths Olympiad Training - Mr Chen Zenghui"){
+                        end_this = true;
+                    }
                     if(!end_this){
                         const ROW = document.createElement("tr");
                         const COURSE = document.createElement("th");
