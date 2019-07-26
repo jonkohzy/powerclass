@@ -1,8 +1,10 @@
 .data{
+    table-layout: fixed;
     margin-left: 40px;
     width: calc(100% - 40px);
 }
 .google{
+    table-layout: fixed;
     width: 100%;
     border-spacing: 0px 20px;
 }
@@ -23,10 +25,12 @@ html, body{
     background: linear-gradient(120deg, #fd812e 45%, white 45%);
 }
 .content{
+    table-layout: fixed;
     margin-top: 91px;
     height: 100%;
 }
 th{
+    table-layout: fixed;
     background: white;
     border-radius: 10px;
     padding: 15px 20px;
@@ -60,6 +64,7 @@ ISP will be made later
     border-bottom: 1px solid black;
 }
 .info{
+    table-layout: fixed;
     padding-left: 10px;
     letter-spacing: .025em;
     font-size: .75em;
@@ -70,6 +75,7 @@ ISP will be made later
     white-space: pre-wrap;
 }
 .cell{
+    table-layout: fixed;
     border-radius: 20px;
     background: white;
     box-shadow: 0 2px 5px #0000004d;
@@ -89,6 +95,7 @@ ISP will be made later
     top: 3.4px;
 }
 .container{
+    table-layout: fixed;
     width: 100%;
     margin-top: 50px;
     margin-right: -0.75rem;
@@ -100,6 +107,7 @@ ISP will be made later
     flex-wrap: wrap;
 }
 .material{
+    table-layout: fixed;
     margin-right: .75rem;
     border-radius: .5rem;
     margin-bottom: .75rem;
@@ -112,6 +120,7 @@ ISP will be made later
     width: calc(50% - .75rem);
 }
 .img{
+    table-layout: fixed;
     margin-right: 1rem;
     height: 4.375rem;
     width: 6.5625rem;
@@ -120,6 +129,7 @@ ISP will be made later
     justify-content: center;
 }
 .text{
+    table-layout: fixed;
     letter-spacing: .00625em;
     font-size: 1rem;
     font-weight: 500;
@@ -130,6 +140,7 @@ ISP will be made later
     overflow: hidden;
 }
 .smoltext{
+    table-layout: fixed;
     letter-spacing: .01428571em;
     font-size: .875rem;
     line-height: 1.25rem;
@@ -139,6 +150,7 @@ ISP will be made later
     overflow: hidden;
 }
 .material a{
+    table-layout: fixed;
     -webkit-box-flex: 1;
     box-flex: 1;
     flex-grow: 1;
@@ -150,6 +162,7 @@ ISP will be made later
     align-items: center;
 }
 .type{
+    table-layout: fixed;
     font-size: .8125rem;
     line-height: 1.25rem;
     overflow: hidden;
