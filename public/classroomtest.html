@@ -70,7 +70,6 @@
           authorizeButton.style.display = 'none';
           signoutButton.style.display = 'block';
           listCourses();
-          listAssignments();
         } else {
           authorizeButton.style.display = 'block';
           signoutButton.style.display = 'none';
@@ -119,47 +118,57 @@
        * Print the names of the first 10 courses the user has access to. If
        * no courses are found an appropriate message is printed.
        */
+
+       // a = response.result.courses
+       // b = a[i]
+       // c = b.id
+       // d = work.result.courseWork
+       // e = d[j]
+       // f = e.creatorUserId
+       // g = cherResponse.result
+       // h = g.name.fullName
        function listCourses() {
-        console.log("courses");
         gapi.client.classroom.courses.list({
           pageSize: 0 // lists all courses
         }).then(function(response) {
-          var courses = response.result.courses;
-          appendPre('Courses:');
-
-          if (courses.length > 0) {
-            for (i = 0; i < courses.length; i++) {
-              var course = courses[i];
-              appendPre(course.name)
-              appendPre(course.id) 
-            }
-          } else {
+          var a = response.result.courses; // set courses as array of courses
+          appendPre('Courses:'); // start courses heading
+          if (a.length > 0) { // if there are courses
+            console.log(a.length);
+            for (i = 0; i < a.length; i++) { // loop through all courses
+              var b = a[i]; // get 1 instance of a course
+              var c = b.id; // set a to be courseId
+              gapi.client.classroom.courses.courseWork.list({ // get all courseWork for that course
+                courseId: 4147149453, // set courseId
+                pageSize: 0 // list all work
+              }).then(function(work) {                
+                var d = work.result.courseWork; // set d as array of courseWork
+                if (d.length > 0) { // if there is courseWork
+                  for (j = 0; j < d.length; j++) { // loop through all courseWork
+                    console.log(d.length);
+                    var e = d[j]; // get 1 instance of courseWork
+                    var f = e.creatorUserId; // get teacher userId
+                    gapi.client.classroom.userProfiles.get({
+                      userId: f
+                    }).then(function(cherResponse) {
+                      var g = cherResponse.result;
+                      var h = g.name.fullName;
+                      appendPre(b.name);
+                      appendPre(c);
+                      appendPre("--- next ---\n\n");
+                      appendPre(e.title);
+                      appendPre(h + "\n\n-- next --\n\n");                      
+                    })
+                  } // end coursework for loop
+                } // end coursework if
+                else {
+                  appendPre('No coursework found.');
+                }
+              });
+            } // end courses for loop
+          } //end 
+          else {
             appendPre('No courses found.');
-          }
-        });
-      }
-
-      /**
-       * Print the names of the first 10 assignments the user has access to. If 
-       * no assignments are found an appropriate message is printed.
-       */
-       function listAssignments() {
-        gapi.client.classroom.courses.courseWork.list({
-          courseId: "40713194839",
-          pageSize: 0 // list all work
-        }).then(function(response) {
-          console.log(response.result.courseWork);
-          for (i = 0; i < response.result.courseWork.length; i++) {
-            var getResult = response.result.courseWork[i];
-            var cherId = getResult.creatorUserId;
-
-            gapi.client.classroom.userProfiles.get({
-              userId: cherId
-            }).then(function(cherResponse) {
-              var cherName = cherResponse.result.name.fullName;
-              appendPreAss("course name: " + getResult.title)
-              appendPreAss("owner name: " + cherName + "\n\n")
-            });
           }
         });
       }
