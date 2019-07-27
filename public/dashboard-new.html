@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>PowerClass</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="stylesheets/dashboard-new.css" type="text/css">
+	<link rel="stylesheet" href="stylesheets/common.css" type="text/css">
+</head>
+<body>
+	<!-- start header -->
+	<div class="header">
+		<a href = "dashboard.html" class="name">PowerClass</a>
+		<a href="outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
+		<a href = "school-matters/announcements.html" class="header-item school-matters-navlink">School Matters</a>
+		<a href="message-board.html" class="header-item message-board-navlink">Message Board</a>
+
+		<div class="user">
+			<img class="icon" src="img/user.png" alt="profile picture" onclick="show_profile()">
+		</div>
+	</div>
+	<!-- end header -->
+	<!-- start main -->
+	<main>
+		<div class="outstanding-work panel">
+			<div class="panel-name">Outstanding Work</div>
+			<div class="panel-subtitle">6 assignments</div>
+		</div>
+		<div class="announcements panel">
+			<div class="panel-name">Announcements</div>
+			<div class="panel-subtitle">8 announcements this month</div>
+		</div>
+		<div class="events panel">
+			<div class="panel-name">Events</div>
+			<div class="panel-subtitle">5 events for the next week</div>
+		</div>
+		<div class="cip-discipline panel">
+			<div class="panel-name">CIP & Discipline</div>
+			<div class="panel-subtitle">126 CIP hours</div>
+			<div class="panel-subtitle">6 demerit points</div>
+		</div>
+	</main>
+	<!-- end main -->
+	<!-- start footer -->
+	<div class="footer"></div>
+	<!-- end footer -->
+	<script src="scripts/dashboard-script.js"></script>
+</body>
+</html>

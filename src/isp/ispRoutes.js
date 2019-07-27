@@ -16,7 +16,7 @@ router.post("/api/isp/events", (req, res) => {
 });
 
 router.post("/api/isp/announcements", (req, res) => {
-  ispAuthHandler({ method: "POST", action: getAnnouncements }, req, res );
+  ispAuthHandler({ method: "POST", action: getAnnouncements }, req, res);
 });
 
 router.get("/api/isp/get-file", (req, res) => {

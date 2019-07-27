@@ -1,0 +1,59 @@
+html {
+	height: 100%;
+}
+body {
+	height: calc(100% - 90px);
+}
+
+main {
+	display: flex;
+	flex-wrap: wrap;
+	height: 100%;
+	margin-top: 90px;
+}
+
+.panel {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	height: 50%;
+	color: #fff;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 0 12px #0000004d inset;
+}
+.panel::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 100px;
+	height: 100px;
+	background-image: url("../img/expand-triangle.svg");
+}
+
+.panel-name {
+	font-size: 60px;
+	margin-bottom: 17px;
+}
+
+.panel-subtitle {
+	font-size: 30px;
+}
+
+.outstanding-work {
+	background-color: #5b39b8;
+}
+
+.announcements {
+	background-color: #12b59f;
+}
+
+.events {
+	background-color: #fd812e;
+}
+
+.cip-discipline {
+	background-color: #fd412e;
+}
