@@ -95,12 +95,22 @@
                         const ROW = document.createElement("tr");
                         const COURSE = document.createElement("th");
                         COURSE.textContent = element.name;
+                        ROW.onclick = function(){
+                            const ASS = this.nextElementSibling;
+                            if(ASS.classList.contains("open")){
+                                ASS.classList.replace("open", "close");
+                            }else{
+                                ASS.classList.replace("close", "open");
+                            }
+                        };
                         ROW.appendChild(COURSE);
                         BODY.appendChild(ROW);
                         
                         if(element.courseWork && element.courseWork.length > 0){
                             
                             const SUDOROW = document.createElement("tr");
+                            SUDOROW.classList.add("assignments");
+                            SUDOROW.classList.add("close");
                             const CELL = document.createElement("td");
                             const ASSIGNMENTS = document.createElement("table");
                             ASSIGNMENTS.className = "data";
@@ -158,8 +168,15 @@
                                         SMALLTEXT.textContent = "Google Docs";
                                         //special cases
                                         if(link.driveFile){
-                                            A.href = link.driveFile.driveFile.alternateLink;
+                                            
+                                            if(link.driveFile.shareMode === "STUDENT_COPY"){
+                                                IMG.onerror = function(){
+                                                    this.src = "img/corner/checked.svg";
+                                                    this.width = "105";
+                                                }
+                                            }
                                             IMG.src = `https://drive.google.com/thumbnail?id=${link.driveFile.driveFile.id}&authuser=0&sz=w105-h70-c`;
+                                            A.href = link.driveFile.driveFile.alternateLink;
                                             SVG.src = "img/corner/drive.svg";
                                             TEXT.textContent = link.driveFile.driveFile.title;
                                             SMALLTEXT.textContent = "Google Drive";
@@ -172,8 +189,24 @@
                                             SVG.src = "img/corner/youtube.svg";
                                             TEXT.textContent = link.youtubeVideo.title;
                                             SMALLTEXT.textContent = "Youtube Video";
-                                        }
+                                        }else if(link.link){
+                                            A.href = link.link.url;
+                                            IMG.src = link.link.thumbnailUrl;
+                                            IMG.width = "105";
+                                            IMG.height = "70";
 
+                                            TEXT.textContent = link.link.title;
+                                            SMALLTEXT.textContent = link.link.url;
+                                        }else if(link.form){
+                                            A.href = link.form.formUrl;
+                                            IMG.src = link.form.thumbnailUrl;
+                                            IMG.width = "105";
+                                            IMG.height = "70";
+                                            SVG.src = "img/corner/form.svg";
+                                            TEXT.textContent = link.form.title;
+                                            SMALLTEXT.textContent = "Google Forms";
+                                        }
+                                        A.target = "_blank";
                                         //appending child nodes
                                         SVGDIV.appendChild(SVG);
                                         IMAGE.appendChild(IMG);
@@ -210,5 +243,6 @@
         </script>
         <script async defer src = "https://apis.google.com/js/api.js" onload = "this.onload = handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
         <script src = "https://apis.google.com/js/platform.js" async defer></script>
+        <script src = "sls.js"></script>
     </body>
 </html>
