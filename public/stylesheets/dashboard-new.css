@@ -12,16 +12,63 @@ main {
 	margin-top: 90px;
 }
 
+.outstanding-work {
+	background-color: #5b39b8;
+}
+.outstanding-work::before {
+	background-image: linear-gradient(110deg, #5b39b8 59%, #4b2d9c 59.1%);
+}
+
+.announcements {
+	left: 50%;
+	background-color: #12b59f;
+}
+.announcements::before {
+	background-image: linear-gradient(110deg, #12b59f 59%, #11a08d 59.1%);
+}
+
+.events {
+	top: calc(50% + 45px);
+	background-color: #fd812e;
+}
+.events::before {
+	background-image: linear-gradient(110deg, #fd812e 59%, #eb6d1a 59.1%);
+}
+
+.cip-discipline {
+	left: 50%;
+	top: calc(50% + 45px);
+	background-color: #fd412e;
+}
+.cip-discipline::before {
+	background-image: linear-gradient(110deg, #fd412e 59%, #e43420 59.1%);
+}
+
 .panel {
-	position: relative;
+	position: absolute;
 	display: flex;
 	flex-direction: column;
-	width: 50%;
-	height: 50%;
-	color: #fff;
-	align-items: center;
 	justify-content: center;
-	box-shadow: 0 0 12px #0000004d inset;
+	width: calc(50% - 76px);
+	height: calc(50% - 115px);
+	padding: 35px 38px;
+	color: #fff;
+	transition: width 0.3s, height 0.3s, left 0.3s, top 0.3s, box-shadow 0.3s;
+	cursor: pointer;
+}
+.panel:hover {
+	z-index: 99999;
+	box-shadow: 0 0 12px 3px #0000004d;
+}
+.panel::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.3s;
 }
 .panel::after {
 	content: "";
@@ -31,6 +78,8 @@ main {
 	width: 100px;
 	height: 100px;
 	background-image: url("../img/expand-triangle.svg");
+	opacity: 1;
+	transition: opacity 0.5s;
 }
 
 .panel-name {
@@ -42,18 +91,27 @@ main {
 	font-size: 30px;
 }
 
-.outstanding-work {
-	background-color: #5b39b8;
+.panel > * {
+	width: 100%;
+	text-align: center;
+	white-space: nowrap;
+	transition: width 0.3s;
 }
 
-.announcements {
-	background-color: #12b59f;
+.panel-expanded {
+	position: absolute;
+	z-index: 99999;
+	left: 0;
+	top: 90px;
+	width: calc(100% - 76px);
+	height: calc(100% - 160px);
 }
-
-.events {
-	background-color: #fd812e;
+.panel-expanded > * {
+	width: 0;
 }
-
-.cip-discipline {
-	background-color: #fd412e;
+.panel-expanded::before {
+	opacity: 1;
+}
+.panel-expanded::after {
+	opacity: 0;
 }
