@@ -3,6 +3,7 @@ html {
 }
 body {
 	height: calc(100% - 90px);
+	overflow: hidden;
 }
 
 main {
@@ -26,6 +27,9 @@ main {
 .announcements::before {
 	background-image: linear-gradient(110deg, #12b59f 59%, #11a08d 59.1%);
 }
+.announcement {
+	color: #288277;
+}
 
 .events {
 	top: calc(50% + 45px);
@@ -33,6 +37,9 @@ main {
 }
 .events::before {
 	background-image: linear-gradient(110deg, #fd812e 59%, #eb6d1a 59.1%);
+}
+.event {
+	color: #b0591f;
 }
 
 .cip-discipline {
@@ -89,9 +96,13 @@ main {
 
 .panel-subtitle {
 	font-size: 30px;
+	transition: margin-bottom 0.3s;
+}
+.cip-discipline .panel-subtitle:nth-child(2) {
+	margin-bottom: 0; /* because CIP panel has 2nd subtitle */
 }
 
-.panel > * {
+.panel .panel-name, .panel .panel-subtitle {
 	width: 100%;
 	text-align: center;
 	white-space: nowrap;
@@ -106,12 +117,76 @@ main {
 	width: calc(100% - 76px);
 	height: calc(100% - 160px);
 }
-.panel-expanded > * {
+.panel-expanded .panel-name, .panel-expanded .panel-subtitle {
 	width: 0;
+}
+.panel-expanded .panel-subtitle {
+	margin-bottom: 35px;
 }
 .panel-expanded::before {
 	opacity: 1;
 }
 .panel-expanded::after {
 	opacity: 0;
+}
+
+.panel-content {
+	width: 50%;
+	height: 0;
+	opacity: 0;
+	transition: height 0.3s, opacity 0.3s;
+}
+.panel-expanded .panel-content {
+	height: 303px;
+	opacity: 1;
+}
+
+.collapse-message {
+	display: none;
+	font-size: 20px;
+	margin-top: 45px;
+}
+@media screen and (max-height: 768px) {
+	.collapse-message {
+		margin-top: 15px;
+	}
+}
+.panel-expanded .collapse-message {
+	display: block;
+}
+
+.list-card {
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 10px 17px;
+	border-radius: 10px;
+	line-height: 37px;
+	background-color: #fff;
+}
+@media screen and (max-height: 768px) {
+	.list-card {
+		padding: 10px 13px;
+		line-height: 32px;
+	}
+}
+
+.list-card-text {
+	font-size: 22px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+@media screen and (max-width: 768px) {
+	.list-card-text {
+		font-size: 21px;
+	}
+}
+
+.list-card-details {
+	font-size: 18px;
+}
+@media screen and (max-width: 768px) {
+	.list-card-details {
+		font-size: 17px;
+	}
 }

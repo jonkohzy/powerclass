@@ -7,9 +7,9 @@ document.querySelectorAll(".panel").forEach((elem) => {
 
 // collapse panel on pressing Esc
 document.addEventListener("keydown", ({ key }) => {
-  if (key === "Escape") {
-    document.querySelector(".panel-expanded")
-        .classList.remove("panel-expanded");
+  const expandedPanel = document.querySelector(".panel-expanded");
+  if (expandedPanel && key === "Escape") {
+    expandedPanel.classList.remove("panel-expanded");
   }
 });
 
