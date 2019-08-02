@@ -8,14 +8,20 @@ const parseExamResults = (examPages) => {
   const results = examPages.map((document) => {
     // results table, NOT progress reports table!
     const resultRows = document.querySelector(".form").childNodes.slice(3);
+    const examsSelector = document.querySelector("#exam");
+
+    if (resultRows[0].structuredText === "(No exam results found)") {
+      return {
+        exam: getSelectedOption(examsSelector),
+        results: [],
+      };
+    }
 
     // results for exam displayed on current page
     const examResults = resultRows.map(({ childNodes }) => ({
       subject: childNodes[1].structuredText,
       mark: childNodes[2].structuredText,
     }));
-
-    const examsSelector = document.querySelector("#exam");
 
     // include exam name
     return {
