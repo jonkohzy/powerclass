@@ -349,8 +349,7 @@
       .then(({ success, message, firstLogin }) => {
         if (success) {
           // store credentials locally
-          localStorage.setItem("user", user);
-          localStorage.setItem("pass", pass);
+          localStorage.setItem("slsCredentials", JSON.stringify({ user, pass }));
 
           // redirect to dashboard
           if (firstLogin) {

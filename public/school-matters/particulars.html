@@ -163,10 +163,7 @@
 		fetch("/api/isp/particulars", {
 			method: "POST",
     	headers: { "Content-Type": "application/json" },
-    	body: JSON.stringify({
-				user: localStorage.getItem("user"),
-        pass: localStorage.getItem("pass"),
-    	}),
+    	body: localStorage.getItem("slsCredentials"),
 		})
 		.then((res) => res.json())
 		.then(({
