@@ -48,7 +48,8 @@ main {
 	background-color: #fd412e;
 }
 .cip-discipline::before {
-	background-image: linear-gradient(110deg, #fd412e 59%, #e43420 59.1%);
+	/* special 50% - half CIP, half discipline */
+	background-image: linear-gradient(110deg, #fd412e 50%, #e43420 50.1%);
 }
 
 .panel {
@@ -117,6 +118,7 @@ main {
 	width: calc(100% - 76px);
 	height: calc(100% - 160px);
 }
+/* > is to exclude CIP/Discipline half-panel names */
 .panel-expanded .panel-name, .panel-expanded .panel-subtitle {
 	width: 0;
 }
@@ -155,6 +157,45 @@ main {
 	display: block;
 }
 
+.link-to-page {
+	position: absolute;
+	right: 50px;
+	width: 33vw; /* width remains constant, no word wrap jumping */
+	color: white;
+	font-size: 65px;
+	text-align: right;
+	opacity: 0; /* hide */
+	transition: opacity 0.3s;
+
+	/* deactivate link when panel not expanded */
+	z-index: -999999;
+	pointer-events: none;
+}
+.link-to-page:hover {
+	color: #d3d3d3;
+}
+.link-to-page::after {
+	content: "";
+	display: block;
+	float: right;
+	height: 70px;
+	width: 100%; /* take up new line */
+	margin-top: 18px;
+	background-image: url("../img/right-arrow-white-70px.png");
+	background-position: right;
+	background-repeat: no-repeat;
+}
+.link-to-page:hover::after {
+	background-image: url("../img/right-arrow-grey-70px.png");
+}
+.panel-expanded .link-to-page {
+	opacity: 1;
+
+	/* make link clickable */
+	z-index: 1;
+	pointer-events: auto;
+}
+
 .list-card {
 	width: 100%;
 	margin-bottom: 20px;
@@ -189,4 +230,79 @@ main {
 	.list-card-details {
 		font-size: 17px;
 	}
+}
+
+/* special stuff for CIP/Discpline panel */
+
+/* hide original "CIP & Discipline" panel title */
+/* > is to go only one level deep, doesn't target half-panel > panel-name */
+.cip-discipline > .panel-name,
+.cip-discipline .panel-subtitle {
+	transition: opacity 0.3s, position 0s 0.3s;
+}
+
+.cip-discipline.panel-expanded > .panel-name,
+.cip-discipline.panel-expanded .panel-subtitle {
+	opacity: 0;
+	position: absolute;
+}
+
+.half-panel {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	width: 37%;
+	height: calc(100% - 120px);
+	top: 60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+.panel-expanded .half-panel {
+	opacity: 1;
+}
+
+.cip {
+	left: 60px;
+}
+
+.cip .collapse-message {
+	position: absolute;
+	bottom: 65px;
+}
+
+.discipline {
+	right: 60px;
+}
+
+.large-number {
+	font-size: 170px;
+	margin-top: 20px;
+}
+
+.button-page-link {
+	width: max-content;
+	margin-top: 59px;
+	padding: 20px;
+	font-size: 30px;
+	border-radius: 10px;
+	background-color: #fff;
+	color: #c51d0c;
+
+	/* deactivate link when panel not expanded */
+	z-index: -999999;
+	pointer-events: none;
+}
+.button-page-link::after {
+	content: "";
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-bottom: -2px;
+	background-image: url("../img/right-arrow-red-30px.png");
+}
+.panel-expanded .button-page-link {
+	z-index: 1; /* make link clickable */
+	pointer-events: auto;
 }

@@ -16,10 +16,7 @@ document.addEventListener("keydown", ({ key }) => {
 const requestOptions = {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    user: localStorage.getItem("user"),
-    pass: localStorage.getItem("pass"),
-  }),
+  body: localStorage.getItem("ispCredentials"),
 };
 
 // announcements
