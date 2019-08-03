@@ -156,7 +156,7 @@
 			const detailsDiv = document.createElement("div");
 			detailsDiv.className = "announcement-details";
 			const detailsText = document.createElement("span");
-			detailsText.textContent =	additionalDetails ? additionalDetails : "None";
+			detailsText.textContent =	additionalDetails || "None";
 
 			detailsDiv.appendChild(detailsLabel);
 			detailsDiv.appendChild(detailsText);
