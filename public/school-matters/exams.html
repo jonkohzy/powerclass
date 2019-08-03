@@ -162,7 +162,7 @@
 		fetch("/api/isp/exams", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: localStorage.getItem("slsCredentials"),
+			body: localStorage.getItem("ispCredentials"),
 		}).then((res) => res.json()).then(({examResults, reports }) => {
 			document.getElementById("loading").style.display = "none";
 

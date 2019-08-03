@@ -91,7 +91,7 @@
 		fetch("/api/isp/discipline", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: localStorage.getItem("slsCredentials"),
+			body: localStorage.getItem("ispCredentials"),
 		}).then((res) => res.json()).then(({ totalDemeritPoints, disciplineRecords }) => {
 			const Tdp = document.getElementsByClassName("number")[0];
 			Tdp.textContent = totalDemeritPoints + "dp";

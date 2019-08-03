@@ -107,7 +107,7 @@
 		fetch("/api/isp/project-work", {
     	method: "POST",
     	headers: { "Content-Type": "application/json" },
-			body: localStorage.getItem("slsCredentials"),
+			body: localStorage.getItem("ispCredentials"),
 		})
 		.then((res) => /* implement error handling before json() */ res.json())
 		.then(({

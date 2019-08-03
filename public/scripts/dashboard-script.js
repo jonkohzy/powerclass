@@ -4,7 +4,7 @@ const pass = localStorage.getItem("pass");
 const requestOptions = {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ user, pass }),
+  body: localStorage.getItem("ispCredentials"),
 };
 
 const fetchAnnouncements = async () => {

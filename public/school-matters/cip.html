@@ -114,7 +114,7 @@
 		fetch("/api/isp/cip", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: localStorage.getItem("slsCredentials"),
+			body: localStorage.getItem("ispCredentials"),
 		})
 		.then((res) => {
 			const requestStatusElem = document.getElementById("totalCipHoursHeading");

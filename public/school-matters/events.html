@@ -105,7 +105,7 @@
 		fetch("/api/isp/events", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: localStorage.getItem("slsCredentials"),
+			body: localStorage.getItem("ispCredentials"),
 		}).then((res) => res.json()).then(({today, tomorrow, next1Week}) => {
 			console.log(today);
 			console.log(tomorrow);

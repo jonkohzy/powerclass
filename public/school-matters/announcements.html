@@ -127,7 +127,7 @@
 	fetch("/api/isp/announcements", {
 		method: "POST",
 		headers: {"Content-Type": "application/json"},
-		body: localStorage.getItem("slsCredentials"),
+		body: localStorage.getItem("ispCredentials"),
 	})
 	.then((res) => res.json())
 	.then((announcements) => {
