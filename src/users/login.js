@@ -2,7 +2,7 @@ const unirest = require("unirest");
 
 const { btoa } = require("../atob-btoa.js");
 const {
-  OK,
+  AUTH_OK,
   BAD_REQUEST,
   MISSING_CREDENTIALS,
   INVALID_CREDENTIALS,
@@ -29,11 +29,15 @@ const login = async (user, pass, req, res) => {
       const foundUser = await User.findOne({ username: user }).exec();
       if (foundUser) {
         req.session.userId = foundUser._id;
-        res.send({ ...OK, firstLogin: false });
+        res.send({ ...AUTH_OK, firstLogin: false });
       } else {
-        const createdUser = await User.create({ username: user });
+        const createdUser = await User.create({
+          username: user,
+          firstLogin: true,
+        });
+
         req.session.userId = createdUser._id;
-        res.send({ ...OK, firstLogin: true });
+        res.send({ ...AUTH_OK, firstLogin: true });
       }
     } catch (err) {
       res.status(500).send(INTERNAL_SERVER_ERROR);

@@ -20,6 +20,31 @@ document.querySelectorAll(".panel a").forEach((link) => {
   });
 });
 
+// check for first login
+fetch("/api/check-first-login")
+    .then((res) => res.json())
+    .then(({ firstLogin }) => {
+      if (firstLogin) {
+        // show the dialog
+      }
+    });
+
+const removeFirstLogin = async () => {
+  const { success } = await fetch("/api/remove-first-login", { method: "POST" })
+      .then((res) => res.json());
+
+  if (success) {
+    // close dialog
+  } else {
+    // display error message somewhere in dialog, don't close it
+  }
+};
+// TODO: first login setup dialog
+// if firstLogin: true in response from /api/check-first-login, show setup dialog
+// when setup dialog COMPLETED (not finished halfway), POST to /api/remove-first-login
+// (call removeFirstLogin)
+
+// get school matters
 const requestOptions = {
   method: "POST",
   headers: { "Content-Type": "application/json" },

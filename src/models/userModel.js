@@ -7,6 +7,7 @@ const UserSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
+  firstLogin: Boolean,
 });
 
 const User = mongoose.model("User", UserSchema);

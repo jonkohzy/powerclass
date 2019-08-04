@@ -1,8 +1,13 @@
 module.exports = {
-  OK: {
+  AUTH_OK: {
     status: 200,
     success: true,
     message: "Authentication successful.",
+  },
+  GENERIC_OK: {
+    status: 200,
+    success: true,
+    message: "Success",
   },
   BAD_REQUEST: {
     status: 400,
@@ -18,6 +23,11 @@ module.exports = {
     status: 401,
     success: false,
     message: "Invalid username or password.",
+  },
+  FORBIDDEN: {
+    status: 403,
+    success: false,
+    message: "Forbidden",
   },
   INTERNAL_SERVER_ERROR: {
     status: 500,
