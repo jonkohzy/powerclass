@@ -1,0 +1,235 @@
+/* tags */
+h1 {
+	margin-top: 0;
+	font-size: 3.9em;
+	font-weight: normal;
+}
+@media screen and (max-width: 1499px) {
+	h1 {
+		font-size: 3.3em;
+	}
+}
+ul, li {
+	list-style: none;
+}
+
+/* main */
+main {
+	margin-top: 91px;
+}
+
+.panel {
+	display: flex;
+	height: calc(100vh - 211px);
+	padding: 60px;
+	box-shadow: 0 2px 10px #0000004d;
+}
+@media screen and (max-width: 1499px) {
+	.panel {
+		height: calc(100vh - 169px);
+		padding: 39px 40px 39px 50px;
+	}
+}
+
+.panel .gradient-protector {
+	width: 54%;
+}
+
+.view-more {
+	display: inline-block;
+	color: gray;
+	margin-top: 4px;
+}
+.view-more:hover {
+	color: #3c3c3c;
+}
+
+.link-to-page {
+	width: 38%;
+	align-self: center;
+	margin-left: 150px;
+	text-align: right;
+	color: white;
+	font-size: 70px;
+	cursor: pointer;
+}
+.link-to-page:hover {
+	color: #d3d3d3;
+}
+@media screen and (max-width: 1499px) {
+	.link-to-page {
+		margin-left: 122px;
+		font-size: 60px;
+	}
+}
+
+.link-to-page::after {
+	content: "";
+	display: inline-block;
+	height: 70px;
+	width: 70px;
+	background-image: url("../img/right-arrow-white-70px.png");
+	background-repeat: no-repeat;
+}
+.link-to-page:hover::after {
+	background-image: url("../img/right-arrow-grey-70px.png");
+}
+@media screen and (max-width: 1499px) {
+	.link-to-page::after {
+		height: 60px;
+		width: 60px;
+		background-image: url("../img/right-arrow-white-60px.png");
+	}
+	.link-to-page:hover::after {
+		background-image: url("../img/right-arrow-grey-60px.png");
+	}
+}
+
+/* outstanding work */
+.outstanding-work {
+	background: linear-gradient(70deg, white 59%, #5b39b8 59.1%);
+}
+
+.homework-item, .outstanding-work .view-more {
+	line-height: 2;
+	font-size: 40px;
+}
+
+/* announcements and events styles */
+.announcements {
+	background: linear-gradient(110deg, white 59%, #12b59f 59.1%);
+}
+
+.announcements .view-more, .events .view-more {
+	font-size: 20px;
+	margin-top: 10px;
+}
+
+.announcement, .event {
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 10px 17px;
+	border-radius: 10px;
+	line-height: 40px;
+	cursor: pointer;
+}
+@media screen and (max-height: 768px) {
+	.announcement, .event {
+		padding: 9px 13px;
+		line-height: 27px;
+	}
+}
+
+.announcement-text, .event-name {
+	font-size: 25px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+@media screen and (max-height: 768px) {
+	.announcement-text, .event-name {
+		font-size: 19px;
+	}
+}
+
+.announcement-details, .event-date {
+	font-size: 18px;
+}
+@media screen and (max-height: 768px) {
+	.announcement-details, .event-date {
+		font-size: 15px;
+	}
+}
+
+/* events */
+.events {
+	background: linear-gradient(70deg, white 59%, #fd812e 59.1%);
+}
+/* other events styles are above, together with announcements */
+
+/* CIP hours and DP */
+.numbers {
+	background: linear-gradient(135deg, white 86%, #fd412e 86.1%);
+}
+
+.cip-hours, .demerit-points {
+	flex: 0 100%;
+}
+
+.cip-hours {
+	border-right: 1px solid black;
+	margin-right: 60px; /* emulate 60px padding on panel */
+}
+@media screen and (max-width: 1499px) {
+	.cip-hours {
+		/* also emulate 50px padding on panel when screen is smaller */
+		margin-right: 50px;
+	}
+}
+
+.large-number {
+	font-size: 150px;
+}
+@media screen and (max-width: 1499px) {
+	.large-number {
+		font-size: 120px;
+	}
+}
+
+.button-link {
+	display: inline-block;
+	margin-top: 7%;
+	padding: 20px;
+	border-radius: 10px;
+	font-size: 30px;
+}
+@media screen and (max-width: 1499px) {
+	.button-link {
+		font-size: 25px;
+	}
+}
+
+.button-link::after {
+	content: "";
+	display: inline-block;
+	height: 30px;
+	width: 30px;
+	margin-left: 5px;
+	margin-bottom: -1px;
+	background-image: url("../img/right-arrow-black-30px.png");
+	background-repeat: no-repeat;
+}
+@media screen and (max-width: 1499px) {
+	.button-link::after {
+		height: 25px;
+		width: 25px;
+		margin-left: 3px;
+		background-image: url("../img/right-arrow-black-25px.png");
+	}
+}
+
+ul {
+	padding-left: 0px;
+}
+ul li a{
+	text-decoration: none;
+	font-size: 20px;
+	text-align: center;
+	color: #848484;
+	transition: all .15s ease-in-out;
+}
+ul li:hover a{
+	color: #161616;
+	font-size: 25px;
+}
+.mid{
+	padding-top: 50px;
+	height: 200px;
+	width: 250px;
+	margin-bottom: 15px;
+}
+.mid img {
+	display: block;
+	margin: auto;
+	transition: .1s transform ease-in-out;
+}
