@@ -140,23 +140,35 @@ main {
 .panel-content {
 	width: 50%;
 	height: 0;
+	pointer-events: none;
 	opacity: 0;
 	transition: height 0.3s, opacity 0.3s;
 }
 .panel-expanded .panel-content {
-	height: 303px;
+	height: 355px;
+	pointer-events: auto;
 	opacity: 1;
+}
+
+.view-more {
+	display: none;
+	height: 0;
+	font-size: 25px;
+	margin-bottom: 25px;
+	color: #fff;
+	opacity: 0;
+	transition: height 0.3s, opacity 0.3s;
+}
+.view-more:hover {
+	color: #d8d8d8;
+}
+.panel-expanded .view-more {
+	display: block;
 }
 
 .collapse-message {
 	display: none;
 	font-size: 20px;
-	margin-top: 45px;
-}
-@media screen and (max-height: 768px) {
-	.collapse-message {
-		margin-top: 15px;
-	}
 }
 .panel-expanded .collapse-message {
 	display: block;
@@ -177,7 +189,7 @@ main {
 	pointer-events: none;
 }
 .link-to-page:hover {
-	color: #d3d3d3;
+	color: #d8d8d8;
 }
 .link-to-page::after {
 	content: "";
@@ -243,13 +255,12 @@ main {
 /* > is to go only one level deep, doesn't target half-panel > panel-name */
 .cip-discipline > .panel-name,
 .cip-discipline .panel-subtitle {
-	transition: opacity 0.3s, position 0s 0.3s;
+	transition: opacity 0.3s;
 }
 
 .cip-discipline.panel-expanded > .panel-name,
 .cip-discipline.panel-expanded .panel-subtitle {
 	opacity: 0;
-	position: absolute;
 }
 
 .half-panel {
