@@ -64,6 +64,11 @@ main {
 	transition: width 0.3s, height 0.3s, left 0.3s, top 0.3s, box-shadow 0.3s;
 	cursor: pointer;
 }
+
+.panel-new {
+	height: calc(100% - 115px);
+}
+
 .panel:hover {
 	z-index: 99999;
 	box-shadow: 0 0 12px 3px #0000004d;
