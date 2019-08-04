@@ -57,7 +57,7 @@ app.get("*", async (req, res, next) => {
     if (foundUser) {
       next();
     } else {
-      res.redirect("/");
+      res.redirect(`/?redirectUrl=${req.originalUrl}`);
     }
   } catch (err) {
     res.sendFile("500.html", { root: "public/error-pages" });
