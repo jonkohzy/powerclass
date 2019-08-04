@@ -1,0 +1,223 @@
+/* tags */
+html, body {
+	height: 100%;
+}
+body {
+	font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+	padding: 0px;
+	margin: 0px;
+	background-color: white;
+}
+h1 {
+	font-size: 1.7em;
+	margin-top: 0;
+	font-weight: normal;
+}
+ul, li {
+	list-style: none;
+}
+a {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+a:hover {
+	color: #797979;
+}
+
+/* header */
+.header {
+	background-color: white;
+	color: black;
+	padding: 0px 60px;
+}
+.header .name {
+	padding-top: 30px;
+	padding-bottom: 25px;
+	font-size: 50px;
+	display: inline-block;
+}
+.header .user {
+	padding: 15px;
+	margin-top: 30px;
+	float: right;
+	border: 1px solid black;
+	border-radius: 10px;
+}
+/*
+.header .user .icon-notification {
+	position:absolute;
+	top:30px;
+	right:90px;
+	font-size:13px;
+	padding: 7px;
+	background:red;
+	color:white;
+	width:15px;height:15px;
+	text-align:center;
+	line-height:18px;
+	border-radius:50%;
+	box-shadow:0 0 1px #333;
+	z-index: 999;
+}
+*/
+.header .user .username {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+.header .user .icon {
+	display: inline-block;
+	vertical-align: middle;
+	height: 35px;
+	border-radius: 50%;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+.header .user .icon:hover {
+	box-shadow: 0 0 0 3px lightgray;
+}
+.header .header-item {
+	display: inline;
+	margin-left: 7%;
+	font-size: 20px;
+}
+.disclosure-triangle {
+	font-size: 16px;
+}
+
+/* main */
+main {
+	height: calc(100% - 123px);
+	padding: 0px 60px;
+}
+.card-top-row {
+	height: 278px;
+	width: calc((100% - 189px) / 3);
+}
+.card-bottom-row {
+	width: calc((100% - 125px) / 2);
+}
+.card {
+	background-color: white;
+	display: inline-block;
+	position: relative;
+	vertical-align: top;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	margin: 12px;
+	padding: 18px;
+	border-radius: 12px;
+}
+.card .homework-list {
+	display: inline-block;
+	width: calc(100% - 160px - 40px); /* 40px extra space for icon*/
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.card .homework-list .homework-item {
+	line-height: 1.5;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.card .icon {
+	position: absolute;
+	top: 24%;
+	right: 4%;
+	margin-right: 15px;
+}
+.card .icon img {
+	width: 160px;
+}
+.card .big-sized-number {
+	font-size: 80px;
+	margin-bottom: 50px;
+}
+.card .large-button {
+	font-size: 20px;
+	border: 1px solid gray;
+	padding: 20px;
+	border-radius: 10px;
+	cursor: pointer;
+	user-select: none;
+}
+.card .large-button:hover {
+	color: black; /* don't change colour */
+	box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+}
+.card .grey-container {
+	background-color: lightgrey;
+	padding: 10px 15px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.card .grey-container .announcement-date, .card .grey-container .event-name {
+	font-weight: bold;
+}
+.card .grey-container .announcement-text::after, .card .grey-container .event-name::after {
+	content: "\A";
+	white-space: pre;
+}
+.card .view-more {
+	display: inline-block;
+	color: gray;
+	margin-top: 4px;
+}
+.card .view-more:hover {
+	text-decoration: underline;
+}
+.card:hover{
+	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+}
+/* .card:hover .icon img{
+	transition: all .15s ease-in-out;
+}
+.card:hover .icon img{
+	transform: scale(1.2);
+} */
+.container {
+	margin: auto;
+	margin-bottom: 12px;
+	position: relative;
+	text-align: center;
+}
+.content {
+	text-align: center;
+}
+.cheader {
+	font-size: 20px;
+	text-align: center;
+	text-decoration: italic;
+	color: #bbb;
+	position: relative;
+	top: -40px;
+}
+ul {
+	padding-left: 0px;
+}
+ul li a{
+	text-decoration: none;
+	font-size: 20px;
+	text-align: center;
+	color: #848484;
+	transition: all .15s ease-in-out;
+}
+ul li:hover a{
+	color: #161616;
+	font-size: 25px;
+}
+.mid{
+	padding-top: 50px;
+	height: 200px;
+	width: 250px;
+	margin-bottom: 15px;
+}
+.mid img {
+	display: block;
+	margin: auto;
+	transition: .1s transform ease-in-out;
+}

@@ -3,7 +3,7 @@
     margin-left: 40px;
     width: calc(100% - 40px);
 }
-.google, .school{
+.google{
     table-layout: fixed;
     width: 100%;
     border-spacing: 0px 20px;
@@ -11,7 +11,7 @@
 html, body{
     height: 100%;
 }
-.SLS, .GC{
+.ISP, .GC{
     width: calc(50% - 30.5px);
     padding: 15px;
     height: 135%;
@@ -21,25 +21,22 @@ html, body{
     border-right: 1px solid black;
     background: linear-gradient(120deg, #12b59f 45%, white 45%);
 }
-.SLS{
+.ISP{
     background: linear-gradient(120deg, #fd812e 45%, white 45%);
-}
-.school{
-    margin-top: 84px;
 }
 .content{
     table-layout: fixed;
     margin-top: 91px;
     height: 100%;
 }
-th, .school tr td{
+th{
     table-layout: fixed;
     background: white;
     border-radius: 10px;
     padding: 15px 20px;
     box-shadow: 0 2px 5px #0000004d;
 }
-th:hover, .school tr td:hover{
+th:hover{
     box-shadow: 0 3px 12px #0000004d;
 }
 .smalltext{
@@ -56,7 +53,7 @@ th:hover, .school tr td:hover{
 info on assignments
 so far i have only made this
 for google classroom
-SLS will be made later
+ISP will be made later
 */
 *{
     box-sizing: inherit;
