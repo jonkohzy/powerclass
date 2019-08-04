@@ -1,235 +1,324 @@
-/* tags */
-h1 {
-	margin-top: 0;
-	font-size: 3.9em;
-	font-weight: normal;
+html {
+	height: 100%;
 }
-@media screen and (max-width: 1499px) {
-	h1 {
-		font-size: 3.3em;
-	}
-}
-ul, li {
-	list-style: none;
+body {
+	height: calc(100% - 90px);
+	overflow: hidden;
 }
 
-/* main */
 main {
-	margin-top: 91px;
+	display: flex;
+	flex-wrap: wrap;
+	height: 100%;
+	margin-top: 90px;
+}
+
+.outstanding-work {
+	background-color: #5b39b8;
+}
+.outstanding-work::before {
+	background-image: linear-gradient(110deg, #5b39b8 59%, #4b2d9c 59.1%);
+}
+
+.announcements {
+	left: 50%;
+	background-color: #12b59f;
+}
+.announcements::before {
+	background-image: linear-gradient(110deg, #12b59f 59%, #11a08d 59.1%);
+}
+.announcement {
+	color: #288277;
+}
+
+.events {
+	top: calc(50% + 45px);
+	background-color: #fd812e;
+}
+.events::before {
+	background-image: linear-gradient(110deg, #fd812e 59%, #eb6d1a 59.1%);
+}
+.event {
+	color: #b0591f;
+}
+
+.cip-discipline {
+	left: 50%;
+	top: calc(50% + 45px);
+	background-color: #fd412e;
+}
+.cip-discipline::before {
+	/* special 50% - half CIP, half discipline */
+	background-image: linear-gradient(110deg, #fd412e 50%, #e43420 50.1%);
 }
 
 .panel {
+	position: absolute;
 	display: flex;
-	height: calc(100vh - 211px);
-	padding: 60px;
-	box-shadow: 0 2px 10px #0000004d;
-}
-@media screen and (max-width: 1499px) {
-	.panel {
-		height: calc(100vh - 169px);
-		padding: 39px 40px 39px 50px;
-	}
+	flex-direction: column;
+	justify-content: center;
+	width: calc(50% - 76px);
+	height: calc(50% - 115px);
+	padding: 35px 38px;
+	color: #fff;
+	transition: width 0.3s, height 0.3s, left 0.3s, top 0.3s, box-shadow 0.3s;
+	cursor: pointer;
 }
 
-.panel .gradient-protector {
-	width: 54%;
+.panel-new {
+	height: calc(100% - 115px);
+}
+
+.panel:hover {
+	z-index: 99999;
+	box-shadow: 0 0 12px 3px #0000004d;
+}
+.panel::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+.panel::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 100px;
+	height: 100px;
+	background-image: url("../img/expand-triangle.svg");
+	opacity: 1;
+	transition: opacity 0.5s;
+}
+
+.panel-name {
+	font-size: 60px;
+	margin-bottom: 17px;
+}
+
+.panel-subtitle {
+	font-size: 30px;
+	transition: margin-bottom 0.3s;
+}
+.cip-discipline .panel-subtitle:nth-child(2) {
+	margin-bottom: 0; /* because CIP panel has 2nd subtitle */
+}
+
+.panel .panel-name, .panel .panel-subtitle {
+	width: 100%;
+	text-align: center;
+	white-space: nowrap;
+	transition: width 0.3s;
+}
+
+.panel-expanded {
+	position: absolute;
+	z-index: 99999;
+	left: 0;
+	top: 90px;
+	width: calc(100% - 76px);
+	height: calc(100% - 160px);
+}
+/* > is to exclude CIP/Discipline half-panel names */
+.panel-expanded .panel-name, .panel-expanded .panel-subtitle {
+	width: 0;
+}
+.panel-expanded .panel-subtitle {
+	margin-bottom: 35px;
+}
+.panel-expanded::before {
+	opacity: 1;
+}
+.panel-expanded::after {
+	opacity: 0;
+}
+
+.panel-content {
+	width: 50%;
+	height: 0;
+	pointer-events: none;
+	opacity: 0;
+	transition: height 0.3s, opacity 0.3s;
+}
+.panel-expanded .panel-content {
+	height: 355px;
+	pointer-events: auto;
+	opacity: 1;
 }
 
 .view-more {
-	display: inline-block;
-	color: gray;
-	margin-top: 4px;
+	display: none;
+	height: 0;
+	font-size: 25px;
+	margin-bottom: 25px;
+	color: #fff;
+	opacity: 0;
+	transition: height 0.3s, opacity 0.3s;
 }
 .view-more:hover {
-	color: #3c3c3c;
+	color: #d8d8d8;
+}
+.panel-expanded .view-more {
+	display: block;
+}
+
+.collapse-message {
+	display: none;
+	font-size: 20px;
+}
+.panel-expanded .collapse-message {
+	display: block;
 }
 
 .link-to-page {
-	width: 38%;
-	align-self: center;
-	margin-left: 150px;
-	text-align: right;
+	position: absolute;
+	right: 50px;
+	width: 33vw; /* width remains constant, no word wrap jumping */
 	color: white;
-	font-size: 70px;
-	cursor: pointer;
+	font-size: 65px;
+	text-align: right;
+	opacity: 0; /* hide */
+	transition: opacity 0.3s;
+
+	/* deactivate link when panel not expanded */
+	z-index: -999999;
+	pointer-events: none;
 }
 .link-to-page:hover {
-	color: #d3d3d3;
+	color: #d8d8d8;
 }
-@media screen and (max-width: 1499px) {
-	.link-to-page {
-		margin-left: 122px;
-		font-size: 60px;
-	}
-}
-
 .link-to-page::after {
 	content: "";
-	display: inline-block;
+	display: block;
+	float: right;
 	height: 70px;
-	width: 70px;
+	width: 100%; /* take up new line */
+	margin-top: 18px;
 	background-image: url("../img/right-arrow-white-70px.png");
+	background-position: right;
 	background-repeat: no-repeat;
 }
 .link-to-page:hover::after {
 	background-image: url("../img/right-arrow-grey-70px.png");
 }
-@media screen and (max-width: 1499px) {
-	.link-to-page::after {
-		height: 60px;
-		width: 60px;
-		background-image: url("../img/right-arrow-white-60px.png");
-	}
-	.link-to-page:hover::after {
-		background-image: url("../img/right-arrow-grey-60px.png");
-	}
+.panel-expanded .link-to-page {
+	opacity: 1;
+
+	/* make link clickable */
+	z-index: 1;
+	pointer-events: auto;
 }
 
-/* outstanding work */
-.outstanding-work {
-	background: linear-gradient(70deg, white 59%, #5b39b8 59.1%);
-}
-
-.homework-item, .outstanding-work .view-more {
-	line-height: 2;
-	font-size: 40px;
-}
-
-/* announcements and events styles */
-.announcements {
-	background: linear-gradient(110deg, white 59%, #12b59f 59.1%);
-}
-
-.announcements .view-more, .events .view-more {
-	font-size: 20px;
-	margin-top: 10px;
-}
-
-.announcement, .event {
+.list-card {
 	width: 100%;
 	margin-bottom: 20px;
 	padding: 10px 17px;
 	border-radius: 10px;
-	line-height: 40px;
-	cursor: pointer;
+	line-height: 37px;
+	background-color: #fff;
 }
 @media screen and (max-height: 768px) {
-	.announcement, .event {
-		padding: 9px 13px;
-		line-height: 27px;
+	.list-card {
+		padding: 10px 13px;
+		line-height: 32px;
 	}
 }
 
-.announcement-text, .event-name {
-	font-size: 25px;
+.list-card-text {
+	font-size: 22px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-@media screen and (max-height: 768px) {
-	.announcement-text, .event-name {
-		font-size: 19px;
+@media screen and (max-width: 768px) {
+	.list-card-text {
+		font-size: 21px;
 	}
 }
 
-.announcement-details, .event-date {
+.list-card-details {
 	font-size: 18px;
 }
-@media screen and (max-height: 768px) {
-	.announcement-details, .event-date {
-		font-size: 15px;
+@media screen and (max-width: 768px) {
+	.list-card-details {
+		font-size: 17px;
 	}
 }
 
-/* events */
-.events {
-	background: linear-gradient(70deg, white 59%, #fd812e 59.1%);
-}
-/* other events styles are above, together with announcements */
+/* special stuff for CIP/Discpline panel */
 
-/* CIP hours and DP */
-.numbers {
-	background: linear-gradient(135deg, white 86%, #fd412e 86.1%);
+/* hide original "CIP & Discipline" panel title */
+/* > is to go only one level deep, doesn't target half-panel > panel-name */
+.cip-discipline > .panel-name,
+.cip-discipline .panel-subtitle {
+	transition: opacity 0.3s;
 }
 
-.cip-hours, .demerit-points {
-	flex: 0 100%;
+.cip-discipline.panel-expanded > .panel-name,
+.cip-discipline.panel-expanded .panel-subtitle {
+	opacity: 0;
 }
 
-.cip-hours {
-	border-right: 1px solid black;
-	margin-right: 60px; /* emulate 60px padding on panel */
+.half-panel {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	width: 37%;
+	height: calc(100% - 120px);
+	top: 60px;
+	opacity: 0;
+	transition: opacity 0.3s;
 }
-@media screen and (max-width: 1499px) {
-	.cip-hours {
-		/* also emulate 50px padding on panel when screen is smaller */
-		margin-right: 50px;
-	}
+.panel-expanded .half-panel {
+	opacity: 1;
+}
+
+.cip {
+	left: 60px;
+}
+
+.cip .collapse-message {
+	position: absolute;
+	bottom: 65px;
+}
+
+.discipline {
+	right: 60px;
 }
 
 .large-number {
-	font-size: 150px;
-}
-@media screen and (max-width: 1499px) {
-	.large-number {
-		font-size: 120px;
-	}
+	font-size: 170px;
+	margin-top: 20px;
 }
 
-.button-link {
-	display: inline-block;
-	margin-top: 7%;
+.button-page-link {
+	width: max-content;
+	margin-top: 59px;
 	padding: 20px;
-	border-radius: 10px;
 	font-size: 30px;
-}
-@media screen and (max-width: 1499px) {
-	.button-link {
-		font-size: 25px;
-	}
-}
+	border-radius: 10px;
+	background-color: #fff;
+	color: #c51d0c;
 
-.button-link::after {
+	/* deactivate link when panel not expanded */
+	z-index: -999999;
+	pointer-events: none;
+}
+.button-page-link::after {
 	content: "";
 	display: inline-block;
-	height: 30px;
 	width: 30px;
+	height: 30px;
 	margin-left: 5px;
-	margin-bottom: -1px;
-	background-image: url("../img/right-arrow-black-30px.png");
-	background-repeat: no-repeat;
+	margin-bottom: -2px;
+	background-image: url("../img/right-arrow-red-30px.png");
 }
-@media screen and (max-width: 1499px) {
-	.button-link::after {
-		height: 25px;
-		width: 25px;
-		margin-left: 3px;
-		background-image: url("../img/right-arrow-black-25px.png");
-	}
-}
-
-ul {
-	padding-left: 0px;
-}
-ul li a{
-	text-decoration: none;
-	font-size: 20px;
-	text-align: center;
-	color: #848484;
-	transition: all .15s ease-in-out;
-}
-ul li:hover a{
-	color: #161616;
-	font-size: 25px;
-}
-.mid{
-	padding-top: 50px;
-	height: 200px;
-	width: 250px;
-	margin-bottom: 15px;
-}
-.mid img {
-	display: block;
-	margin: auto;
-	transition: .1s transform ease-in-out;
+.panel-expanded .button-page-link {
+	z-index: 1; /* make link clickable */
+	pointer-events: auto;
 }
