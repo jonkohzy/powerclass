@@ -13,6 +13,9 @@
 		.content{
 			background: linear-gradient(120deg, #5b39b8 25%, transparent 25.1%);
 		}
+		tr, td{
+			background: white;
+		}
 	</style>
 </head>
 <body>
@@ -79,14 +82,14 @@
 	</div>
 	<div class = "content">
 		<div class = "number">Loading...</div>
-		<table class = "list">
+		<table class = "list" style = "border-spacing: 0px 10px">
 			<thead>
 				<tr>
-					<th>Category</th>
+					<th class = "left">Category</th>
 					<th>Offense</th>
 					<th>Date</th>
 					<th>Demerit Points</th>
-					<th>Major Offence?</th>
+					<th class = "right">Major Offence?</th>
 				</tr>
 			</thead>
 		</table>
@@ -104,6 +107,7 @@
 				const ROW = document.createElement("tr");
 				const CAT = document.createElement("td");
 				CAT.textContent = category;
+				CAT.className = "left";
 				const OFF = document.createElement("td");
 				OFF.textContent = offence;
 				const DAY = document.createElement("td");
@@ -111,6 +115,7 @@
 				const DP = document.createElement("td");
 				DP.textContent = `${demeritPoints} DP`;
 				const MAJOR = document.createElement("td");
+				MAJOR.className = "right";
 				if(majorOffence){
 					MAJOR.textContent = "Yes";
 				}else{
