@@ -20,6 +20,7 @@
 
 		td, th{
 			padding: 12px 20px;
+			background: white;
 		}
 		tr{
 			box-shadow: 0 2px 5px #0000004d;
@@ -96,11 +97,11 @@
 	</div>
 	<div class = "content">
 		<h1 class = "heading">Today</h1>
-		<table id = "tdy"></table>
+		<table id = "tdy" style = "border-spacing: 0px 10px"></table>
 		<h1 class = "heading">Tomorrow</h1>
-		<table id = "tmr"></table>
+		<table id = "tmr" style = "border-spacing: 0px 10px"></table>
 		<h1 class = "heading">Next Week</h1>
-		<table id = "nxt"></table>
+		<table id = "nxt" style = "border-spacing: 0px 10px"></table>
 	</div>
 	<!-- weird fix for transitions firing on page load -->
 	<script>
@@ -119,6 +120,8 @@
 				EVENT.textContent = eventName;
 				const DATE = document.createElement("td");
 				DATE.textContent = date;
+				EVENT.className = "left";
+				DATE.className = "right";
 				ROW.appendChild(EVENT);
 				ROW.appendChild(DATE);
 				TODAY.appendChild(ROW);
@@ -130,6 +133,8 @@
 				EVENT.textContent = eventName;
 				const DATE = document.createElement("td");
 				DATE.textContent = date;
+				EVENT.className = "left";
+				DATE.className = "right";
 				ROW.appendChild(EVENT);
 				ROW.appendChild(DATE);
 				TOMORROW.appendChild(ROW);
@@ -141,6 +146,8 @@
 				EVENT.textContent = eventName;
 				const DATE = document.createElement("td");
 				DATE.textContent = date;
+				EVENT.className = "left";
+				DATE.className = "right";
 				ROW.appendChild(EVENT);
 				ROW.appendChild(DATE);
 				NEXTWEEK.appendChild(ROW);
@@ -149,6 +156,8 @@
 				const ROW = document.createElement("tr");
 				const TEXT = document.createElement("td");
 				TEXT.textContent = "There's nothing here. ¯\\_(ツ)_/¯";
+				TEXT.classList.add("left");
+				TEXT.classList.add("right");
 				ROW.appendChild(TEXT);
 				TODAY.appendChild(ROW);
 			}
@@ -156,6 +165,8 @@
 				const ROW = document.createElement("tr");
 				const TEXT = document.createElement("td");
 				TEXT.textContent = "There's nothing here. ¯\\_(ツ)_/¯";
+				TEXT.classList.add("left");
+				TEXT.classList.add("right");
 				ROW.appendChild(TEXT);
 				TOMORROW.appendChild(ROW);
 			}
@@ -163,6 +174,8 @@
 				const ROW = document.createElement("tr");
 				const TEXT = document.createElement("td");
 				TEXT.textContent = "There's nothing here. ¯\\_(ツ)_/¯";
+				TEXT.classList.add("left");
+				TEXT.classList.add("right");
 				ROW.appendChild(TEXT);
 				NEXTWEEK.appendChild(ROW);
 			}

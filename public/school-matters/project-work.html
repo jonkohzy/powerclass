@@ -21,6 +21,15 @@
 			font-size: 20px;
 			margin-bottom: 5px;
 		}
+		.container{
+			padding: 10px 20px;
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 2px 5px #0000004d;
+		}
+		.container:hover{
+			box-shadow: 0 3px 12px #0000004d;
+		}
 	</style>
 </head>
 <body>
@@ -88,20 +97,22 @@
 	<!--navbar end-->
 
 	<div class="content">
-		<h1 id="project-name" class="heading">Loading project...</h1>
-		<div class="pw-detail" id="project-category">Category: </div>
-		<div class="pw-detail" id="project-mentor">Mentor: </div>
-		<div class="pw-detail" id="mentor-approval-wrapper">
-			<span id="mentor-approval">Mentor approval status: </span>
-			<img id="mentor-approval-icon" class="icon">
-		</div>
-		<div class="pw-detail" id="category-manager-approval-wrapper">
-			<span id="category-manager-approval">Category manager approval status: </span>
-			<img id="cat-manager-approval-icon" class="icon">
-		</div>
-		<div class="pw-detail" id="project-status-wrapper">
-			<span id="project-status">Project status: </span>
-			<img id="project-status-icon" class="icon">
+		<div class = "container">
+			<h1 id="project-name" class="heading">Loading project...</h1>
+			<div class="pw-detail" id="project-category">Category: </div>
+			<div class="pw-detail" id="project-mentor">Mentor: </div>
+			<div class="pw-detail" id="mentor-approval-wrapper">
+				<span id="mentor-approval">Mentor approval status: </span>
+				<img id="mentor-approval-icon" class="icon">
+			</div>
+			<div class="pw-detail" id="category-manager-approval-wrapper">
+				<span id="category-manager-approval">Category manager approval status: </span>
+				<img id="cat-manager-approval-icon" class="icon">
+			</div>
+			<div class="pw-detail" id="project-status-wrapper">
+				<span id="project-status">Project status: </span>
+				<img id="project-status-icon" class="icon">
+			</div>
 		</div>
 	</div>
 
