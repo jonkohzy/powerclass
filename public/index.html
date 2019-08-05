@@ -355,9 +355,9 @@
           if (firstLogin) {
             window.location = "/dashboard.html?firstLogin=true";
           } else {
-            // redirect to where user wanted to go (redirectUrl query param)
-            window.location = (new URLSearchParams(window.location.search))
+            const redirectUrl = (new URLSearchParams(window.location.search))
                 .get("redirectUrl");
+            window.location = redirectUrl || "/dashboard.html";
           }
         } else {
           displayError(message);
