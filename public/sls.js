@@ -3,7 +3,7 @@ fetch("/api/sls", {
     headers: {
         "Content-Type": "application/json",
     },
-    body: localStorage.getItem("slsCredentials");
+    body: localStorage.getItem("slsCredentials"),
 }).then((res) => res.json()).then((response) => {
     console.log(response);
     const BODY = document.getElementsByClassName("school")[0];
@@ -15,4 +15,4 @@ fetch("/api/sls", {
         ROW.appendChild(DATA);
         BODY.appendChild(ROW);
     });
-}); 
+});
