@@ -183,3 +183,122 @@ const fetchDisplayCipDiscipline = async () => {
 fetchDisplayAnnouncements()
     .then(fetchDisplayEvents)
     .then(fetchDisplayCipDiscipline);
+
+/* SLS integration */
+
+// for some reason I need to do this to stop Chrome autofilling
+setTimeout(() => {
+  document.getElementById("sls-username").value = "";
+  document.getElementById("sls-password").value = "";
+}, 70);
+
+document.forms[0].addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  document.getElementById("login-button").classList.add("login-button-loading");
+  document.getElementsByClassName("loading-circle-wrapper")[0]
+      .style.opacity = "1";
+
+  checkSlsCredentials();
+});
+
+const displayError = (message) => {
+  // revert element styles to previous unsubmitted state
+  document.getElementsByClassName("loading-circle-wrapper")[0]
+      .style.opacity = "0";
+  document.getElementById("login-button").classList.remove("login-button-loading");
+
+  // display error
+  const errorDiv = document.getElementById("error");
+  errorDiv.style.display = "block";
+  errorDiv.textContent = message;
+};
+
+const checkSlsCredentials = () => {
+  // hide error
+  const errorDiv = document.getElementById("error");
+  errorDiv.style.display = "none";
+  errorDiv.textContent = "";
+
+  const slsUser = document.getElementById("sls-username").value;
+  const slsPass = document.getElementById("sls-password").value;
+
+  if (!slsUser.trim() || !slsPass.trim()) {
+    displayError("Username and/or password not provided.");
+    return;
+  }
+
+  fetch("/api/sls", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ user: slsUser, pass: slsPass }),
+  })
+      .then(async (res) => {
+        if (res.status === 200) {
+          localStorage.setItem("slsCredentials", JSON.stringify({
+            user: slsUser,
+            pass: slsPass,
+          }));
+
+          document.getElementsByClassName("loading-circle-wrapper")[0]
+              .style.opacity = "0";
+
+          // make login button indicate success
+          const loginButton = document.getElementById("login-button");
+          loginButton.classList.remove("login-button-loading");
+          loginButton.classList.add("login-button-success");
+          loginButton.textContent = "Success!";
+          // disable login button
+          loginButton.disabled = true;
+
+          // disable editing username & password
+          document.querySelectorAll(".sls-credentials-form input")
+              .forEach((input) => {
+                input.disabled = true;
+              });
+
+          // enable "Next" button
+          document.querySelector(".sls-setup .next-button").disabled = false;
+
+          const slsAssignments = await res.json();
+          // display under Outstanding Work
+        } else {
+          const errorMessage = await res.text();
+          displayError(errorMessage);
+        }
+      });
+};
+
+const nextPanelSlsToClassroom = () => {
+  // advance progress bar
+  document.getElementsByClassName("progress-indicator-completed")[0]
+      .style.width = "calc(66% + 5px)"; // increase by 33%
+  // wait for progress-indicator-completed to finish lengthening
+  // only 600ms (not 1s) to avoid weird delay between indicator reaching
+  // and circle changing colour
+  setTimeout(() => {
+    document.getElementById("progress-circle-3").classList
+        .add("progress-circle-completed");
+  }, 600);
+
+  // switch step-details div
+  document.querySelector(".sls-step-details span").style.opacity = "0";
+  // wait for opacity to fade (0.3s)
+  setTimeout(() => {
+    document.querySelector(".sls-step-details").style.display = "none";
+    document.querySelector(".classroom-step-details").style.display = "inline-flex";
+    document.querySelector(".classroom-step-details").style.opacity = "1";
+  }, 300);
+
+  // switch setup div
+  const slsSetupDiv = document.getElementsByClassName("sls-setup")[0];
+  const classroomSetupDiv =
+      document.getElementsByClassName("google-classroom-setup")[0];
+  slsSetupDiv.style.opacity = "0";
+  // wait for opacity to fade (0.3s)
+  setTimeout(() => {
+    slsSetupDiv.style.display = "none";
+    classroomSetupDiv.style.display = "block";
+    classroomSetupDiv.style.opacity = "1";
+  }, 300);
+};

@@ -13,6 +13,307 @@ main {
 	margin-top: 90px;
 }
 
+/* first login setup */
+
+.first-login-setup {
+	display: flex; /* change to "none" after done */
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 90px);
+	align-items: center;
+	justify-content: center;
+	background-color: #00000063;
+	z-index: 99999;
+}
+
+.setup-dialog {
+	width: 55%;
+	height: 83%;
+	background-color: #fff;
+	border-radius: 20px;
+	box-shadow: 0 0 12px 3px #0000004d;
+}
+
+.dialog-heading {
+	display: flex;
+	padding: 20px 25px;
+	font-size: 25px;
+	background-color: #5b39b8;
+	color: #fff;
+	border-radius: 20px 20px 0 0;
+}
+
+.dialog-content {
+	display: flex;
+	height: calc(100% - 73.6px);
+}
+
+.step-details {
+	display: inline-flex;
+	align-items: center;
+	text-align: center;
+	width: calc(40% - 40px);
+	height: calc(100% - 40px);
+	padding: 20px;
+	font-size: 30px;
+	background-color: #e7ebed;
+	border-bottom-left-radius: 20px;
+}
+.step-details span {
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+
+.classroom-step-details.step-details {
+	display: none; /* Google Classroom section hidden at first */
+}
+
+.config-area {
+	position: relative;
+	display: inline-block;
+	width: calc(60% + 40px);
+	padding: 30px;
+}
+
+.progress-indicator {
+	position: relative;
+	width: calc(100% - 100px);
+	height: 10px;
+	margin: 20px auto;
+	background-color: #e7ebed;
+}
+.progress-indicator-completed {
+	display: block;
+	position: absolute;
+	left: 2px;
+	width: calc(33% + 5px);
+	height: 10px;
+	background-color: #5b39b8;
+	border-radius: 99999px;
+	transition: width 1s;
+}
+
+.progress-circle {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	top: -10px; /* centering */
+	border-radius: 50%;
+	background-color: #e7ebed;
+	transition: background-color 0.3s;
+}
+.progress-circle-completed {
+	background-color: #5b39b8;
+}
+.progress-circle p {
+	margin-top: 37px;
+	white-space: nowrap;
+	font-size: 13px;
+	text-align: center;
+}
+#progress-circle-1 {
+	left: -13px;
+}
+#progress-circle-2 {
+	left: calc(33% - 13px);
+}
+#progress-circle-3 {
+	left: calc(66% - 13px);
+}
+#progress-circle-4 {
+	left: calc(99% - 13px);
+}
+
+.config-action-area {
+	margin-top: 120px;
+	opacity: 1;
+	transition: opacity 0.3s;
+}
+
+.google-classroom-setup.config-action-area {
+	display: none;
+}
+
+.action-area-heading {
+	font-size: 25px;
+}
+
+/* LOGIN/CREDENTIAL TEST FORM*/
+
+#error {
+	display: none; /* hidden by default */
+	margin-bottom: 20px;
+	color: red;
+}
+
+form {
+	position: relative;
+	margin-top: 34px;
+	text-align: center;
+}
+
+form * {
+	font-family: inherit;
+}
+
+input {
+	border-radius: 999999px;
+	margin-top: 5px;
+	padding: 9px 13px;
+	font-size: 15px;
+	border: 1.5px solid lightgrey;
+	width: 282px;
+}
+
+input, #login-button {
+	outline: none;
+}
+
+input:focus {
+	border: 1.5px solid #5b39b8;
+	transition: border 0.2s ease-in-out;
+}
+
+.login-button-loading {
+	background-color: grey !important;
+	color: grey !important; /* effectively hides text */
+}
+
+.login-button-success {
+	background-color: #12b59f !important;
+}
+.login-button-success:hover, .login-button-success:focus {
+	box-shadow: none !important;
+}
+
+#login-button {
+	position: relative;
+	color: white;
+	margin-top: 21px;
+	padding: 10px;
+	font-size: 19px;
+	border: none;
+	border-radius: 999999px;
+	width: 308px;
+	background-color: #5b39b8;
+	transition: background-color 0.2s, box-shadow 0.2s;
+	user-select: none;
+}
+
+#login-button:hover, #login-button:focus {
+	background-color: #5333a8;
+	box-shadow: 0 3px 6px #5b39b873;
+}
+
+#login-button:active {
+	background-color: #412a81;
+}
+@media screen and (max-width: 1499px){
+	.intro {
+		width: calc(60% - 1px);
+	}
+}
+
+.loading-circle-wrapper {
+	width: 80px;
+	opacity: 0;
+	transition: opacity 0.5s;
+
+	/* center items */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	/* center self */
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+.loading-circle {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #fff;
+	z-index: 999;
+
+	/* animation */
+	animation-name: grow;
+	animation-duration: 0.5s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+@keyframes grow {
+	from {
+		width: 10px;
+		height: 10px;
+	}
+	to {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+#loading-circle-1 {
+	animation-delay: 0s;
+}
+
+#loading-circle-2 {
+	animation-delay: 0.2s;
+
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#loading-circle-3 {
+	animation-delay: 0.4s;
+}
+
+.step-button-container {
+	display: flex;
+	justify-content: flex-end;
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	width: 100%;
+}
+
+.step-button {
+	width: 20%;
+	margin-left: 10px;
+	padding: 10px;
+	border-radius: 99999999px;
+	border: 2px solid #5b39b8;
+	background-color: #fff;
+	font-size: 17px;
+	font-family: inherit;
+	outline: none;
+	transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.step-button:hover:not(:disabled), .step-button:focus:not(:disabled) {
+	background-color: #5333a8;
+	box-shadow: 0 3px 6px #5b39b873;
+}
+.step-button:disabled {
+	background-color: rgba(0, 0, 0, 0.103);
+}
+.step-button:not(:disabled) {
+	cursor: pointer;
+}
+.next-button:not(:disabled) {
+	background-color: #5b39b8;
+	color: #fff;
+}
+
+/* PANELS */
+
 .outstanding-work {
 	background-color: #5b39b8;
 }

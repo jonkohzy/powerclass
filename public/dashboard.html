@@ -23,6 +23,69 @@
 	<!-- end header -->
 	<!-- start main -->
 	<main>
+		<div class="first-login-setup">
+			<div class="setup-dialog">
+				<div class="dialog-heading">Setup</div>
+				<div class="dialog-content">
+					<div class="sls-step-details step-details">
+						<span>Step 2 of 3: configure SLS integration</span>
+					</div>
+					<div class="classroom-step-details step-details">
+						<span>Step 3 of 3: configure Google Classroom integration</span>
+					</div>
+
+					<div class="config-area">
+						<div class="progress-indicator">
+							<div class="progress-indicator-completed"></div>
+							<div class="progress-circle progress-circle-completed" id="progress-circle-1">
+								<p>Step 1:<br>Sign in</p>
+							</div>
+							<div class="progress-circle progress-circle-completed" id="progress-circle-2">
+								<p>Step 2:<br>Configure SLS</p>
+							</div>
+							<div class="progress-circle" id="progress-circle-3">
+								<p>Step 3:<br>Configure<br>Google<br>Classroom</p>
+							</div>
+							<div class="progress-circle" id="progress-circle-4">
+								<p>Setup complete</p>
+							</div>
+						</div>
+
+						<div class="sls-setup config-action-area">
+							<div class="action-area-heading">
+								Enter your SLS credentials to enable integration with SLS.
+							</div>
+
+							<form class="sls-credentials-form">
+								<div id="error" class="subtitle"></div>
+								<input autocomplete="disabled" id="sls-username" type="text" name="user" placeholder="SLS username" spellcheck="false">
+								<input autocomplete="disabled" id="sls-password" type="password" name="pass" placeholder="SLS password">
+								<button id="login-button" type="submit">
+									Check credentials
+									<div class="loading-circle-wrapper">
+										<div id="loading-circle-1" class="loading-circle"></div>
+										<div id="loading-circle-2" class="loading-circle"></div>
+										<div id="loading-circle-3" class="loading-circle"></div>
+									</div>
+								</button>
+							</form>
+
+							<div class="step-button-container">
+								<button class="back-button step-button" disabled="disabled">Back</button>
+								<button class="next-button step-button" disabled="disabled"
+										title="Verify your SLS credentials before proceeding."
+										onclick="nextPanelSlsToClassroom()">Next</button>
+							</div>
+						</div>
+
+						<div class="google-classroom-setup config-action-area">
+							eeeeee
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="outstanding-work panel">
 			<div class="panel-name">Outstanding Work</div>
 			<div class="panel-subtitle">6 assignments</div>
