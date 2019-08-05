@@ -4,8 +4,8 @@ fetch("/api/sls", {
         "Content-Type": "application/json"
     },
     body: JSON.stringify({
-        user: "TANYU6989H",
-        pass: `()|2164/\\/\\1!OOO`
+        user: "",
+        pass: ``
     })
 }).then((res) => res.json()).then((response) => {
     console.log(response);
