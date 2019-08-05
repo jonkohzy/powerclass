@@ -1,12 +1,9 @@
 fetch("/api/sls", {
     method: "POST",
     headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-        user: "",
-        pass: ``
-    })
+    body: localStorage.getItem("slsCredentials");
 }).then((res) => res.json()).then((response) => {
     console.log(response);
     const BODY = document.getElementsByClassName("school")[0];
