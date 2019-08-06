@@ -3,6 +3,9 @@
     margin-left: 40px;
     width: calc(100% - 40px);
 }
+.heading{
+    color: white;
+}
 .google, .school{
     table-layout: fixed;
     width: 100%;
@@ -22,10 +25,10 @@ html, body{
 }
 .GC{
     border-right: 1px solid black;
-    background: linear-gradient(120deg, #12b59f 45%, white 45%);
+    background: linear-gradient(120deg, #5b39b8 45%, white 45%);
 }
 .SLS{
-    background: linear-gradient(120deg, #fd812e 45%, white 45%);
+    background: linear-gradient(120deg, #12b59f 45%, white 45%);
 }
 .content{
     table-layout: fixed;
