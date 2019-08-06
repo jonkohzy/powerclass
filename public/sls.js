@@ -7,12 +7,23 @@ fetch("/api/sls", {
 }).then((res) => res.json()).then((response) => {
     console.log(response);
     const BODY = document.getElementsByClassName("school")[0];
-    response.forEach((element) => {
-        const ROW = document.createElement("tr");
-        const DATA = document.createElement("td");
-        DATA.textContent = element;
+    if (response.length > 0) {
+        response.forEach((element) => {
+            const ROW = document.createElement("tr");
+            const DATA = document.createElement("td");
+            DATA.textContent = element;
 
-        ROW.appendChild(DATA);
-        BODY.appendChild(ROW);
-    });
+            ROW.appendChild(DATA);
+            BODY.appendChild(ROW);
+        });
+    } else {
+        const noAssRow = document.createElement("tr");
+        const noAssText = document.createElement("td");
+        noAssText.style.backgroundColor = "#444";
+        noAssText.style.color = "white";
+        noAssText.textContent = "No SLS assignments.";
+
+        noAssRow.append(noAssText);
+        BODY.append(noAssRow);
+    }
 });

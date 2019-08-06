@@ -18,22 +18,32 @@ html, body{
     height: 100%;
 }
 .SLS, .GC{
-    width: calc(50% - 30.5px);
-    padding: 15px;
-    height: 135%;
+    position: relative;
+    padding: 35px 38px;
     float: left;
+}
+.SLS::before, .GC::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1500px;
+    z-index: -99999;
 }
 .GC{
     border-right: 1px solid black;
-    background: linear-gradient(120deg, #5b39b8 45%, white 45%);
 }
-.SLS{
-    background: linear-gradient(120deg, #12b59f 45%, white 45%);
+.GC::before {
+    background: linear-gradient(120deg, #5b39b8 45%, white 45.1%);
+    border-right: 1px solid black;
+}
+.SLS::before {
+    background: linear-gradient(120deg, #12b59f 45%, white 45.1%);
 }
 .content{
-    table-layout: fixed;
+    display: flex;
     margin-top: 91px;
-    height: 100%;
 }
 th, .school tr td{
     table-layout: fixed;
