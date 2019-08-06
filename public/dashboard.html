@@ -30,8 +30,11 @@
 					<div class="sls-step-details step-details">
 						<span>Step 2 of 3: configure SLS integration</span>
 					</div>
-					<div class="classroom-step-details step-details">
+					<div class="google-classroom-step-details step-details">
 						<span>Step 3 of 3: configure Google Classroom integration</span>
+					</div>
+					<div class="setup-complete-step-details step-details">
+						<span>Setup complete!</span>
 					</div>
 
 					<div class="config-area">
@@ -53,11 +56,10 @@
 
 						<div class="sls-setup config-action-area">
 							<div class="action-area-heading">
-								Enter your SLS credentials to enable integration with SLS.
+								Enter your SLS credentials to enable retrieval of SLS assignments.
 							</div>
-
 							<form class="sls-credentials-form">
-								<div id="error" class="subtitle"></div>
+								<div class="error"></div>
 								<input autocomplete="disabled" id="sls-username" type="text" name="user" placeholder="SLS username" spellcheck="false">
 								<input autocomplete="disabled" id="sls-password" type="password" name="pass" placeholder="SLS password">
 								<button id="login-button" type="submit">
@@ -69,17 +71,28 @@
 									</div>
 								</button>
 							</form>
-
-							<div class="step-button-container">
-								<button class="back-button step-button" disabled="disabled">Back</button>
-								<button class="next-button step-button" disabled="disabled"
-										title="Verify your SLS credentials before proceeding."
-										onclick="nextPanelSlsToClassroom()">Next</button>
-							</div>
+							<button class="next-button step-button" disabled
+									title="Verify your SLS credentials before proceeding."
+									onclick="nextPanelSlsToClassroom()">Next</button>
 						</div>
 
 						<div class="google-classroom-setup config-action-area">
-							eeeeee
+							<div class="action-area-heading">
+								Authorise access to Google Classroom to enable feature-rich integration.
+							</div>
+							<button class="classroom-authorise-button" onclick="handleAuthClick();">
+								Authorise
+							</button>
+							<div class="error"></div>
+							<button class="next-button step-button" disabled
+									title="Authorise Google Classroom access before proceeding."
+									onclick="nextPanelClassroomToComplete()">Next</button>
+						</div>
+
+						<div class="setup-complete config-action-area">
+							<img class="setup-complete-tick" src="img/setup-complete-tick.svg" alt="Setup complete">
+							<div class="setup-complete-heading">Setup complete!</div>
+							<button class="setup-complete-close-button" onclick="completeSetup()">Close</button>
 						</div>
 					</div>
 				</div>
@@ -145,5 +158,9 @@
 	<div class="footer"></div>
 	<!-- end footer -->
 	<script src="scripts/dashboard-script.js"></script>
+	<script async defer src="https://apis.google.com/js/api.js"
+		onload="this.onload=function(){};handleClientLoad()"
+		onreadystatechange="if (this.readyState === 'complete') this.onload()">
+	</script>
 </body>
 </html>

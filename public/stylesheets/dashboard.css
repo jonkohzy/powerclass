@@ -16,7 +16,7 @@ main {
 /* first login setup */
 
 .first-login-setup {
-	display: flex; /* change to "none" after done */
+	display: none; /* hidden by default */
 	position: absolute;
 	width: 100%;
 	height: calc(100% - 90px);
@@ -24,6 +24,8 @@ main {
 	justify-content: center;
 	background-color: #00000063;
 	z-index: 99999;
+	opacity: 1;
+	transition: opacity 0.3s;
 }
 
 .setup-dialog {
@@ -51,6 +53,7 @@ main {
 .step-details {
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	text-align: center;
 	width: calc(40% - 40px);
 	height: calc(100% - 40px);
@@ -63,9 +66,9 @@ main {
 	opacity: 1;
 	transition: opacity 0.3s;
 }
-
-.classroom-step-details.step-details {
-	display: none; /* Google Classroom section hidden at first */
+.step-details:not(.sls-step-details) {
+	/* all step details except SLS hidden at first */
+	display: none;
 }
 
 .config-area {
@@ -131,26 +134,27 @@ main {
 	opacity: 1;
 	transition: opacity 0.3s;
 }
-
-.google-classroom-setup.config-action-area {
+.config-action-area:not(.sls-setup) {
+	/* all config action areas except SLS hidden at first */
 	display: none;
 }
 
 .action-area-heading {
-	font-size: 25px;
+	font-size: 20px;
 }
 
-/* LOGIN/CREDENTIAL TEST FORM*/
-
-#error {
+.error {
 	display: none; /* hidden by default */
+	margin-top: 10px;
 	margin-bottom: 20px;
 	color: red;
 }
 
+/* SLS integration */
+
 form {
 	position: relative;
-	margin-top: 12px;
+	margin-top: 15px;
 	text-align: center;
 }
 
@@ -190,13 +194,13 @@ input:focus {
 
 #login-button {
 	position: relative;
+	width: 236px;
 	color: white;
 	margin-top: 10px;
-	padding: 10px;
+	padding: 10px 0;
 	font-size: 19px;
 	border: none;
 	border-radius: 999999px;
-	width: 308px;
 	background-color: #5b39b8;
 	transition: background-color 0.2s, box-shadow 0.2s;
 	user-select: none;
@@ -276,16 +280,10 @@ input:focus {
 	animation-delay: 0.4s;
 }
 
-.step-button-container {
-	display: flex;
-	justify-content: flex-end;
+.next-button {
 	position: absolute;
 	bottom: 30px;
 	right: 30px;
-	width: 100%;
-}
-
-.step-button {
 	width: 20%;
 	margin-left: 10px;
 	padding: 10px;
@@ -297,19 +295,86 @@ input:focus {
 	outline: none;
 	transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
-.step-button:hover:not(:disabled), .step-button:focus:not(:disabled) {
+.next-button:hover:not(:disabled), .next-button:focus:not(:disabled) {
 	background-color: #5333a8;
 	box-shadow: 0 3px 6px #5b39b873;
 }
-.step-button:disabled {
+.next-button:disabled {
 	background-color: rgba(0, 0, 0, 0.103);
 }
-.step-button:not(:disabled) {
-	cursor: pointer;
-}
 .next-button:not(:disabled) {
+	cursor: pointer;
 	background-color: #5b39b8;
 	color: #fff;
+}
+
+/* Google Classroom integration */
+
+.classroom-authorise-button {
+	width: 172px;
+	margin-top: 23px;
+	padding: 10px;
+	border-radius: 99999999px;
+	background-color: #5b39b8;
+	color: #fff;
+	font-size: 17px;
+	font-family: inherit;
+	border: 2px solid #5b39b8;
+	outline: none;
+	transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
+}
+.classroom-authorise-button:not(:disabled) {
+	cursor: pointer;
+}
+.classroom-authorise-button:hover,
+.classroom-authorise-button:focus {
+	background-color: #5333a8;
+	box-shadow: 0 3px 6px #5b39b873;
+}
+.classroom-authorise-button-success {
+	background-color: #12b59f !important;
+	border: 2px solid #12b59f !important;
+}
+.classroom-authorise-button-success:hover,
+.classroom-authorise-button-success:focus {
+	box-shadow: none !important;
+}
+
+/* setup completed panel */
+
+.setup-complete {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: calc(100% - 140px);
+}
+
+.setup-complete-tick {
+	width: 17vh;
+	margin: 20px 0;
+}
+
+.setup-complete-heading {
+	font-size: 25px;
+}
+
+.setup-complete-close-button {
+	margin-top: 20px;
+	padding: 10px 40px;
+	border-radius: 99999999px;
+	background-color: #5b39b8;
+	color: #fff;
+	font-size: 17px;
+	font-family: inherit;
+	border: 2px solid #5b39b8;
+	outline: none;
+	cursor: pointer;
+	transition: background-color 0.3s, box-shadow 0.3s;
+}
+.setup-complete-close-button:hover,
+.setup-complete-close-button:focus {
+	background-color: #5333a8;
+	box-shadow: 0 3px 6px #5b39b873;
 }
 
 /* PANELS */

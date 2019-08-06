@@ -29,16 +29,6 @@ fetch("/api/check-first-login")
       }
     });
 
-const removeFirstLogin = async () => {
-  const { success } = await fetch("/api/remove-first-login", { method: "POST" })
-      .then((res) => res.json());
-
-  if (success) {
-    // close dialog
-  } else {
-    // display error message somewhere in dialog, don't close it
-  }
-};
 // TODO: first login setup dialog
 // if firstLogin: true in response from /api/check-first-login, show setup dialog
 // when setup dialog COMPLETED (not finished halfway), POST to /api/remove-first-login
@@ -184,6 +174,18 @@ fetchDisplayAnnouncements()
     .then(fetchDisplayEvents)
     .then(fetchDisplayCipDiscipline);
 
+/* SETUP DIALOG */
+
+// if first login, show setup dialog
+fetch("/api/check-first-login")
+    .then((res) => res.json())
+    .then(({ firstLogin }) => {
+      if (firstLogin) {
+        document.getElementsByClassName("first-login-setup")[0]
+            .style.display = "flex";
+      }
+    });
+
 /* SLS integration */
 
 // for some reason I need to do this to stop Chrome autofilling
@@ -202,21 +204,21 @@ document.forms[0].addEventListener("submit", (event) => {
   checkSlsCredentials();
 });
 
-const displayError = (message) => {
+const displaySlsError = (message) => {
   // revert element styles to previous unsubmitted state
   document.getElementsByClassName("loading-circle-wrapper")[0]
       .style.opacity = "0";
   document.getElementById("login-button").classList.remove("login-button-loading");
 
   // display error
-  const errorDiv = document.getElementById("error");
+  const errorDiv = document.querySelector(".sls-setup .error");
   errorDiv.style.display = "block";
   errorDiv.textContent = message;
 };
 
 const checkSlsCredentials = () => {
   // hide error
-  const errorDiv = document.getElementById("error");
+  const errorDiv = document.querySelector(".sls-setup .error");
   errorDiv.style.display = "none";
   errorDiv.textContent = "";
 
@@ -224,7 +226,7 @@ const checkSlsCredentials = () => {
   const slsPass = document.getElementById("sls-password").value;
 
   if (!slsUser.trim() || !slsPass.trim()) {
-    displayError("Username and/or password not provided.");
+    displaySlsError("Username and/or password not provided.");
     return;
   }
 
@@ -248,6 +250,7 @@ const checkSlsCredentials = () => {
           loginButton.classList.remove("login-button-loading");
           loginButton.classList.add("login-button-success");
           loginButton.textContent = "Success!";
+          loginButton.title = "";
           // disable login button
           loginButton.disabled = true;
 
@@ -264,7 +267,7 @@ const checkSlsCredentials = () => {
           // display under Outstanding Work
         } else {
           const errorMessage = await res.text();
-          displayError(errorMessage);
+          displaySlsError(errorMessage);
         }
       });
 };
@@ -286,8 +289,10 @@ const nextPanelSlsToClassroom = () => {
   // wait for opacity to fade (0.3s)
   setTimeout(() => {
     document.querySelector(".sls-step-details").style.display = "none";
-    document.querySelector(".classroom-step-details").style.display = "inline-flex";
-    document.querySelector(".classroom-step-details").style.opacity = "1";
+    const classroomStepDetails =
+        document.getElementsByClassName("google-classroom-step-details")[0];
+    classroomStepDetails.style.display = "inline-flex";
+    classroomStepDetails.style.opacity = "1";
   }, 300);
 
   // switch setup div
@@ -301,4 +306,115 @@ const nextPanelSlsToClassroom = () => {
     classroomSetupDiv.style.display = "block";
     classroomSetupDiv.style.opacity = "1";
   }, 300);
+};
+
+/* Google Classroom integration */
+
+const authoriseButton =
+    document.getElementsByClassName("classroom-authorise-button")[0];
+
+const displayGoogleClassroomError = (message) => {
+  const errorDiv = document.querySelector(".google-classroom-setup .error");
+  errorDiv.style.display = "block";
+  errorDiv.textContent = message;
+};
+
+const updateSigninStatus = (isSignedIn) => {
+  if (isSignedIn) {
+    authoriseButton.classList.add("classroom-authorise-button-success");
+    authoriseButton.textContent = "Authorised!";
+    authoriseButton.disabled = true;
+
+    // enable "Next" button
+    document.querySelector(".google-classroom-setup .next-button").disabled
+        = false;
+  } else {
+    authoriseButton.classList.remove("classroom-authorise-button-success");
+    authoriseButton.textContent = "Authorise";
+    authoriseButton.disabled = false;
+
+    // disable "Next" button
+    document.querySelector(".google-classroom-setup .next-button").disabled
+        = true;
+  }
+};
+
+const initClient = () => {
+  const CLIENT_ID = "167953657646-jdjmkp26lp14ut29gev2e7aqhv9ihsei.apps.googleusercontent.com";
+  const API_KEY = "AIzaSyCVayniJVOK5iagM3LwR9H68q_HfvoL-jM";
+  const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/classroom/v1/rest"];
+  const SCOPES = "https://www.googleapis.com/auth/classroom.courses https://www.googleapis.com/auth/classroom.coursework.me https://www.googleapis.com/auth/classroom.rosters";
+
+  gapi.client.init({
+    apiKey: API_KEY,
+    clientId: CLIENT_ID,
+    discoveryDocs: DISCOVERY_DOCS,
+    scope: SCOPES,
+  }).then(() => {
+    // listen for sign-in state changes
+    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+    // handle initial sign-in state
+    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+  }).catch((err) => {
+    displayGoogleClassroomError(err.message);
+  });
+};
+
+const handleClientLoad = () => {
+  gapi.load("client:auth2", initClient);
+};
+
+const handleAuthClick = () => {
+  gapi.auth2.getAuthInstance().signIn();
+};
+
+const nextPanelClassroomToComplete = () => {
+  // advance progress bar
+  document.getElementsByClassName("progress-indicator-completed")[0]
+      .style.width = "100%";
+  // wait for progress-indicator-completed to finish lengthening
+  // only 600ms (not 1s) to avoid weird delay between indicator reaching
+  // and circle changing colour
+  setTimeout(() => {
+    document.getElementById("progress-circle-4").classList
+        .add("progress-circle-completed");
+  }, 600);
+
+  // switch step-details div
+  document.querySelector(".google-classroom-step-details span").style
+      .opacity = "0";
+  // wait for opacity to fade (0.3s)
+  setTimeout(() => {
+    document.querySelector(".google-classroom-step-details").style
+        .display = "none";
+    const setupCompleteStepDetails =
+        document.getElementsByClassName("setup-complete-step-details")[0];
+    setupCompleteStepDetails.style.display = "inline-flex";
+    setupCompleteStepDetails.style.opacity = "1";
+  }, 300);
+
+  // switch setup div
+  const classroomSetupDiv =
+      document.getElementsByClassName("google-classroom-setup")[0];
+  const setupCompleteDiv =
+      document.getElementsByClassName("setup-complete")[0];
+  classroomSetupDiv.style.opacity = "0";
+  // wait for opacity to fade (0.3s)
+  setTimeout(() => {
+    classroomSetupDiv.style.display = "none";
+    setupCompleteDiv.style.display = "flex";
+    setupCompleteDiv.style.opacity = "1";
+  }, 300);
+};
+
+const completeSetup = async () => {
+  const setupDiv = document.getElementsByClassName("first-login-setup")[0];
+  setupDiv.style.opacity = "0";
+  // wait for opacity to finish transitioning
+  setTimeout(() => {
+    setupDiv.style.display = "none";
+  }, 300);
+
+  // remove first login record server-side, don't show setup dialog again
+  fetch("/api/remove-first-login", { method: "POST" });
 };
