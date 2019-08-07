@@ -352,7 +352,7 @@ input:focus {
 
 .setup-complete-tick {
 	width: 17vh;
-	margin: 15px 0;
+	margin-bottom: 15px;
 }
 
 .setup-complete-heading {
