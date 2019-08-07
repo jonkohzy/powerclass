@@ -17,7 +17,7 @@
 		.button{
 			margin-top: 100px;
 		}
-		button{
+		.content button{
 			display: block;
 			padding: 8px 16px;
 			border-radius: 4px;
@@ -29,7 +29,7 @@
 			-webkit-text-fill-color: transparent;
 			position: relative;
 		}
-		button::after{
+		.content button::after{
 			content: "";
 			position: absolute;
 			top: 0;
@@ -39,12 +39,12 @@
 			background: linear-gradient(60deg, #fc5185 50%, #fff 50%);
 			z-index: -1;
 		}
-		button, button::after{
+		.content button, .content button::after{
 			background-size: 300%;
 			background-position: 100%;
 			transition: background-size .3s, background-position .3s;
 		}
-		button:hover, button:hover::after{
+		.content button:hover, .content button:hover::after{
 			background-position: 0;
 		}
 		.half {
@@ -83,9 +83,7 @@
 		<a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
 		<a class="header-item school-matters-navlink">School Matters</a>
 		
-		<div class="user">
-			<img class="icon" src="../img/user.png" alt="profile picture" onclick="show_profile();">
-		</div>
+		<button class="logout-button" onclick="logout();">Logout</button>
 	</div>
 	<!--header end-->
 	<!--navbar-->
@@ -155,6 +153,7 @@
 		</div>
 	</div>
 
+	<script src="/scripts/common.js"></script>
 	<script>
 		let Results;
 		let Reports;

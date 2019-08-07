@@ -27,22 +27,25 @@ a {
 	font-size: 40px;
 	display: inline-block;
 }
-.header .user {
-	padding: 0;
-	margin-top: 18px;
+.header .logout-button {
 	float: right;
-}
-.header .user .icon {
-	display: inline-block;
-	vertical-align: middle;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
+	margin-top: 45px;
+	transform: translateY(-50%);
+
+	padding: 10px 23px;
+	border-radius: 99999999px;
+	border: 2px solid #5b39b8;
+	background-color: #5b39b8;
+	color: #fff;
+	font-size: 17px;
+	font-family: inherit;
+	outline: none;
 	cursor: pointer;
-	box-sizing: border-box;
+	transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
-.header .user .icon:hover {
-	box-shadow: 0 0 0 3px lightgray;
+.header .logout-button:hover,
+.header .logout-button:focus {
+	box-shadow: 0 3px 6px #5b39b873;
 }
 .header .header-item {
 	position: absolute;

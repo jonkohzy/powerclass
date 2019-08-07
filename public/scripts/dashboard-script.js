@@ -20,15 +20,6 @@ document.querySelectorAll(".panel a").forEach((link) => {
   });
 });
 
-// check for first login
-fetch("/api/check-first-login")
-    .then((res) => res.json())
-    .then(({ firstLogin }) => {
-      if (firstLogin) {
-        // show the dialog
-      }
-    });
-
 // get outstanding work
 // called only after Google API initialises
 // in updateSigninStatus()

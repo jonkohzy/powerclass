@@ -52,4 +52,10 @@ router.post("/api/remove-first-login", async (req, res) => {
   }
 });
 
+router.get("/logout", (req, res) => {
+  req.session.destroy((_err) => {
+    res.redirect("/");
+  });
+});
+
 module.exports = router;

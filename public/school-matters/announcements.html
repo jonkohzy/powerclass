@@ -60,9 +60,7 @@
 			<a href="../outstanding-work.html" class="header-item outstanding-work-navlink">Outstanding Work</a>
 			<a class="header-item school-matters-navlink">School Matters</a>
 				
-			<div class="user">
-				<img class="icon" src="../img/user.png" alt="profile picture" onclick="show_profile();">
-			</div>
+			<button class="logout-button" onclick="logout();">Logout</button>
 		</div>
 		<!--header end-->
 		<!--navbar-->
@@ -122,6 +120,7 @@
 			<div id="loading">Loading...</div>
 		</div>
 
+<script src="/scripts/common.js"></script>
 <script>
 	fetch("/api/isp/announcements", {
 		method: "POST",
@@ -213,6 +212,5 @@
 		})
 	});
 </script>
-
 </body>
 </html>
