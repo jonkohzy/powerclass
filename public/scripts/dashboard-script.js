@@ -29,20 +29,47 @@ fetch("/api/check-first-login")
       }
     });
 
-// TODO: first login setup dialog
-// if firstLogin: true in response from /api/check-first-login, show setup dialog
-// when setup dialog COMPLETED (not finished halfway), POST to /api/remove-first-login
-// (call removeFirstLogin)
+// get outstanding work
+// called only after Google API initialises
+// in updateSigninStatus()
+const fetchDisplayOutstandingWork = async () => {
+  const [coursesSubtitle, slsSubtitle] =
+      document.querySelectorAll(".outstanding-work .panel-subtitle");
+  const [coursesLargeNumber, slsLargeNumber] =
+      document.querySelectorAll(".outstanding-work .large-number");
+
+  // no await for requests - can be loaded concurrently
+  // unlike ISP, which only allows one login at a time
+
+  gapi.client.classroom.courses.list({
+    pageSize: 0,
+  }).then(({ result: { courses } }) => {
+    coursesSubtitle.textContent =
+        `${courses.length || "No"} courses with outstanding work`;
+    coursesLargeNumber.textContent = courses.length;
+  });
+
+  fetch("/api/sls", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: localStorage.getItem("slsCredentials"),
+  })
+      .then((res) => res.json())
+      .then((assignments) => {
+        slsSubtitle.textContent = `${assignments.length || "No"} SLS assignments`;
+        slsLargeNumber.textContent = assignments.length;
+      });
+};
 
 // get school matters
-const requestOptions = {
+const ispRequestOptions = {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: localStorage.getItem("ispCredentials"),
 };
 
 const fetchDisplayAnnouncements = async () => {
-  const announcements = await fetch("/api/isp/announcements", requestOptions)
+  const announcements = await fetch("/api/isp/announcements", ispRequestOptions)
       .then((res) => res.json());
 
   // display number of announcements
@@ -98,7 +125,7 @@ const fetchDisplayAnnouncements = async () => {
 };
 
 const fetchDisplayEvents = async () => {
-  const { today, tomorrow, next1Week } = await fetch("/api/isp/events", requestOptions)
+  const { today, tomorrow, next1Week } = await fetch("/api/isp/events", ispRequestOptions)
       .then((res) => res.json());
   const eventsWithPossibleDuplicates = [...today, ...tomorrow, ...next1Week];
 
@@ -152,9 +179,9 @@ const fetchDisplayEvents = async () => {
 };
 
 const fetchDisplayCipDiscipline = async () => {
-  const { totalCipHours } = await fetch("/api/isp/cip", requestOptions)
+  const { totalCipHours } = await fetch("/api/isp/cip", ispRequestOptions)
       .then((res) => res.json());
-  const { totalDemeritPoints } = await fetch("/api/isp/discipline", requestOptions)
+  const { totalDemeritPoints } = await fetch("/api/isp/discipline", ispRequestOptions)
       .then((res) => res.json());
 
   // display stats in subtitles
@@ -328,6 +355,8 @@ const updateSigninStatus = (isSignedIn) => {
     // enable "Next" button
     document.querySelector(".google-classroom-setup .next-button").disabled
         = false;
+
+    fetchDisplayOutstandingWork();
   } else {
     authoriseButton.classList.remove("classroom-authorise-button-success");
     authoriseButton.textContent = "Authorise";

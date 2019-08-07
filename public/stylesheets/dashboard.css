@@ -385,6 +385,10 @@ input:focus {
 .outstanding-work::before {
 	background-image: linear-gradient(110deg, #5b39b8 59%, #4b2d9c 59.1%);
 }
+.outstanding-work-item {
+	font-size: 22px;
+	color: #3e2979;
+}
 
 .announcements {
 	left: 50%;
@@ -468,17 +472,18 @@ input:focus {
 
 .panel-subtitle {
 	font-size: 30px;
+	margin-bottom: 0;
 	transition: margin-bottom 0.3s;
 }
-.cip-discipline .panel-subtitle:nth-child(2) {
-	margin-bottom: 0; /* because CIP panel has 2nd subtitle */
+.panel-expanded .panel-subtitle {
+	margin-bottom: 35px;
 }
 
 .panel .panel-name, .panel .panel-subtitle {
 	width: 100%;
 	text-align: center;
 	white-space: nowrap;
-	transition: width 0.3s;
+	transition: width 0.3s, opacity 0.3s;
 }
 
 .panel-expanded {
@@ -493,7 +498,7 @@ input:focus {
 .panel-expanded .panel-name, .panel-expanded .panel-subtitle {
 	width: 0;
 }
-.panel-expanded .panel-subtitle {
+.panel-expanded .panel-subtitle:nth-child(2) {
 	margin-bottom: 35px;
 }
 .panel-expanded::before {
@@ -613,6 +618,50 @@ input:focus {
 	.list-card-details {
 		font-size: 17px;
 	}
+}
+.section-header {
+	margin-bottom: 30px;
+	font-size: 30px;
+}
+
+/* special stuff for Outstanding Work panel */
+
+.outstanding-work.panel-expanded > .panel-name,
+.outstanding-work.panel-expanded .panel-subtitle {
+	opacity: 0;
+}
+
+.quarter-panel {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	position: absolute;
+	width: 30%;
+	height: calc(100% - 120px);
+	top: 60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+.panel-expanded .quarter-panel {
+	opacity: 1;
+}
+
+.quarter-panel .large-number {
+	margin-top: 0;
+}
+
+.number-label {
+	font-size: 40px;
+	width: 100%;
+	transition: width 0.3s, opacity 0.3s;
+}
+
+.courses {
+	left: 60px;
+}
+
+.sls-assignments {
+	right: calc(35% + 60px);
 }
 
 /* special stuff for CIP/Discpline panel */
