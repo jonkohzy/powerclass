@@ -346,12 +346,13 @@ input:focus {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	height: calc(100% - 140px);
 }
 
 .setup-complete-tick {
 	width: 17vh;
-	margin: 20px 0;
+	margin: 15px 0;
 }
 
 .setup-complete-heading {
