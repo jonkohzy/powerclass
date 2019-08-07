@@ -26,13 +26,17 @@ const login = async (user, pass, req, res) => {
     res.status(401).send(INVALID_CREDENTIALS);
   } else {
     try {
-      const foundUser = await User.findOne({ username: user }).exec();
+      const lowerCaseUsername = user.toLowerCase();
+      const foundUser = await User.findOne({
+        username: lowerCaseUsername,
+      }).exec();
+
       if (foundUser) {
         req.session.userId = foundUser._id;
         res.send({ ...AUTH_OK, firstLogin: false });
       } else {
         const createdUser = await User.create({
-          username: user,
+          username: lowerCaseUsername,
           firstLogin: true,
         });
 
