@@ -5,6 +5,11 @@ const _ = require("lodash");
 const parseDisciplineRecords = (disciplineRecordsElements) => {
   const rawDisciplineRecords = _.chunk(disciplineRecordsElements, 6);
 
+  if (rawDisciplineRecords[0][0].structuredText ===
+    "(No offence records found)") {
+    return [];
+  }
+
   const disciplineRecords = rawDisciplineRecords.map((recordDetails) => ({
     category: recordDetails[1].structuredText,
     offence: recordDetails[2].structuredText,
