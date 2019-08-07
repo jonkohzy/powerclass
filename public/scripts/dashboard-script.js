@@ -437,13 +437,14 @@ const nextPanelClassroomToComplete = () => {
 };
 
 const completeSetup = async () => {
+  fetch("/api/remove-first-login", { method: "POST" });
+};
+
+const closeSetupPanel = () => {
   const setupDiv = document.getElementsByClassName("first-login-setup")[0];
   setupDiv.style.opacity = "0";
   // wait for opacity to finish transitioning
   setTimeout(() => {
     setupDiv.style.display = "none";
   }, 300);
-
-  // remove first login record server-side, don't show setup dialog again
-  fetch("/api/remove-first-login", { method: "POST" });
 };

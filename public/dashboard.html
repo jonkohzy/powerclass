@@ -86,13 +86,13 @@
 							<div class="error"></div>
 							<button class="next-button step-button" disabled
 									title="Authorise Google Classroom access before proceeding."
-									onclick="nextPanelClassroomToComplete()">Next</button>
+									onclick="nextPanelClassroomToComplete(); completeSetup()">Next</button>
 						</div>
 
 						<div class="setup-complete config-action-area">
 							<img class="setup-complete-tick" src="img/setup-complete-tick.svg" alt="Setup complete">
 							<div class="setup-complete-heading">Setup complete!</div>
-							<button class="setup-complete-close-button" onclick="completeSetup()">Close</button>
+							<button class="setup-complete-close-button" onclick="closeSetupPanel()">Close</button>
 						</div>
 					</div>
 				</div>
